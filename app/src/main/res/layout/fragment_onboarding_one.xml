@@ -24,7 +24,7 @@
         android:id="@+id/fragment_onboarding_one_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/timely_medical_intervention_str"
+        android:text="@string/faster_laboratory_services_str"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="70dp"
@@ -36,11 +36,11 @@
 
     <TextView
         android:id="@+id/fragment_onboarding_two_description"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:gravity="center"
-        android:text="@string/description_one_str"
+        android:text="@string/description_two_str"
         android:textColor="@color/color_black"
         app:layout_constraintEnd_toEndOf="@+id/fragment_onboarding_one_title"
         app:layout_constraintStart_toStartOf="@id/fragment_onboarding_one_title"

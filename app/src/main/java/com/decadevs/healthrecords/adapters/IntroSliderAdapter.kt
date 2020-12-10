@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.decadevs.healthrecords.data.IntroSlide
+
 
 class IntroSliderAdapter (
     list : ArrayList<Fragment>,

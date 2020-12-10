@@ -4,5 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="get_started_str">Get Started</string>
     <string name="timely_medical_intervention_str">Timely Medical Intervention</string>
-    <string name="description_one_str">Information Availability ensures faster and timely medical interventions.</string>
+    <string name="description_one_str">Information Availability\nensures faster and timely\nmedical interventions.</string>
+    <string name="faster_laboratory_services_str">Faster Laboratory Services</string>
+    <string name="description_two_str">Vital information availabilty\nguarantees faster and\nfocused services delivry.</string>
+    <string name="better_personal_health_str">Better Personal Health</string>
 </resources>
