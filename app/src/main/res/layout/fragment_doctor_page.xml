@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circular_image"
-            app:strokeColor="@color/light_green"
+            app:strokeColor="@color/green"
             app:strokeWidth="3dp" />
 
         <LinearLayout
