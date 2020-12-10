@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onBoardingScreenFragment"
-        android:name="com.decadevs.healthrecords.OnBoardingScreenFragment"
+        android:name="com.decadevs.healthrecords.onBoardingScreens.OnBoardingScreenFragment"
         android:label="fragment_onboarding_screen"
         tools:layout="@layout/fragment_onboarding_screen" />
 </navigation>

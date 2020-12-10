@@ -2,4 +2,7 @@
     <string name="app_name">Health Records</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="get_started_str">Get Started</string>
+    <string name="timely_medical_intervention_str">Timely Medical Intervention</string>
+    <string name="description_one_str">Information Availability ensures faster and timely medical interventions.</string>
 </resources>
