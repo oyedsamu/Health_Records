@@ -11,7 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:backgroundTint="@color/transparent"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dr_ben_ani"
                 android:textColor="@color/black"
+                android:textStyle="bold"
                 android:textFontWeight="700"
                 android:textSize="14sp"
                 android:layout_weight="1" />
