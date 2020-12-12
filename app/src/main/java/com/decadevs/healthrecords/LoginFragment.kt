@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.databinding.FragmentLoginBinding
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -17,8 +19,34 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        val uID = binding.uniqueIdEditText
+        val pwd = binding.passwordEditText
+
+        binding.signInButton.setOnClickListener {
+
+            validateLoginInput(uID, pwd)
+
+        }
         return binding.root
 
+    }
+
+    private fun validateLoginInput(
+        uID: TextInputEditText,
+        pwd: TextInputEditText
+    ) {
+        when {
+            uID.text?.isEmpty()!! -> {
+                uID.error = "Please enter unique ID"
+            }
+            pwd.text?.isEmpty()!! -> {
+                pwd.error = "Please enter your password"
+            }
+            else -> {
+                findNavController().navigate(R.id.doctorPageFragment)
+            }
+        }
     }
 
     override fun onDestroy() {

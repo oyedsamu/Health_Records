@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/actionHome"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+
+
+        <item
+            android:id="@+id/actionServices"
+            android:icon="@drawable/ic_user_1"
+            android:title="Our Services" />
+
+        <item
+            android:id="@+id/actionAbout"
+            android:icon="@drawable/question_mark"
+            android:title="About Us" />
+
+
+        <item
+            android:id="@+id/actionContact"
+            android:icon="@drawable/ic_notification"
+            android:title="Contact Us" />
+
+        <item
+            android:id="@+id/actionLogout"
+            android:icon="@drawable/ic_live"
+            android:iconTintMode="@color/red"
+            android:title="Log Out" />
+    </group>
+
+</menu>
