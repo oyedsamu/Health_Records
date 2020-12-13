@@ -1,13 +1,17 @@
 package com.decadevs.healthrecords
 
+
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.databinding.FragmentLoginBinding
 import com.google.android.material.textfield.TextInputEditText
+
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
@@ -23,13 +27,12 @@ class LoginFragment : Fragment() {
         val uID = binding.uniqueIdEditText
         val pwd = binding.passwordEditText
 
+
         binding.signInButton.setOnClickListener {
-
             validateLoginInput(uID, pwd)
-
         }
-        return binding.root
 
+        return binding.root
     }
 
     private fun validateLoginInput(
@@ -53,4 +56,5 @@ class LoginFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
+
 }

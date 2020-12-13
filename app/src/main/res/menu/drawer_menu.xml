@@ -11,7 +11,7 @@
 
         <item
             android:id="@+id/actionServices"
-            android:icon="@drawable/ic_user_1"
+            android:icon="@drawable/stethoscope_icon"
             android:title="Our Services" />
 
         <item
@@ -22,13 +22,12 @@
 
         <item
             android:id="@+id/actionContact"
-            android:icon="@drawable/ic_notification"
+            android:icon="@drawable/contact_logo"
             android:title="Contact Us" />
 
         <item
             android:id="@+id/actionLogout"
-            android:icon="@drawable/ic_live"
-            android:iconTintMode="@color/red"
+            android:icon="@drawable/signout"
             android:title="Log Out" />
     </group>
 
