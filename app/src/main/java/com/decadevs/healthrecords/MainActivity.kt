@@ -1,14 +1,11 @@
 package com.decadevs.healthrecords
 
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import com.decadevs.healthrecords.databinding.ActivityMainBinding
-import com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(){
