@@ -11,9 +11,9 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_HealthRecords)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.framelayout, PatientDetailsFragment())
-                .commit()
-        }
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(R.id.framelayout, DoctorPageFragment())
+//                .commit()
+//        }
     }
 }

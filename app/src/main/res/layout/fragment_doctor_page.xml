@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.doctorpage.DoctorPageFragment">
 
@@ -49,8 +50,7 @@
                 android:text="@string/dr_ben_ani"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textFontWeight="700"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:layout_weight="1" />
 
             <TextView
@@ -59,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ben_ani_stjoseph_com"
                 android:textColor="@color/black"
-                android:textFontWeight="400"
                 android:layout_weight="1" />
 
             <TextView
@@ -117,17 +116,21 @@
             android:textFontWeight="500"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:hint="273098RES"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enter_id_text" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/search_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:src="@drawable/search"
+            android:backgroundTint="@color/transparent"
+            android:elevation="10dp"
+            android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="@+id/search"
             app:layout_constraintEnd_toEndOf="@+id/search"
             app:layout_constraintTop_toTopOf="@+id/search" />

@@ -32,7 +32,7 @@ class PatientDetailsFragment : Fragment() {
         ArrayAdapter.createFromResource(
             requireContext(),
             R.array.years,
-            android.R.layout.simple_spinner_item
+            R.layout.spinner_text
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.yearsSpinner.adapter = adapter
