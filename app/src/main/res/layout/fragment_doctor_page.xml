@@ -135,20 +135,20 @@
             app:layout_constraintEnd_toEndOf="@+id/search"
             app:layout_constraintTop_toTopOf="@+id/search" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:background="@drawable/bottom_nav_bg"
-            android:translationY="-20dp"
-            app:itemIconSize="36dp"
-            app:itemIconTint="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/green_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_navigation_menu" />
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bottomNavigationView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:background="@drawable/bottom_nav_bg"-->
+<!--            android:translationY="-20dp"-->
+<!--            app:itemIconSize="36dp"-->
+<!--            app:itemIconTint="@color/white"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/green_background"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:menu="@menu/bottom_navigation_menu" />-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
