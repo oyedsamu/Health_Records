@@ -3,6 +3,7 @@ package com.decadevs.healthrecords
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
@@ -17,7 +18,6 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
 
 
 

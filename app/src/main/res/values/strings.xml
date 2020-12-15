@@ -16,5 +16,20 @@
     <string name="st_joseph_hospital_lekki">ST. JOSEPH HOSPITAL, LEKKI</string>
     <string name="_08122233344">08122233344</string>
     <string name="enter_patient_id">ENTER PATIENT ID</string>
+    <string name="mrs_adams_ken">MRS ADAMS KEN</string>
+    <string name="_237754600ed">237754600ED</string>
+    <string name="adamsken_gmail_com">adamsken@gmail.com</string>
+    <string name="practitioner">PRACTITIONER</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="date">DATE</string>
 
+    <!-- PATIENT DETAILS- YEARS -->
+    <string-array name="years">
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+        <item>2017</item>
+        <item>2016</item>
+        <item>2015</item>
+    </string-array>
 </resources>
