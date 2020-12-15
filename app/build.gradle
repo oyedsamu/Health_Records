@@ -84,6 +84,11 @@ dependencies {
     //viewpager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2"
 
+    //indicator
+    implementation 'me.relex:circleindicator:2.1.4'
+    //lottie
+    implementation "com.airbnb.android:lottie:3.4.1"
+
     // DataStore
     implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
 

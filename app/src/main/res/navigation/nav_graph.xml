@@ -3,12 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/onBoardingScreenFragment">
+
+    <fragment
+        android:id="@+id/onBoardingScreenFragment"
+        android:name="com.decadevs.healthrecords.onBoardingScreens.OnBoardingScreenFragment"
+        android:label="fragment_onboarding_screen"
+        tools:layout="@layout/fragment_onboarding_screen" />
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.decadevs.healthrecords.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
+
     <fragment
         android:id="@+id/doctorPageFragment"
         android:name="com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragment"

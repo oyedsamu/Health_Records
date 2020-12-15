@@ -8,6 +8,7 @@
     tools:context=".MainActivity"
     tools:openDrawer="start">
 
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -19,7 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph"
-
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.adapters.PatientDetailsRVAdapter
@@ -28,6 +29,12 @@ class PatientDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /** BACK BUTTON */
+        binding.backArrow.setOnClickListener {
+            findNavController().navigate(R.id.doctorPageFragment)
+        }
+
         /** SET UP SPINNER */
         ArrayAdapter.createFromResource(
             requireContext(),
