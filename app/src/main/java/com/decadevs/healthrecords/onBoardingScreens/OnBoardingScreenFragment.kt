@@ -83,13 +83,4 @@ class OnBoardingScreenFragment : Fragment(R.layout.fragment_onboarding_screen) {
         return sharedPreferences.getBoolean("finished", false)
     }
 
-
-
-
-
-
-
-
-
-
 }
