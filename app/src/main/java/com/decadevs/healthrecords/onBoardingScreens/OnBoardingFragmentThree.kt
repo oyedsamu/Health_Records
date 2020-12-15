@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.onBoardingScreens
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,4 +19,7 @@ class OnBoardingFragmentThree : Fragment(R.layout.fragment_on_boarding_three) {
     }
 
 
+
+
 }
+
