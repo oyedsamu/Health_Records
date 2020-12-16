@@ -83,6 +83,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             "details" to item.details
         )
 
-//        findNavController().navigate(R.id.patientMedicalDetails, bundle)
+        findNavController().navigate(R.id.patientMedicalDetailsFragment, bundle)
     }
 }

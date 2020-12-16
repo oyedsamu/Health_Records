@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.FragmentPatientMedicalDetailsBinding
 
@@ -25,7 +26,21 @@ class PatientMedicalDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /** FILL VIEWS WITH PATIENT DETAILS */
+        val patientName = arguments?.getString("patientName")
+        val practitioner = arguments?.getString("practitioner")
+        val date = arguments?.getString("date")
+        val details = arguments?.getString("details")
 
+        binding.patientName.text = patientName
+        binding.practitioner.text = practitioner
+        binding.date.text = date
+        binding.details.text = details
+
+        /** BACK BUTTON */
+        binding.backArrow.setOnClickListener {
+            findNavController().navigate(R.id.patientDetailsFragment)
+        }
     }
 
     override fun onDestroy() {
