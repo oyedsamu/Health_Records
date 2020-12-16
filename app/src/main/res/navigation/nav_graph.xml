@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.decadevs.healthrecords.LoginFragment"
+        android:name="com.decadevs.healthrecords.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
 
