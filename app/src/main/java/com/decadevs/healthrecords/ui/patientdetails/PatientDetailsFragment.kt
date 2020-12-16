@@ -77,6 +77,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onItemClick(item: PatientDetails, position: Int) {
         Toast.makeText(this.context, "$position", Toast.LENGTH_SHORT).show()
         var bundle = bundleOf(
+            "patientName" to binding.patientName.text.toString(),
             "practitioner" to item.practitioner,
             "date" to item.date,
             "details" to item.details
