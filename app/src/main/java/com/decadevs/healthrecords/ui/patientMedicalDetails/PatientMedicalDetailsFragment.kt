@@ -31,9 +31,11 @@ class PatientMedicalDetailsFragment : Fragment() {
         val practitioner = arguments?.getString("practitioner")
         val date = arguments?.getString("date")
         val details = arguments?.getString("details")
+        val hospital = arguments?.getString("hospital")
 
         binding.patientName.text = patientName
         binding.practitioner.text = practitioner
+        binding.hospitalName.text = hospital
         binding.date.text = date
         binding.details.text = details
 
