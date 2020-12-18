@@ -20,7 +20,7 @@ class PatientDetailsRVAdapter(private var patientDetails: List<PatientDetails>, 
                 binding.apply {
                     practitioner.text = patientDetails.practitioner
                     date.text = patientDetails.date
-                    details.text = patientDetails.details
+                    diagnosisDetailsTv.text = patientDetails.details
                 }
             }
 
