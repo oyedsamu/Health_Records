@@ -94,8 +94,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="10dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@id/edit_details_btn"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
@@ -104,6 +103,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
             android:orientation="vertical">
 
             <TextView
