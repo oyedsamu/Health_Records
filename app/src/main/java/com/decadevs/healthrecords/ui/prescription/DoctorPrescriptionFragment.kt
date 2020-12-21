@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.FragmentDoctorPrescriptionBinding
 
@@ -23,6 +24,9 @@ class DoctorPrescriptionFragment : Fragment() {
 
         val items = listOf<String>("Group A", "Group B", "Group AB", "Group O")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_dropdown, items)
+
+        val dropDownTextFieldLayout = (binding.fragmentPatientTypeTextInputDropdownLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+
 
         return binding.root
     }

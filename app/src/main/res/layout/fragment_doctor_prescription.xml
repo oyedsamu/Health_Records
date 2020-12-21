@@ -44,6 +44,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             android:hint="@string/patient_s_diagnosis_string"
+
              />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +76,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/fragment_patient_type_text_input_layout"
+        android:id="@+id/fragment_patient_type_text_input_dropdown_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,7 +109,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        app:layout_constraintTop_toBottomOf="@+id/fragment_patient_type_text_input_layout">
+        app:layout_constraintTop_toBottomOf="@+id/fragment_patient_type_text_input_dropdown_layout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/fragment_doctor_note_text_input_et"
