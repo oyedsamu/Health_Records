@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.decadevs.healthrecords.R
+import com.decadevs.healthrecords.adapters.OnItemClick
 import com.decadevs.healthrecords.adapters.PatientDetailsRVAdapter
 import com.decadevs.healthrecords.data.PatientDetails
 import com.decadevs.healthrecords.databinding.FragmentPatientDetailsBinding
 
-class PatientDetailsFragment : Fragment() {
+class PatientDetailsFragment : Fragment(), OnItemClick {
 
     private var _binding: FragmentPatientDetailsBinding? = null
     private val binding get() = _binding!!
@@ -46,7 +49,7 @@ class PatientDetailsFragment : Fragment() {
         }
 
         /** POPULATE PATIENT DETAILS RECYCLER VIEW WITH DUMMY DATA */
-        val adapter = PatientDetailsRVAdapter(patientsDetails)
+        val adapter = PatientDetailsRVAdapter(patientsDetails, this)
         val patientsDetailsRV = binding.patientDetailsList
         patientsDetailsRV.adapter = adapter
         patientsDetailsRV.layoutManager = LinearLayoutManager(this.context)
@@ -69,5 +72,17 @@ class PatientDetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemClick(item: PatientDetails, position: Int) {
+        var bundle = bundleOf(
+            "patientName" to binding.patientName.text.toString(),
+            "hospital" to binding.hospitalAddress.text.toString(),
+            "practitioner" to item.practitioner,
+            "date" to item.date,
+            "details" to item.details
+        )
+
+        findNavController().navigate(R.id.patientMedicalDetailsFragment, bundle)
     }
 }

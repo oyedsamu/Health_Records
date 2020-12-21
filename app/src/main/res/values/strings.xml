@@ -20,8 +20,16 @@
     <string name="_237754600ed">237754600ED</string>
     <string name="adamsken_gmail_com">adamsken@gmail.com</string>
     <string name="practitioner">PRACTITIONER</string>
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="date">DATE</string>
+    <string name="patient_name">PATIENT NAME</string>
+    <string name="hospital_name">HOSPITAL NAME</string>
+    <string name="diagnosis">Diagnosis</string>
+    <string name="edit_medical_details">Edit Medical Details</string>
+    <string name="prescription">Prescription</string>
+    <string name="type">Type</string>
+    <string name="is_sensitive_or_not">Is sensitive or not</string>
+    <string name="doctor_s_note">Doctor\'s Note</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
