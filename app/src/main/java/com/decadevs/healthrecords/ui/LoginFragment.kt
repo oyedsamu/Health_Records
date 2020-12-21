@@ -1,14 +1,13 @@
-package com.decadevs.healthrecords
+package com.decadevs.healthrecords.ui
 
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.FragmentLoginBinding
 import com.google.android.material.textfield.TextInputEditText
 

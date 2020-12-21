@@ -10,20 +10,20 @@
 
 
         <item
-            android:id="@+id/actionServices"
+            android:id="@+id/vitalInfo"
             android:icon="@drawable/stethoscope_icon"
-            android:title="Our Services" />
+            android:title="Vital Info" />
 
         <item
-            android:id="@+id/actionAbout"
-            android:icon="@drawable/question_mark"
-            android:title="About Us" />
-
-
-        <item
-            android:id="@+id/actionContact"
+            android:id="@+id/history"
             android:icon="@drawable/contact_logo"
-            android:title="Contact Us" />
+            android:title="History" />
+
+
+        <item
+            android:id="@+id/addHistory"
+            android:icon="@drawable/add_history"
+            android:title="Add History" />
 
         <item
             android:id="@+id/actionLogout"
