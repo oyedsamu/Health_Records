@@ -30,6 +30,11 @@
     <string name="type">Type</string>
     <string name="is_sensitive_or_not">Is sensitive or not</string>
     <string name="doctor_s_note">Doctor\'s Note</string>
+    <string name="doctor_s_diagnosis_str">Doctor\'s Diagnosis</string>
+    <string name="patient_s_diagnosis_string">Patient\'s Diagnosis</string>
+    <string name="doctor_s_note_str">Doctor\'s Note</string>
+    <string name="submit_str">Submit</string>
+    <string name="nurse_s_comment_str">Nurse\'s Comment</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
