@@ -11,6 +11,8 @@ buildscript {
         lifecycleVersion = "2.2.0"
         roomVersion = "2.2.5"
         viewPager2 = "1.0.0"
+        retrofitVersion = '2.9.0'
+        okhttp3_version = '4.5.0'
     }
     repositories {
         google()
