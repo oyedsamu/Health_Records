@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 
 class HealthRecordsViewModel(
     private val repository: HealthRecordsRepository,
-    private val context: Context
 ) : ViewModel() {
 
     private val _loginResponse: MutableLiveData<Resource<GenericResponseClass<LoginResponse>>> =
