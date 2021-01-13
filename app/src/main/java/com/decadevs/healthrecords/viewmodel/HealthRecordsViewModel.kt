@@ -16,9 +16,9 @@ class HealthRecordsViewModel(
     private val repository: HealthRecordsRepository,
 ) : ViewModel() {
 
-    private val _loginResponse: MutableLiveData<Resource<GenericResponseClass<LoginResponse>>> =
+    private val _loginResponse: MutableLiveData<Resource<LoginResponse>> =
         MutableLiveData()
-    val loginResponse: LiveData<Resource<GenericResponseClass<LoginResponse>>>
+    val loginResponse: LiveData<Resource<LoginResponse>>
         get() = _loginResponse
 
 

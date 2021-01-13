@@ -48,12 +48,13 @@ class LoginFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
 
         viewModel.loginResponse.observe(viewLifecycleOwner, {
+            Log.i("Login Response ", "$it")
 
             when (it) {
                 is Resource.Success -> {
-                    val successResponse = it.value.data?.message
-
-                     Log.i("Login Response", "$successResponse")
+                    val successResponse = it.value.message
+                    Log.i("Login Response", "$successResponse")
+                    findNavController().navigate(R.id.doctorPageFragment)
                 }
                 is Resource.Failure -> {
                     Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
@@ -84,7 +85,6 @@ class LoginFragment : Fragment() {
             else -> {
                 val loginRequest = LoginRequest(uID.text.toString(), pwd.text.toString())
                 viewModel.login(loginRequest)
-//                findNavController().navigate(R.id.doctorPageFragment)
             }
         }
     }

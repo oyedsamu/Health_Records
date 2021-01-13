@@ -12,7 +12,7 @@ class HealthRecordsRepositoryImpl
 constructor(
     private val loginAuthApi: LoginAuthApi
 ) : BaseRepository(), HealthRecordsRepository {
-    override suspend fun login(loginRequest: LoginRequest): Resource<GenericResponseClass<LoginResponse>> =
+    override suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse> =
         safeApiCall {
             loginAuthApi.login(loginRequest)
         }

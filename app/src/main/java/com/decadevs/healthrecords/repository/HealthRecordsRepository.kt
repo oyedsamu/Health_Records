@@ -6,5 +6,5 @@ import com.decadevs.healthrecords.model.LoginRequest
 import com.decadevs.healthrecords.model.LoginResponse
 
 interface HealthRecordsRepository {
-    suspend fun login(loginRequest: LoginRequest): Resource<GenericResponseClass<LoginResponse>>
+    suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse>
 }

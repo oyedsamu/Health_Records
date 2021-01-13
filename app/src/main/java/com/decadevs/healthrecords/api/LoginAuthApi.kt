@@ -14,6 +14,6 @@ interface LoginAuthApi {
     @POST("Auth/login")
     suspend fun login(
         @Body loginRequest: LoginRequest
-    ): GenericResponseClass<LoginResponse>
+    ): LoginResponse
 
 }
