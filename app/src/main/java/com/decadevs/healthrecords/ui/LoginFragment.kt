@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -30,6 +31,7 @@ class LoginFragment : Fragment() {
     lateinit var loginAuthApi: LoginAuthApi
 
     private lateinit var viewModel: HealthRecordsViewModel
+    lateinit var progressBar: ProgressBar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,7 @@ class LoginFragment : Fragment() {
         val uID = binding.uniqueIdEditText
         val pwd = binding.passwordEditText
 
+        progressBar = binding.progressBarLayout.fragmentMainProgressBar
 
         val repository = HealthRecordsRepositoryImpl(loginAuthApi)
         val factory = ViewModelFactory(repository)
@@ -54,10 +57,12 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     val successResponse = it.value.message
                     Log.i("Login Response", "$successResponse")
+                    progressBar.visibility = View.GONE
                     findNavController().navigate(R.id.doctorPageFragment)
                 }
                 is Resource.Failure -> {
                     Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+                    progressBar.visibility = View.GONE
                 }
             }
 
@@ -65,6 +70,7 @@ class LoginFragment : Fragment() {
 
 
         binding.signInButton.setOnClickListener {
+            progressBar.visibility = View.VISIBLE
             validateLoginInput(uID, pwd)
         }
 
