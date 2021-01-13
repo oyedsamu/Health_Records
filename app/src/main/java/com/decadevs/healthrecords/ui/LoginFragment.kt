@@ -2,19 +2,34 @@ package com.decadevs.healthrecords.ui
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
+import com.decadevs.healthrecords.api.LoginAuthApi
+import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentLoginBinding
+import com.decadevs.healthrecords.model.LoginRequest
+import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
+import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
+import com.decadevs.healthrecords.viewmodel.ViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var loginAuthApi: LoginAuthApi
+
+    private lateinit var viewModel: HealthRecordsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +40,27 @@ class LoginFragment : Fragment() {
 
         val uID = binding.uniqueIdEditText
         val pwd = binding.passwordEditText
+
+
+        val repository = HealthRecordsRepositoryImpl(loginAuthApi)
+        val factory = ViewModelFactory(repository)
+
+        viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
+
+        viewModel.loginResponse.observe(viewLifecycleOwner, {
+
+            when (it) {
+                is Resource.Success -> {
+                    val successResponse = it.value.data?.message
+
+                     Log.i("Login Response", "$successResponse")
+                }
+                is Resource.Failure -> {
+                    Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+                }
+            }
+
+        })
 
 
         binding.signInButton.setOnClickListener {
@@ -46,7 +82,9 @@ class LoginFragment : Fragment() {
                 pwd.error = "Please enter your password"
             }
             else -> {
-                findNavController().navigate(R.id.doctorPageFragment)
+                val loginRequest = LoginRequest(uID.text.toString(), pwd.text.toString())
+                viewModel.login(loginRequest)
+//                findNavController().navigate(R.id.doctorPageFragment)
             }
         }
     }
