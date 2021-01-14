@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
-import com.decadevs.healthrecords.api.LoginAuthApi
+import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentLoginBinding
 import com.decadevs.healthrecords.datastore.UserManager
@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var loginAuthApi: LoginAuthApi
+    lateinit var apiService: ApiService
 
     private lateinit var viewModel: HealthRecordsViewModel
     lateinit var progressBar: ProgressBar
@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
 
         progressBar = binding.progressBarLayout.fragmentMainProgressBar
 
-        val repository = HealthRecordsRepositoryImpl(loginAuthApi)
+        val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository)
 
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)

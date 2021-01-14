@@ -1,6 +1,6 @@
 package com.decadevs.healthrecords.di
 
-import com.decadevs.healthrecords.api.LoginAuthApi
+import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.data.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -11,7 +11,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -53,8 +52,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideLoginApiService (retrofit: Retrofit) : LoginAuthApi {
-        return retrofit.create(LoginAuthApi::class.java)
+    fun provideLoginApiService (retrofit: Retrofit) : ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
 }
