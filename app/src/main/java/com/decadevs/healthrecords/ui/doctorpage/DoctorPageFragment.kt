@@ -1,13 +1,17 @@
 package com.decadevs.healthrecords.ui.doctorpage
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
+import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.api.ApiService
+import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPageBinding
 import com.decadevs.healthrecords.datastore.UserManager
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
@@ -40,12 +44,31 @@ class DoctorPageFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
 
-        observeStaffIdAndImplementApi()
+        getStaffIdFromDataStoreAndImplementApiCall()
+
+
+        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
+            Log.i("Get staff Response ", "$it")
+
+            when (it) {
+                is Resource.Success -> {
+                    val successResponse = it.value.data?.success
+                    Log.i("Staff Response", "$successResponse")
+//                    progressBar.visibility = View.GONE
+                    findNavController().navigate(R.id.doctorPageFragment)
+                }
+                is Resource.Failure -> {
+                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+//                    progressBar.visibility = View.GONE
+                }
+            }
+
+        })
 
         return binding.root
     }
 
-    private fun observeStaffIdAndImplementApi() {
+    private fun getStaffIdFromDataStoreAndImplementApiCall() {
         userManager.rmUserIdFlow.asLiveData().observe(requireActivity(), { uid ->
             if (uid != "") {
                 viewModel.getStaff(uid)
