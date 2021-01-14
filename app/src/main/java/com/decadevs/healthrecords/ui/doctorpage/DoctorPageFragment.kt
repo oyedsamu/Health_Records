@@ -76,12 +76,9 @@ class DoctorPageFragment : Fragment() {
     }
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {
-        var UUID = "hi"
         userManager.rmUserIdFlow.asLiveData().observe(requireActivity(), { uid ->
             if (uid != "") {
-                UUID = uid
-                Log.i("UUID", uid)
-                viewModel.getStaff(UUID)
+                viewModel.getStaff(uid)
             }
         })
 
