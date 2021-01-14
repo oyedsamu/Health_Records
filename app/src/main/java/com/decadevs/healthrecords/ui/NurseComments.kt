@@ -22,9 +22,19 @@ class NurseComments : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
       _binding = FragmentNurseCommentsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.fragmentNurseCommentBtn.setOnClickListener{
+            val nurseComment = binding.fragmentNurseCommentTextInputEt.text
+            // Do something with this text.
+
+
+        }
     }
 
 }
