@@ -31,4 +31,8 @@ class HealthRecordsViewModel(
     fun login(loginRequest: LoginRequest) = viewModelScope.launch {
         _loginResponse.value = repository.login(loginRequest)
     }
+
+    fun getStaff(uuid:String) = viewModelScope.launch {
+        _getStaffResponse.value = repository.getStaff(uuid)
+    }
 }
