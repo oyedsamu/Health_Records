@@ -42,7 +42,11 @@ class DoctorPageFragment : Fragment() {
                     val successResponse = it.value.data
                     Log.i("Staff Response", successResponse.toString())
 //                    progressBar.visibility = View.GONE
-//                    findNavController().navigate(R.id.doctorPageFragment)
+                    binding.doctorName.text =
+                        successResponse.firstname + " " + successResponse.lastname
+                    binding.doctorEmail.text = successResponse.email
+                    binding.hospitalAddress.text = successResponse.healthcareProviderName
+                    binding.doctorPhoneNumber.text = successResponse.phoneNumber
                 }
                 is Resource.Failure -> {
                     Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
@@ -80,7 +84,6 @@ class DoctorPageFragment : Fragment() {
                 viewModel.getStaff(UUID)
             }
         })
-
 
 
     }
