@@ -1,4 +1,4 @@
-package com.decadevs.healthrecords.model
+package com.decadevs.healthrecords.model.response
 
 data class GenericResponseClass<T>(
     val title: String?,

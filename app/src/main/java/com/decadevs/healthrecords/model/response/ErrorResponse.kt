@@ -1,4 +1,4 @@
-package com.decadevs.healthrecords.model
+package com.decadevs.healthrecords.model.response
 
 data class ErrorResponse(
     val message: String?
