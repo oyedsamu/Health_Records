@@ -19,6 +19,7 @@ import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlin.coroutines.coroutineContext
 
 @AndroidEntryPoint
 class DoctorPageFragment : Fragment() {
@@ -29,7 +30,28 @@ class DoctorPageFragment : Fragment() {
     lateinit var apiService: ApiService
 
     private lateinit var viewModel: HealthRecordsViewModel
-    lateinit var userManager: UserManager
+    private lateinit var userManager: UserManager
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
+            Log.i("Get staff Response ", "$it")
+
+            when (it) {
+                is Resource.Success -> {
+                    val successResponse = it.value.data
+                    Log.i("Staff Response", successResponse.toString())
+//                    progressBar.visibility = View.GONE
+//                    findNavController().navigate(R.id.doctorPageFragment)
+                }
+                is Resource.Failure -> {
+                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+//                    progressBar.visibility = View.GONE
+                }
+            }
+
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,38 +68,26 @@ class DoctorPageFragment : Fragment() {
 
         getStaffIdFromDataStoreAndImplementApiCall()
 
-
-        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
-            Log.i("Get staff Response ", "$it")
-
-            when (it) {
-                is Resource.Success -> {
-                    val successResponse = it.value.data?.success
-                    Log.i("Staff Response", "$successResponse")
-//                    progressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.doctorPageFragment)
-                }
-                is Resource.Failure -> {
-                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-//                    progressBar.visibility = View.GONE
-                }
-            }
-
-        })
-
         return binding.root
     }
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {
+        var UUID = "hi"
         userManager.rmUserIdFlow.asLiveData().observe(requireActivity(), { uid ->
             if (uid != "") {
-                viewModel.getStaff(uid)
+                UUID = uid
+                Log.i("UUID", uid)
+                viewModel.getStaff(UUID)
             }
         })
+
+
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
+
 }

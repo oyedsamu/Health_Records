@@ -9,5 +9,5 @@ import com.decadevs.healthrecords.model.response.StaffResponse
 interface HealthRecordsRepository {
     suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse>
 
-    suspend fun getStaff(id: String): Resource<GenericResponseClass<StaffResponse>>
+    suspend fun getStaff(id: String): Resource<StaffResponse>
 }

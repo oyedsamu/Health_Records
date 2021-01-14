@@ -18,6 +18,6 @@ interface ApiService {
     @GET("Staff/{id}")
     suspend fun getStaff(
         @Path("id") id: String
-    ): GenericResponseClass<StaffResponse>
+    ): StaffResponse
 
 }

@@ -18,7 +18,7 @@ constructor(
             apiService.login(loginRequest)
         }
 
-    override suspend fun getStaff(id: String): Resource<GenericResponseClass<StaffResponse>> =
+    override suspend fun getStaff(id: String): Resource<StaffResponse> =
         safeApiCall {
             apiService.getStaff(id)
         }

@@ -21,9 +21,9 @@ class HealthRecordsViewModel(
     val loginResponse: LiveData<Resource<LoginResponse>>
         get() = _loginResponse
 
-    private val _getStaffResponse: MutableLiveData<Resource<GenericResponseClass<StaffResponse>>> =
+    private val _getStaffResponse: MutableLiveData<Resource<StaffResponse>> =
         MutableLiveData()
-    val getStaffResponse: LiveData<Resource<GenericResponseClass<StaffResponse>>>
+    val getStaffResponse: LiveData<Resource<StaffResponse>>
         get() = _getStaffResponse
 
 
