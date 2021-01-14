@@ -41,7 +41,8 @@ class DoctorPageFragment : Fragment() {
                 is Resource.Success -> {
                     val successResponse = it.value.data
                     Log.i("Staff Response", successResponse.toString())
-//                    progressBar.visibility = View.GONE
+
+                    //Update UI
                     binding.doctorName.text =
                         successResponse.firstname + " " + successResponse.lastname
                     binding.doctorEmail.text = successResponse.email
@@ -50,7 +51,6 @@ class DoctorPageFragment : Fragment() {
                 }
                 is Resource.Failure -> {
                     Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-//                    progressBar.visibility = View.GONE
                 }
             }
 
