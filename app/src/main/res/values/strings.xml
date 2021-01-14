@@ -35,6 +35,7 @@
     <string name="doctor_s_note_str">Doctor\'s Note</string>
     <string name="submit_str">Submit</string>
     <string name="nurse_s_comment_str">Nurse\'s Comment</string>
+    <string name="note">Note</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
