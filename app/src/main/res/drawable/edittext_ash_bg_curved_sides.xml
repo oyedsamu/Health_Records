@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Curved Shape filled Buttons with Primary color-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:alpha="http://schemas.android.com/aapt"
+    android:shape="rectangle">
+    <stroke android:color="#c4c4c4" android:width="2dp"/>
+    <corners android:radius="10dp" />
+    <solid android:color="#DEDEDE" alpha:alpha="0.5" />
+</shape>

@@ -36,6 +36,16 @@
     <string name="submit_str">Submit</string>
     <string name="nurse_s_comment_str">Nurse\'s Comment</string>
     <string name="note">Note</string>
+    <string name="patient_registration_form">Patient Registration Form</string>
+    <string name="healthcare_no">Healthcare No</string>
+    <string name="add_comments">Add Comments</string>
+    <string name="patient_s_first_name">Patient\'s First Name</string>
+    <string name="patient_s_last_name">Patient\'s Last Name</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="preview">Preview</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
