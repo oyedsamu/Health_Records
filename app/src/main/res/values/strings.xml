@@ -46,6 +46,8 @@
     <string name="address">Address</string>
     <string name="city">City</string>
     <string name="preview">Preview</string>
+    <string name="welcome">Kindly fill in the institution details</string>
+    <string name="healthcare_provider_name">HealthCare Provider Name</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
