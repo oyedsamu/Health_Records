@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.institution.InstitutionRegistration">
+
+    <include
+        android:id="@+id/fragment_institution_reg_toolbar"
+        layout="@layout/institution_registration_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/institution_reg_healthcare_provider_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:height="50dp"
+        android:background="@drawable/edittext_ash_bg_curved_sides"
+        android:hint="@string/healthcare_provider_name"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_institution_reg_toolbar" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/patient_reg_form_type_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:height="50dp"
+        android:background="@drawable/edittext_ash_bg_curved_sides"
+        android:hint="@string/type"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/institution_reg_healthcare_provider_name_et" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
