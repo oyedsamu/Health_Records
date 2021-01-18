@@ -43,6 +43,10 @@ class PatientMedicalDetailsFragment : Fragment() {
         binding.backArrow.setOnClickListener {
             findNavController().navigate(R.id.patientDetailsFragment)
         }
+
+        binding.editDetailsBtn.setOnClickListener {
+            findNavController().navigate(R.id.doctorPrescriptionFragment)
+        }
     }
 
     override fun onDestroy() {

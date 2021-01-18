@@ -61,6 +61,7 @@ class LoginFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
 
+
         /**
          * Set uid and password into login edit fields if rememberMe already saved
          */
