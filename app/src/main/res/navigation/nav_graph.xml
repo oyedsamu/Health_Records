@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onBoardingScreenFragment">
+    app:startDestination="@id/forgotPasswordFragment">
 
     <fragment
         android:id="@+id/onBoardingScreenFragment"
@@ -47,4 +47,19 @@
         android:name="com.decadevs.healthrecords.ui.prescription.NursePrescriptionFragment"
         android:label="fragment_nurse_prescription"
         tools:layout="@layout/fragment_nurse_prescription" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.decadevs.healthrecords.ui.resetpassword.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/institutionRegistration"
+        android:name="com.decadevs.healthrecords.ui.institution.InstitutionRegistration"
+        android:label="fragment_institution_registration"
+        tools:layout="@layout/fragment_institution_registration" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.decadevs.healthrecords.ui.resetpassword.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
 </navigation>
