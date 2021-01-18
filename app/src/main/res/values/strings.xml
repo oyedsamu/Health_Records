@@ -52,6 +52,10 @@
     <string name="email_str">Email</string>
     <string name="uniqueid_str">UniqueID</string>
     <string name="send_str">Send</string>
+    <string name="reset_password_str">Reset Password</string>
+    <string name="password_str">Password</string>
+    <string name="confirm_password_str">Confirm Password</string>
+    <string name="reset_str">Reset</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
