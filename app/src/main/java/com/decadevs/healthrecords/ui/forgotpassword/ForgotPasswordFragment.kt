@@ -50,7 +50,6 @@ class ForgotPasswordFragment : Fragment() {
 
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository)
-
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
 
         binding.fragmentForgotPasswordSendBtn.setOnClickListener {
@@ -62,8 +61,6 @@ class ForgotPasswordFragment : Fragment() {
                 when (it) {
                     is Resource.Success -> {
                         val successResponse = it.value.token
-                        Log.i("Forgot pwd Response", "$successResponse")
-
                         val action =
                             ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToResetPasswordFragment(
                                 successResponse, email.text.toString(), uID.text.toString()
@@ -87,8 +84,6 @@ class ForgotPasswordFragment : Fragment() {
                             ).show()
                             uID.error = "Something went wrong, please recheck your unique id"
                         }
-
-                        Log.i("Forgot Pwd Failure", "${it.errorCode}, $it")
                     }
                 }
 

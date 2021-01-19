@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
@@ -33,6 +34,11 @@ class HealthRecordsViewModel(
         get() = _getTokenResponse
 
 
+    private val _getResetPwdResponse: MutableLiveData<Resource<Any>> =
+        MutableLiveData()
+    val getResetPwdResponse: LiveData<Resource<Any>>
+        get() = _getResetPwdResponse
+
     /** launch coroutine in viewModel scope for login */
     fun login(loginRequest: LoginRequest) = viewModelScope.launch {
         _loginResponse.value = repository.login(loginRequest)
@@ -46,5 +52,9 @@ class HealthRecordsViewModel(
     /** launch coroutine in viewModel scope for forgot pwd */
     fun getTokenResponseForForgotPwd(forgotPwdRequest: ForgotPwdRequest) = viewModelScope.launch {
         _getTokenResponse.value = repository.forgotPwd(forgotPwdRequest)
+    }
+
+    fun getResetPwdResponse(resetPasswordRequest: ResetPasswordRequest) = viewModelScope.launch {
+        _getResetPwdResponse.value = repository.resetPassword(resetPasswordRequest)
     }
 }

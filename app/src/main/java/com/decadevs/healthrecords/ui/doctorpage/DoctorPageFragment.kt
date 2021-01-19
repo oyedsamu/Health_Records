@@ -33,11 +33,6 @@ class DoctorPageFragment : Fragment() {
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
 
-    override fun onStart() {
-        super.onStart()
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,11 +46,31 @@ class DoctorPageFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
 
+        getStaffIdFromDataStoreAndImplementApiCall()
 
+
+        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
+            when (it) {
+                is Resource.Success -> {
+                    val successResponse = it.value.data
+                    Log.i("Staff Response", successResponse.toString())
+                    //Update UI
+                    binding.doctorName.text =
+                        successResponse.firstname + " " + successResponse.lastname
+                    binding.doctorEmail.text = successResponse.email
+                    binding.hospitalAddress.text = successResponse.healthcareProviderName
+                    binding.doctorPhoneNumber.text = successResponse.phoneNumber
+                }
+                is Resource.Failure -> {
+                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                }
+            }
+
+        })
 
         binding.searchBtn.setOnClickListener {
 //            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-//            getStaffIdFromDataStoreAndImplementApiCall()
             findNavController().navigate(R.id.patientDetailsFragment)
         }
 
@@ -74,38 +89,6 @@ class DoctorPageFragment : Fragment() {
         })
 
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
-            Log.i("Get staff Response ", "$it")
-
-            when (it) {
-                is Resource.Success -> {
-                    val successResponse = it.value.data
-                    Log.i("Staff Response", successResponse.toString())
-
-                    //Update UI
-                    binding.doctorName.text =
-                        successResponse.firstname + " " + successResponse.lastname
-                    binding.doctorEmail.text = successResponse.email
-                    binding.hospitalAddress.text = successResponse.healthcareProviderName
-                    binding.doctorPhoneNumber.text = successResponse.phoneNumber
-
-
-                    findNavController().navigate(R.id.patientDetailsFragment)
-
-
-                }
-                is Resource.Failure -> {
-                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-
-                }
-            }
-
-        })
     }
 
     override fun onDestroy() {
