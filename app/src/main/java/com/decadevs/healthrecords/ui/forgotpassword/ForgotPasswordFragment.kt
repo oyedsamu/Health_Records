@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.ui.resetpassword
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -34,6 +35,8 @@ class ForgotPasswordFragment : Fragment() {
     private lateinit var email: EditText
     private lateinit var uID: EditText
 
+    private var mProgressDialog: ProgressDialog? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,8 +61,12 @@ class ForgotPasswordFragment : Fragment() {
 
                 when (it) {
                     is Resource.Success -> {
+                        mProgressDialog!!.dismiss()
+
                         val successResponse = it.value.token
                         Log.i("Forgot pwd Response", "$successResponse")
+                        email.error = null
+                        uID.error = null
                         //findNavController().navigate(R.id.resetPasswordFragment)
                     }
                     is Resource.Failure -> {
@@ -76,7 +83,7 @@ class ForgotPasswordFragment : Fragment() {
                                 "Something went wrong, please recheck your unique id",
                                 Toast.LENGTH_LONG
                             ).show()
-                            email.error = "Something went wrong, please recheck your unique id"
+                            uID.error = "Something went wrong, please recheck your unique id"
                         }
 
                         Log.i("Forgot Pwd Failure", "${it.errorCode}, $it")
@@ -98,8 +105,19 @@ class ForgotPasswordFragment : Fragment() {
                 uID.error = "Please enter your correct unique ID"
             }
             else -> {
+
+                mProgressDialog =
+                    ProgressDialog.show(
+                        requireActivity(),
+                        "Verifying data",
+                        "Please wait...",
+                        false,
+                        false
+                    )
                 val forgotPwdRequest = ForgotPwdRequest(email.text.toString(), uID.text.toString())
                 viewModel.getTokenResponseForForgotPwd(forgotPwdRequest)
+                email.error = null
+                uID.error = null
             }
         }
     }
