@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
@@ -62,6 +63,13 @@ class ForgotPasswordFragment : Fragment() {
                         //findNavController().navigate(R.id.resetPasswordFragment)
                     }
                     is Resource.Failure -> {
+                        if (it.errorCode == 404)
+                            Toast.makeText(
+                                requireActivity(),
+                                "Email not found, please input correct email",
+                                Toast.LENGTH_LONG
+                            ).show()
+
                         Log.i("Forgot Pwd Failure", "${it.errorCode}, $it")
                     }
                 }
