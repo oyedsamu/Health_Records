@@ -2,9 +2,11 @@ package com.decadevs.healthrecords.repository
 
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
+import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
+import com.decadevs.healthrecords.model.response.TokenResponse
 import javax.inject.Inject
 
 class HealthRecordsRepositoryImpl
@@ -22,6 +24,10 @@ constructor(
             apiService.getStaff(id)
         }
 
+    override suspend fun forgotPwd(pwdRequest: ForgotPwdRequest): Resource<TokenResponse> =
+        safeApiCall {
+            apiService.forgotPwd(pwdRequest)
+        }
 
 
 }
