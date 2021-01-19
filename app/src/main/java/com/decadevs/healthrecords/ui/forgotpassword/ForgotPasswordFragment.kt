@@ -66,7 +66,7 @@ class ForgotPasswordFragment : Fragment() {
 
                         val action =
                             ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToResetPasswordFragment(
-                                successResponse
+                                successResponse, email.text.toString(), uID.text.toString()
                             )
                         findNavController().navigate(action)
                     }

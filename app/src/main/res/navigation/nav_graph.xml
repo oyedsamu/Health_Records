@@ -70,5 +70,13 @@
             android:name="token"
             app:argType="string"
             android:defaultValue="null" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="null" />
+        <argument
+            android:name="uid"
+            app:argType="string"
+            android:defaultValue="null" />
     </fragment>
 </navigation>
