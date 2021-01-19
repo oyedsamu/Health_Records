@@ -57,12 +57,10 @@ class ForgotPasswordFragment : Fragment() {
             validateInputField()
 
             viewModel.getTokenResponse.observe(viewLifecycleOwner, {
+                mProgressDialog!!.dismiss()
                 Log.i("Token Response", "$it")
-
                 when (it) {
                     is Resource.Success -> {
-                        mProgressDialog!!.dismiss()
-
                         val successResponse = it.value.token
                         Log.i("Forgot pwd Response", "$successResponse")
                         email.error = null
