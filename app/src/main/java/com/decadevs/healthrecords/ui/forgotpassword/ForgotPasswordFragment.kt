@@ -53,7 +53,7 @@ class ForgotPasswordFragment : Fragment() {
             validateInputField()
 
             viewModel.getTokenResponse.observe(viewLifecycleOwner, {
-                Log.i("Token Response ", "$it")
+                Log.i("Token Response", "$it")
 
                 when (it) {
                     is Resource.Success -> {
