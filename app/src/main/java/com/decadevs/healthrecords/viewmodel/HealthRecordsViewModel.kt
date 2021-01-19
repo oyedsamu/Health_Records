@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.decadevs.healthrecords.api.Resource
-import com.decadevs.healthrecords.model.LoginRequest
-import com.decadevs.healthrecords.model.response.GenericResponseClass
+import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepository

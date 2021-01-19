@@ -1,4 +1,4 @@
-package com.decadevs.healthrecords.model
+package com.decadevs.healthrecords.model.request
 
 data class LoginRequest (
     var id : String,

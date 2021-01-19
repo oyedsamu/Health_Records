@@ -2,8 +2,7 @@ package com.decadevs.healthrecords.repository
 
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
-import com.decadevs.healthrecords.model.LoginRequest
-import com.decadevs.healthrecords.model.response.GenericResponseClass
+import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import javax.inject.Inject
