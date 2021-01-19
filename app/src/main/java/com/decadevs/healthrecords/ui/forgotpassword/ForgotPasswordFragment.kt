@@ -70,6 +70,7 @@ class ForgotPasswordFragment : Fragment() {
                                 Toast.LENGTH_LONG
                             ).show()
 
+                        email.error = "Email not found, please input correct email"
                         Log.i("Forgot Pwd Failure", "${it.errorCode}, $it")
                     }
                 }
