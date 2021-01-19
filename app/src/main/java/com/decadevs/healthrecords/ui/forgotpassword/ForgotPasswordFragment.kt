@@ -63,9 +63,12 @@ class ForgotPasswordFragment : Fragment() {
                     is Resource.Success -> {
                         val successResponse = it.value.token
                         Log.i("Forgot pwd Response", "$successResponse")
-                        email.error = null
-                        uID.error = null
-                        //findNavController().navigate(R.id.resetPasswordFragment)
+
+                        val action =
+                            ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToResetPasswordFragment(
+                                successResponse
+                            )
+                        findNavController().navigate(action)
                     }
                     is Resource.Failure -> {
                         if (it.errorCode == 404) {
@@ -76,6 +79,7 @@ class ForgotPasswordFragment : Fragment() {
                             ).show()
                             email.error = "Email not found, please input correct email"
                         } else if (it.errorCode == 500) {
+                            email.error = null
                             Toast.makeText(
                                 requireActivity(),
                                 "Something went wrong, please recheck your unique id",
