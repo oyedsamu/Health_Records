@@ -2,6 +2,7 @@ package com.decadevs.healthrecords.api
 
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
@@ -22,8 +23,14 @@ interface ApiService {
     ): StaffResponse
 
     @POST("Auth/forgotpassword")
-    suspend fun forgotPwd(
+    suspend fun forgotPassword(
         @Body forgotPwdRequest: ForgotPwdRequest
     ): TokenResponse
+
+
+    @POST("Auth/resetPassword")
+    suspend fun resetPassword(
+        @Body resetPwdRequest: ResetPasswordRequest
+    )
 
 }

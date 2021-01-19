@@ -26,7 +26,7 @@ constructor(
 
     override suspend fun forgotPwd(pwdRequest: ForgotPwdRequest): Resource<TokenResponse> =
         safeApiCall {
-            apiService.forgotPwd(pwdRequest)
+            apiService.forgotPassword(pwdRequest)
         }
 
 
