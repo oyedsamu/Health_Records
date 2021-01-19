@@ -63,14 +63,22 @@ class ForgotPasswordFragment : Fragment() {
                         //findNavController().navigate(R.id.resetPasswordFragment)
                     }
                     is Resource.Failure -> {
-                        if (it.errorCode == 404)
+                        if (it.errorCode == 404) {
                             Toast.makeText(
                                 requireActivity(),
                                 "Email not found, please input correct email",
                                 Toast.LENGTH_LONG
                             ).show()
+                            email.error = "Email not found, please input correct email"
+                        } else if (it.errorCode == 500) {
+                            Toast.makeText(
+                                requireActivity(),
+                                "Something went wrong, please recheck your unique id",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            email.error = "Something went wrong, please recheck your unique id"
+                        }
 
-                        email.error = "Email not found, please input correct email"
                         Log.i("Forgot Pwd Failure", "${it.errorCode}, $it")
                     }
                 }
