@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.FragmentResetPasswordBinding
 
 
 class ResetPasswordFragment : Fragment() {
 
-    private var _binding : FragmentResetPasswordBinding? = null
+    private var _binding: FragmentResetPasswordBinding? = null
     private val binding get() = _binding!!
+
+
+    private val args: ResetPasswordFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
