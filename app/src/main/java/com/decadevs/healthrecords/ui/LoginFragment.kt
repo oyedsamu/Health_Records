@@ -18,7 +18,7 @@ import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentLoginBinding
 import com.decadevs.healthrecords.datastore.UserManager
-import com.decadevs.healthrecords.model.LoginRequest
+import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
@@ -60,6 +60,8 @@ class LoginFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
+
+        binding.forgetPwdButton.setOnClickListener { findNavController().navigate(R.id.forgotPasswordFragment) }
 
 
         /**
