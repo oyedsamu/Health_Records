@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/patientDetailsFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/onBoardingScreenFragment"
@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.decadevs.healthrecords.LoginFragment"
+        android:name="com.decadevs.healthrecords.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
 
@@ -32,4 +32,14 @@
         android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
         android:label="fragment_patient_medical_details"
         tools:layout="@layout/fragment_patient_medical_details" />
+    <fragment
+        android:id="@+id/doctorPrescriptionFragment"
+        android:name="com.decadevs.healthrecords.ui.prescription.DoctorPrescriptionFragment"
+        android:label="fragment_doctor_prescription"
+        tools:layout="@layout/fragment_doctor_prescription" />
+    <fragment
+        android:id="@+id/nurseComments"
+        android:name="com.decadevs.healthrecords.ui.NurseComments"
+        android:label="fragment_nurse_comments"
+        tools:layout="@layout/fragment_nurse_comments" />
 </navigation>

@@ -57,6 +57,12 @@ dependencies {
     // Fragment
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
 
+    // Retrofit + GSON
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"
+
     // Lifecycle + ViewModel & LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
@@ -81,6 +87,9 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
 
+
+
+
     //viewpager2
     implementation "androidx.viewpager2:viewpager2:$viewPager2"
 
@@ -94,6 +103,11 @@ dependencies {
 
     //Cardview
     implementation "androidx.cardview:cardview:1.0.0"
+
+    //DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha05"
+
+
 }
 
 kapt {

@@ -63,7 +63,6 @@ class OnBoardingScreenFragment : Fragment(R.layout.fragment_onboarding_screen) {
     override fun onStart() {
         super.onStart()
 
-
         if (loadFromSharedPreference(requireActivity())) {
             findNavController().navigate(R.id.loginFragment)
         }
@@ -82,14 +81,5 @@ class OnBoardingScreenFragment : Fragment(R.layout.fragment_onboarding_screen) {
             activity.getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean("finished", false)
     }
-
-
-
-
-
-
-
-
-
 
 }
