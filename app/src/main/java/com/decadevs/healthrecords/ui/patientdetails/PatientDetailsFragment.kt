@@ -38,6 +38,10 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             findNavController().navigate(R.id.doctorPageFragment)
         }
 
+        binding.addRecord.setOnClickListener {
+            findNavController().navigate(R.id.doctorPrescriptionFragment)
+        }
+
         /** SET UP SPINNER */
         ArrayAdapter.createFromResource(
             requireContext(),

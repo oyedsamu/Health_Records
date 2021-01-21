@@ -36,6 +36,26 @@
     <string name="submit_str">Submit</string>
     <string name="nurse_s_comment_str">Nurse\'s Comment</string>
     <string name="note">Note</string>
+    <string name="patient_registration_form">Patient Registration Form</string>
+    <string name="healthcare_no">Healthcare No</string>
+    <string name="add_comments">Add Comments</string>
+    <string name="patient_s_first_name">Patient\'s First Name</string>
+    <string name="patient_s_last_name">Patient\'s Last Name</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="preview">Preview</string>
+    <string name="welcome">Kindly fill in the institution details</string>
+    <string name="healthcare_provider_name">HealthCare Provider Name</string>
+    <string name="forgot_password_str">Forgot Password</string>
+    <string name="email_str">Email</string>
+    <string name="uniqueid_str">UniqueID</string>
+    <string name="send_str">Send</string>
+    <string name="reset_password_str">Reset Password</string>
+    <string name="password_str">Password</string>
+    <string name="confirm_password_str">Confirm Password</string>
+    <string name="reset_str">Reset</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">

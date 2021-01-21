@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -32,31 +33,6 @@ class DoctorPageFragment : Fragment() {
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
 
-    override fun onStart() {
-        super.onStart()
-        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
-            Log.i("Get staff Response ", "$it")
-
-            when (it) {
-                is Resource.Success -> {
-                    val successResponse = it.value.data
-                    Log.i("Staff Response", successResponse.toString())
-
-                    //Update UI
-                    binding.doctorName.text =
-                        successResponse.firstname + " " + successResponse.lastname
-                    binding.doctorEmail.text = successResponse.email
-                    binding.hospitalAddress.text = successResponse.healthcareProviderName
-                    binding.doctorPhoneNumber.text = successResponse.phoneNumber
-                }
-                is Resource.Failure -> {
-                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-                }
-            }
-
-        })
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -71,6 +47,36 @@ class DoctorPageFragment : Fragment() {
         userManager = UserManager(requireActivity())
 
         getStaffIdFromDataStoreAndImplementApiCall()
+
+
+        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
+            when (it) {
+                is Resource.Success -> {
+                    val successResponse = it.value.data
+                    Log.i("Staff Response", successResponse.toString())
+                    //Update UI
+                    binding.doctorName.text =
+                        successResponse.firstname + " " + successResponse.lastname
+                    binding.doctorEmail.text = successResponse.email
+                    binding.hospitalAddress.text = successResponse.healthcareProviderName
+                    binding.doctorPhoneNumber.text = successResponse.phoneNumber
+                }
+                is Resource.Failure -> {
+                    Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                }
+            }
+
+        })
+
+        binding.searchBtn.setOnClickListener {
+//            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.patientDetailsFragment)
+        }
+
+        binding.backArrow.setOnClickListener {
+            findNavController().navigate(R.id.loginFragment)
+        }
 
         return binding.root
     }

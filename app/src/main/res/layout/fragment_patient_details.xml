@@ -113,7 +113,8 @@
         android:layout_marginBottom="10dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/green_background" />
+        app:layout_constraintEnd_toEndOf="@+id/green_background"
+        android:contentDescription="@string/add_comments" />
 
     <View
         android:id="@+id/green_background"
