@@ -15,23 +15,13 @@
         android:id="@+id/loginFragment"
         android:name="com.decadevs.healthrecords.ui.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_doctorPageActivity"
+            app:destination="@id/doctorPageActivity" />
+    </fragment>
 
-    <fragment
-        android:id="@+id/doctorPageFragment"
-        android:name="com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragment"
-        android:label="fragment_doctor_page"
-        tools:layout="@layout/fragment_doctor_page" />
-    <fragment
-        android:id="@+id/patientDetailsFragment"
-        android:name="com.decadevs.healthrecords.ui.patientdetails.PatientDetailsFragment"
-        android:label="fragment_patient_details"
-        tools:layout="@layout/fragment_patient_details" />
-    <fragment
-        android:id="@+id/patientMedicalDetailsFragment"
-        android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
-        android:label="fragment_patient_medical_details"
-        tools:layout="@layout/fragment_patient_medical_details" />
+
     <fragment
         android:id="@+id/doctorPrescriptionFragment"
         android:name="com.decadevs.healthrecords.ui.prescription.DoctorPrescriptionFragment"
@@ -79,4 +69,8 @@
             app:argType="string"
             android:defaultValue="null" />
     </fragment>
+    <activity
+        android:id="@+id/doctorPageActivity"
+        android:name="com.decadevs.healthrecords.ui.DoctorPageActivity"
+        android:label="DoctorPageActivity" />
 </navigation>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/doctor_page_nav_graph"
+    app:startDestination="@id/doctorPageFragment">
+
+    <fragment
+        android:id="@+id/doctorPageFragment"
+        android:name="com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragment"
+        android:label="fragment_doctor_page"
+        tools:layout="@layout/fragment_doctor_page" />
+    <fragment
+        android:id="@+id/vitalInfoFragment"
+        android:name="com.decadevs.healthrecords.ui.vitalinfo.VitalInfoFragment"
+        android:label="fragment_vital_info"
+        tools:layout="@layout/fragment_vital_info" />
+    <fragment
+        android:id="@+id/patientDetailsFragment"
+        android:name="com.decadevs.healthrecords.ui.patientdetails.PatientDetailsFragment"
+        android:label="fragment_patient_details"
+        tools:layout="@layout/fragment_patient_details" />
+    <fragment
+        android:id="@+id/patientMedicalDetailsFragment"
+        android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
+        android:label="fragment_patient_medical_details"
+        tools:layout="@layout/fragment_patient_medical_details" />
+
+
+</navigation>

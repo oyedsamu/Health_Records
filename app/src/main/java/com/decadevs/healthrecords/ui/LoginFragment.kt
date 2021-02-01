@@ -81,7 +81,8 @@ class LoginFragment : Fragment() {
                         val successResponse = it.value.message
                         Log.i("Login Response", "$successResponse")
                         progressBar.visibility = View.GONE
-                        findNavController().navigate(R.id.doctorPageFragment)
+                        findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
+                      //  findNavController().navigate(R.id.doctorPageFragment)
                     }
                     is Resource.Failure -> {
                         Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
