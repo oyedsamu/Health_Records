@@ -63,6 +63,15 @@
     <string name="home_str">Home</string>
     <string name="vital_information_str">Vital Information</string>
     <string name="mrs_adam_ken_str">MRS ADAM KEN</string>
+    <string name="_23335698ed_str">23335698ED</string>
+    <string name="genotype_str">Genotype</string>
+    <string name="o_positive_str">O Positive</string>
+    <string name="milk_cheese_pollen_str">Milk, Cheese, Pollen</string>
+    <string name="nill_str">Nill</string>
+    <string name="blood_group_str">Blood Group</string>
+    <string name="aa_str">AA</string>
+    <string name="allergies_str">Allergies</string>
+    <string name="disabilities_str">Disabilities</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.vitalinfo.VitalInfoFragment">
 
 
@@ -11,15 +12,15 @@
         android:id="@+id/fragment_vital_info_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:text="@string/vital_information_str"
-        android:textStyle="bold"
         android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/icon"
@@ -42,14 +43,224 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/mrs_adam_ken_str"
-        android:textStyle="bold"
         android:textColor="@color/black"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/icon" />
 
 
+    <TextView
+        android:id="@+id/fragment_vital_info_id_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/_23335698ed_str"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_vital_info_name_tv"
+        app:layout_constraintStart_toStartOf="@+id/fragment_vital_info_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_vital_info_name_tv" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fragment_vital_info_card"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        app:cardCornerRadius="50dp"
+        app:cardBackgroundColor="@color/green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_vital_info_id_tv"/>
+
+
+    <TextView
+        android:id="@+id/fragment_vital_info_blood_group_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:text="@string/blood_group_str"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_info_card"
+        app:layout_constraintStart_toEndOf="@+id/fragment_vital_info_card"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_card"
+        app:layout_constraintVertical_bias="0.461" />
+
+    <TextView
+        android:id="@+id/fragment_vital_info_positive_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/o_positive_str"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_info_blood_group_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_blood_group_tv"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/off_white"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_vital_info_card" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fragment_vital_info_card_genotype"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+
+    <TextView
+        android:id="@+id/fragment_vital_info_genotype_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/genotype_str"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_info_card_genotype"
+        app:layout_constraintStart_toEndOf="@+id/fragment_vital_info_card_genotype"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_card_genotype"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/fragment_vital_info_AA_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/aa_str"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_info_genotype_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_genotype_tv"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/off_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_vital_info_card_genotype" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fragment_vital_allergies_card"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <TextView
+        android:id="@+id/fragment_vital_info_allergies_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/allergies_str"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_allergies_card"
+        app:layout_constraintStart_toEndOf="@+id/fragment_vital_allergies_card"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_allergies_card"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/fragment_vital_info_food_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/milk_cheese_pollen_str"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_info_allergies_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_allergies_tv"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/off_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_vital_info_allergies_tv" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/fragment_vital_disabilities_card"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+
+    <TextView
+        android:id="@+id/fragment_vital_info_disabilities_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/disabilities_str"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_disabilities_card"
+        app:layout_constraintStart_toEndOf="@+id/fragment_vital_disabilities_card"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_disabilities_card"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/fragment_vital_info_disabilities_blood_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="@string/nill_str"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_vital_info_disabilities_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_disabilities_tv"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@color/off_white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_vital_info_disabilities_tv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
