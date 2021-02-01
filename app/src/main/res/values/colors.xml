@@ -17,6 +17,7 @@
     <color name="color_black">#080808</color>
 
     <color name="dark_green">#0E280E</color>
+    <color name="error_color">#ed4337</color>
 
 
 </resources>

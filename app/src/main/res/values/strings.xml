@@ -56,6 +56,13 @@
     <string name="password_str">Password</string>
     <string name="confirm_password_str">Confirm Password</string>
     <string name="reset_str">Reset</string>
+    <string name="log_out_str">Log Out</string>
+    <string name="add_history_str">Add History</string>
+    <string name="history_str">History</string>
+    <string name="vital_info_str">Vital Info</string>
+    <string name="home_str">Home</string>
+    <string name="vital_information_str">Vital Information</string>
+    <string name="mrs_adam_ken_str">MRS ADAM KEN</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
