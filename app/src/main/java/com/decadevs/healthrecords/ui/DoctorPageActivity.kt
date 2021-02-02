@@ -64,7 +64,7 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
             }
 
             R.id.addHistoryFragment -> {
-                findNavController(R.id.activity_doctor_nav_host).navigate(R.id.patientMedicalDetailsFragment)
+                findNavController(R.id.activity_doctor_nav_host).navigate(R.id.doctorPrescriptionFragment)
             }
 
             R.id.logout -> {

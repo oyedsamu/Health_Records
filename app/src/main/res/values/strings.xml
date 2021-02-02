@@ -72,6 +72,8 @@
     <string name="aa_str">AA</string>
     <string name="allergies_str">Allergies</string>
     <string name="disabilities_str">Disabilities</string>
+    <string name="patient_history_str">Patient History</string>
+    <string name="edit_patient_details_str">Edit Patient Details</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">

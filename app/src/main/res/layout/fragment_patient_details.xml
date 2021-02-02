@@ -7,29 +7,32 @@
     android:background="@color/white"
     tools:context=".ui.patientdetails.PatientDetailsFragment">
 
-
-<!--    <ImageButton-->
-<!--        android:id="@+id/back_arrow"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:backgroundTint="@color/transparent"-->
-<!--        android:src="@drawable/ic_arrow_back"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <TextView
+        android:id="@+id/fragment_patient_details_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/patient_history_str"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profile_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/patient_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_patient_details_title_tv"
         app:shapeAppearanceOverlay="@style/circular_image"
-        app:strokeColor="@color/green"/>
+        app:strokeColor="@color/green" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -75,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/adamsken_gmail_com"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSpinner
@@ -84,8 +87,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:elevation="5dp"
-        android:theme="@style/spinner"
+        app:backgroundTint="@color/white"
         android:popupBackground="@drawable/spinner_bg"
+        android:theme="@style/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,26 +99,33 @@
         android:id="@+id/patient_details_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingBottom="5dp"
-        tools:listitem="@layout/patient_details_template"
         android:elevation="5dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/years_spinner"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        tools:listitem="@layout/patient_details_template" />
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        style="@style/Widget.App.FloatingActionButton"
+        app:tint="@color/white"
+        app:backgroundTint="@color/white"
+        android:background="@color/green"
+        android:backgroundTint="@color/green_accent"
+        android:contentDescription="@string/add_comments"
         android:src="@drawable/ic_add"
-        android:backgroundTint="@color/green"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
+        app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/green_background"
-        android:contentDescription="@string/add_comments" />
+        app:layout_constraintEnd_toEndOf="@+id/green_background" />
 
     <View
         android:id="@+id/green_background"
