@@ -21,12 +21,6 @@
             app:destination="@id/doctorPageActivity" />
     </fragment>
 
-
-    <fragment
-        android:id="@+id/doctorPrescriptionFragment"
-        android:name="com.decadevs.healthrecords.ui.prescription.DoctorPrescriptionFragment"
-        android:label="fragment_doctor_prescription"
-        tools:layout="@layout/fragment_doctor_prescription" />
     <fragment
         android:id="@+id/nurseComments"
         android:name="com.decadevs.healthrecords.ui.NurseComments"

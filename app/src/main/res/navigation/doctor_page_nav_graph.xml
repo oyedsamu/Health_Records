@@ -25,6 +25,12 @@
         android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
         android:label="fragment_patient_medical_details"
         tools:layout="@layout/fragment_patient_medical_details" />
+    <fragment
+        android:id="@+id/doctorPrescriptionFragment"
+        android:name="com.decadevs.healthrecords.ui.prescription.DoctorPrescriptionFragment"
+        android:label="DoctorPrescriptionFragment"
+        tools:layout="@layout/fragment_doctor_prescription"
+        />
 
 
 </navigation>

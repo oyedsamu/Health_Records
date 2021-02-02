@@ -120,7 +120,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/vital_details_bg"
                 android:lineHeight="14dp"
                 android:padding="5dp"
                 android:text="@string/lorem_ipsum"
@@ -141,7 +140,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/vital_details_bg"
                 android:lineHeight="14dp"
                 android:padding="5dp"
                 android:text="@string/lorem_ipsum"
@@ -178,17 +176,16 @@
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/type_details_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/vital_details_bg"
-                android:lineHeight="14dp"
-                android:padding="5dp"
-                android:text="@string/is_sensitive_or_not"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/type_details_tv"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:lineHeight="14dp"-->
+<!--                android:padding="5dp"-->
+<!--                android:text="@string/is_sensitive_or_not"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="12sp" />-->
 
         </LinearLayout>
 
@@ -200,8 +197,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginHorizontal="15dp"
-        android:background="@drawable/button_bg"
-        android:text="@string/edit_medical_details"
+        android:backgroundTint="@color/green"
+        android:text="@string/edit_patient_details_str"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
