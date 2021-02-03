@@ -8,6 +8,7 @@ import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.response.PatientAllRecordsResponse
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
@@ -27,6 +28,11 @@ class HealthRecordsViewModel(
         MutableLiveData()
     val getStaffResponse: LiveData<Resource<StaffResponse>>
         get() = _getStaffResponse
+
+    private  val _getPatientPatientAllMedicalRecord: MutableLiveData<Resource<PatientAllRecordsResponse>> =
+        MutableLiveData()
+    val getPatientPatientAllMedicalRecord: LiveData<Resource<PatientAllRecordsResponse>>
+    get() = _getPatientPatientAllMedicalRecord
 
     private val _getTokenResponse: MutableLiveData<Resource<TokenResponse>> =
         MutableLiveData()

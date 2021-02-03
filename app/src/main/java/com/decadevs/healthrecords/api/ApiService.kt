@@ -3,6 +3,7 @@ package com.decadevs.healthrecords.api
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.response.PatientAllRecordsResponse
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
@@ -32,5 +33,10 @@ interface ApiService {
     suspend fun resetPassword(
         @Body resetPwdRequest: ResetPasswordRequest
     )
+
+    @GET("MedicalRecord/GetAllMedicalRecords/{id}/1")
+    suspend fun getAllHealthRecords(
+        @Path("id") id: String
+    ): PatientAllRecordsResponse
 
 }

@@ -4,6 +4,7 @@ import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.response.PatientAllRecordsResponse
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
@@ -16,4 +17,6 @@ interface HealthRecordsRepository {
     suspend fun forgotPwd(pwdRequest: ForgotPwdRequest): Resource<TokenResponse>
 
     suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): Resource<Any>
+
+    suspend fun getAllRecords(patientId: String): Resource<PatientAllRecordsResponse>
 }

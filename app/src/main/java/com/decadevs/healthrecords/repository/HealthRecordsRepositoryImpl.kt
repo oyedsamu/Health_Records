@@ -5,6 +5,7 @@ import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.response.PatientAllRecordsResponse
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
@@ -33,6 +34,10 @@ constructor(
     override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): Resource<Any> =
         safeApiCall {
         apiService.resetPassword(resetPasswordRequest)
+    }
+
+    override suspend fun getAllRecords(patientId: String): Resource<PatientAllRecordsResponse> = safeApiCall {
+        apiService.getAllHealthRecords(patientId)
     }
 
 
