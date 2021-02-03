@@ -35,4 +35,10 @@ class DoctorPrescriptionFragment : Fragment() {
         return binding.root
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

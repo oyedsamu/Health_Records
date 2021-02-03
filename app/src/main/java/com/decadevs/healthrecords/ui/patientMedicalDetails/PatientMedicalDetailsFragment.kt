@@ -37,16 +37,16 @@ class PatientMedicalDetailsFragment : Fragment() {
         binding.practitioner.text = practitioner
         binding.hospitalName.text = hospital
         binding.date.text = date
-        binding.diagnosisDetailsTv.text = details
+      //  binding.diagnosisDetailsTv.text = details
 
         /** BACK BUTTON */
-        binding.backArrow.setOnClickListener {
-            findNavController().navigate(R.id.patientDetailsFragment)
-        }
-
-        binding.editDetailsBtn.setOnClickListener {
-            findNavController().navigate(R.id.doctorPrescriptionFragment)
-        }
+//        binding.backArrow.setOnClickListener {
+//            findNavController().navigate(R.id.patientDetailsFragment)
+//        }
+//
+//        binding.editDetailsBtn.setOnClickListener {
+//            findNavController().navigate(R.id.doctorPrescriptionFragment)
+//        }
     }
 
     override fun onDestroy() {

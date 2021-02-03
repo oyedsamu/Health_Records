@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group
-        android:checkableBehavior="single">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/actionHome"
+            android:id="@+id/homeFragment"
             android:icon="@drawable/home_icon"
-            android:title="Home" />
+            android:title="@string/home_str" />
 
 
         <item
-            android:id="@+id/vitalInfo"
+            android:id="@+id/vitalInfoFragment"
             android:icon="@drawable/stethoscope_icon"
-            android:title="Vital Info" />
+            android:title="@string/vital_info_str" />
 
         <item
-            android:id="@+id/history"
+            android:id="@+id/historyFragment"
             android:icon="@drawable/contact_logo"
-            android:title="History" />
+            android:title="@string/history_str" />
 
 
         <item
-            android:id="@+id/addHistory"
+            android:id="@+id/addHistoryFragment"
             android:icon="@drawable/add_history"
-            android:title="Add History" />
+            android:title="@string/add_history_str" />
 
         <item
-            android:id="@+id/actionLogout"
+            android:id="@+id/logout"
             android:icon="@drawable/signout"
-            android:title="Log Out" />
+            android:title="@string/log_out_str" />
     </group>
 
 </menu>

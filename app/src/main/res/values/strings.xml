@@ -56,6 +56,25 @@
     <string name="password_str">Password</string>
     <string name="confirm_password_str">Confirm Password</string>
     <string name="reset_str">Reset</string>
+    <string name="log_out_str">Log Out</string>
+    <string name="add_history_str">Add History</string>
+    <string name="history_str">History</string>
+    <string name="vital_info_str">Vital Info</string>
+    <string name="home_str">Home</string>
+    <string name="vital_information_str">Vital Information</string>
+    <string name="mrs_adam_ken_str">MRS ADAM KEN</string>
+    <string name="_23335698ed_str">23335698ED</string>
+    <string name="genotype_str">Genotype</string>
+    <string name="o_positive_str">O Positive</string>
+    <string name="milk_cheese_pollen_str">Milk, Cheese, Pollen</string>
+    <string name="nill_str">Nill</string>
+    <string name="blood_group_str">Blood Group</string>
+    <string name="aa_str">AA</string>
+    <string name="allergies_str">Allergies</string>
+    <string name="disabilities_str">Disabilities</string>
+    <string name="patient_history_str">Patient History</string>
+    <string name="edit_patient_details_str">Edit Patient Details</string>
+    <string name="edit_str">Edit</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">

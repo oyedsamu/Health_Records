@@ -34,9 +34,9 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         super.onViewCreated(view, savedInstanceState)
 
         /** BACK BUTTON */
-        binding.backArrow.setOnClickListener {
-            findNavController().navigate(R.id.doctorPageFragment)
-        }
+//        binding.backArrow.setOnClickListener {
+//            findNavController().navigate(R.id.doctorPageFragment)
+//        }
 
         binding.addRecord.setOnClickListener {
             findNavController().navigate(R.id.doctorPrescriptionFragment)
