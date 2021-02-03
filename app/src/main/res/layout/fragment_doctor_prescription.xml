@@ -6,12 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
     android:background="@color/white"
-    >
+    tools:context=".ui.prescription.DoctorPrescriptionFragment">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.prescription.DoctorPrescriptionFragment">
+    android:layout_height="match_parent">
 
     <!--    Tool bar -->
     <include
@@ -83,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            android:hint="@string/patient_s_diagnosis_string"
+            android:hint="@string/patient_s_prescription"
             />
     </com.google.android.material.textfield.TextInputLayout>
 

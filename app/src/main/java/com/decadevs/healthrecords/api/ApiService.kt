@@ -4,6 +4,7 @@ import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
+import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
 import retrofit2.http.*
@@ -32,5 +33,8 @@ interface ApiService {
     suspend fun resetPassword(
         @Body resetPwdRequest: ResetPasswordRequest
     )
+
+    @POST("MedicalRecord/CreateMedicalRecord")
+    suspend fun addMedicalRecord(): MedicalRecordResponse
 
 }
