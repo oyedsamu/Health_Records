@@ -29,10 +29,10 @@ class HealthRecordsViewModel(
     val getStaffResponse: LiveData<Resource<StaffResponse>>
         get() = _getStaffResponse
 
-    private  val _getPatientPatientAllMedicalRecord: MutableLiveData<Resource<PatientAllRecordsResponse>> =
+    private  val _getAllPatientMedicalRecord: MutableLiveData<Resource<PatientAllRecordsResponse>> =
         MutableLiveData()
-    val getPatientPatientAllMedicalRecord: LiveData<Resource<PatientAllRecordsResponse>>
-    get() = _getPatientPatientAllMedicalRecord
+    val getAllPatientMedicalRecord: LiveData<Resource<PatientAllRecordsResponse>>
+    get() = _getAllPatientMedicalRecord
 
     private val _getTokenResponse: MutableLiveData<Resource<TokenResponse>> =
         MutableLiveData()
@@ -62,5 +62,9 @@ class HealthRecordsViewModel(
 
     fun getResetPwdResponse(resetPasswordRequest: ResetPasswordRequest) = viewModelScope.launch {
         _getResetPwdResponse.value = repository.resetPassword(resetPasswordRequest)
+    }
+
+    fun getAllPatientRecord(patientId: String) = viewModelScope.launch {
+        _getAllPatientMedicalRecord.value = repository.getAllRecords(patientId)
     }
 }

@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -18,9 +17,10 @@ import com.decadevs.healthrecords.datastore.UserManager
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.showToast
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 @AndroidEntryPoint
 class DoctorPageFragment : Fragment() {
@@ -48,7 +48,6 @@ class DoctorPageFragment : Fragment() {
 
         getStaffIdFromDataStoreAndImplementApiCall()
 
-
         viewModel.getStaffResponse.observe(viewLifecycleOwner, {
             when (it) {
                 is Resource.Success -> {
@@ -69,16 +68,42 @@ class DoctorPageFragment : Fragment() {
 
         })
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.searchBtn.setOnClickListener {
 //            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.patientDetailsFragment)
+            val isSearchFieldValidated = validateSearchField()
+
+            if(isSearchFieldValidated) {
+                getAllPatientRecords(binding.search.text.toString())
+            }
+
+            viewModel.getAllPatientMedicalRecord.observe(viewLifecycleOwner, {
+                when(it) {
+                    is Resource.Success -> {
+                        val successResponse = it.value.data
+                        Log.d("TAG", "sendNotificationSuccess: $successResponse")
+
+                        //findNavController().navigate(R.id.patientDetailsFragment)
+                    }
+
+                    is Resource.Failure -> {
+                        Log.i("Records Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                    }
+                }
+
+            })
+
         }
 
         binding.backArrow.setOnClickListener {
             findNavController().navigate(R.id.loginFragment)
         }
-
-        return binding.root
     }
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {
@@ -87,8 +112,18 @@ class DoctorPageFragment : Fragment() {
                 viewModel.getStaff(uid)
             }
         })
+    }
 
+    private fun getAllPatientRecords(patientId: String){
+        viewModel.getAllPatientRecord(patientId)
+    }
 
+    private fun validateSearchField(): Boolean {
+        return if(binding.search.text.isEmpty()) {
+            showToast("Please enter patient ID", requireActivity())
+            false
+        } else
+            true
     }
 
     override fun onDestroy() {
