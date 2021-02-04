@@ -1,5 +1,9 @@
 package com.decadevs.healthrecords.model.response
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class PatientDataResponse(
     val id: String,
     val firstName: String,
@@ -18,4 +22,4 @@ data class PatientDataResponse(
     val disability: String,
     val createdAt: String,
     val updatedAt: String
-)
+): Parcelable

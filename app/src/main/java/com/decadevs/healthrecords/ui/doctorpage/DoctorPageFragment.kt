@@ -14,6 +14,7 @@ import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPageBinding
 import com.decadevs.healthrecords.datastore.UserManager
+import com.decadevs.healthrecords.model.response.PatientDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
@@ -84,10 +85,38 @@ class DoctorPageFragment : Fragment() {
             viewModel.getPatientData.observe(viewLifecycleOwner, {
                 when (it) {
                     is Resource.Success -> {
-                        val successResponse = it.value.data
-                        Log.d("TAG", "Data success: $successResponse")
+                        //response
+                        val res = it.value.data
 
-                        //findNavController().navigate(R.id.patientDetailsFragment)
+                        val patientObject = PatientDataResponse(
+                            res.id,
+                            res.firstName,
+                            res.lastName,
+                            res.registrationNumber,
+                            res.weight,
+                            res.height,
+                            res.gender,
+                            res.doB,
+                            res.state,
+                            res.city,
+                            res.street,
+                            res.bloodGroup,
+                            res.genoType,
+                            res.allergies,
+                            res.disability,
+                            res.createdAt,
+                            res.updatedAt
+                        )
+
+                        val action =
+                            DoctorPageFragmentDirections.actionDoctorPageFragment2ToPatientDetailsFragment2(
+                                patientObject
+                            )
+
+                        findNavController().navigate(action)
+
+                        Log.d("TAG", "Data success: $res")
+
                     }
 
                     is Resource.Failure -> {
