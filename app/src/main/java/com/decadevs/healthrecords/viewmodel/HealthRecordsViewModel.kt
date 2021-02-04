@@ -66,7 +66,12 @@ class HealthRecordsViewModel(
         _getResetPwdResponse.value = repository.resetPassword(resetPasswordRequest)
     }
 
-    fun getAllPatientRecord(patientId: String) = viewModelScope.launch {
+    fun getPatientAllRecords(patientId: String) = viewModelScope.launch {
         _getAllPatientMedicalRecord.value = repository.getPatientAllRecords(patientId)
     }
+
+    fun getPatientData(patientId: String) = viewModelScope.launch {
+        _getPatientData.value = repository.getPatientData(patientId)
+    }
+
 }

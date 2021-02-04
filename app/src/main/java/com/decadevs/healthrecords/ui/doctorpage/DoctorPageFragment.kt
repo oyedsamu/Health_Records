@@ -18,7 +18,6 @@ import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
 import com.decadevs.utils.showToast
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -115,7 +114,7 @@ class DoctorPageFragment : Fragment() {
     }
 
     private fun getAllPatientRecords(patientId: String){
-        viewModel.getAllPatientRecord(patientId)
+        viewModel.getPatientAllRecords(patientId)
     }
 
     private fun validateSearchField(): Boolean {
