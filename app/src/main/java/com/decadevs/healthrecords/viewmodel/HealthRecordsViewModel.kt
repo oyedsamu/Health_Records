@@ -8,10 +8,7 @@ import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
-import com.decadevs.healthrecords.model.response.PatientAllRecordsResponse
-import com.decadevs.healthrecords.model.response.LoginResponse
-import com.decadevs.healthrecords.model.response.StaffResponse
-import com.decadevs.healthrecords.model.response.TokenResponse
+import com.decadevs.healthrecords.model.response.*
 import com.decadevs.healthrecords.repository.HealthRecordsRepository
 import kotlinx.coroutines.launch
 
@@ -29,10 +26,14 @@ class HealthRecordsViewModel(
     val getStaffResponse: LiveData<Resource<StaffResponse>>
         get() = _getStaffResponse
 
-    private  val _getAllPatientMedicalRecord: MutableLiveData<Resource<PatientAllRecordsResponse>> =
+    private val _getAllPatientMedicalRecord: MutableLiveData<Resource<PatientAllRecordsResponse>> =
         MutableLiveData()
     val getAllPatientMedicalRecord: LiveData<Resource<PatientAllRecordsResponse>>
-    get() = _getAllPatientMedicalRecord
+        get() = _getAllPatientMedicalRecord
+
+    private val _getPatientData: MutableLiveData<Resource<PatientDataResponse>> = MutableLiveData()
+    val getPatientData: LiveData<Resource<PatientDataResponse>>
+        get() = _getPatientData
 
     private val _getTokenResponse: MutableLiveData<Resource<TokenResponse>> =
         MutableLiveData()
@@ -44,6 +45,7 @@ class HealthRecordsViewModel(
         MutableLiveData()
     val getResetPwdResponse: LiveData<Resource<Any>>
         get() = _getResetPwdResponse
+
 
     /** launch coroutine in viewModel scope for login */
     fun login(loginRequest: LoginRequest) = viewModelScope.launch {
@@ -65,6 +67,6 @@ class HealthRecordsViewModel(
     }
 
     fun getAllPatientRecord(patientId: String) = viewModelScope.launch {
-        _getAllPatientMedicalRecord.value = repository.getAllRecords(patientId)
+        _getAllPatientMedicalRecord.value = repository.getPatientAllRecords(patientId)
     }
 }
