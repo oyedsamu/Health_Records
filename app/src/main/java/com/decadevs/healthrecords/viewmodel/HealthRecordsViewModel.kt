@@ -7,8 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.MedicalRecordRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
+import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepository
@@ -39,6 +41,9 @@ class HealthRecordsViewModel(
     val getResetPwdResponse: LiveData<Resource<Any>>
         get() = _getResetPwdResponse
 
+    private val _medicalRecordResponse: MutableLiveData<Resource<MedicalRecordResponse>> = MutableLiveData()
+    val medicalRecordResponse: LiveData<Resource<MedicalRecordResponse>> get() = _medicalRecordResponse
+
     /** launch coroutine in viewModel scope for login */
     fun login(loginRequest: LoginRequest) = viewModelScope.launch {
         _loginResponse.value = repository.login(loginRequest)
@@ -56,5 +61,10 @@ class HealthRecordsViewModel(
 
     fun getResetPwdResponse(resetPasswordRequest: ResetPasswordRequest) = viewModelScope.launch {
         _getResetPwdResponse.value = repository.resetPassword(resetPasswordRequest)
+    }
+
+    /** ADD MEDICAL RECORD IN VIEW-MODEL SCOPE OF COROUTINE */
+    fun addMedicalRecord(medicalRecordRequest: MedicalRecordRequest) = viewModelScope.launch {
+        _medicalRecordResponse.value = repository.addMedicalRecord(medicalRecordRequest)
     }
 }

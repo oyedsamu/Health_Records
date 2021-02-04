@@ -8,9 +8,17 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
+import com.decadevs.healthrecords.api.ApiService
+import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPrescriptionBinding
+import com.decadevs.healthrecords.model.request.MedicalRecordRequest
+import com.decadevs.healthrecords.repository.HealthRecordsRepository
+import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
+import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
+import com.decadevs.healthrecords.viewmodel.ViewModelFactory
 import com.decadevs.utils.FormValidator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,8 +32,15 @@ class DoctorPrescriptionFragment : Fragment() {
     private var validator = FormValidator()
     private lateinit var patientsDiagnosis: String
     private lateinit var patientsPrescription: String
-    private lateinit var type: String
+    private var type: Boolean = false
     private lateinit var doctorsNote: String
+    private lateinit var patientRegistrationNumber: String
+
+    @Inject lateinit var apiService: ApiService
+    private lateinit var viewModel: HealthRecordsViewModel
+    private lateinit var viewModelFactory: ViewModelFactory
+    private lateinit var repository: HealthRecordsRepository
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +56,12 @@ class DoctorPrescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /** SET UP VIEW-MODEL */
+        repository = HealthRecordsRepositoryImpl(apiService)
+        viewModelFactory = ViewModelFactory(repository as HealthRecordsRepositoryImpl)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(HealthRecordsViewModel::class.java)
+
 
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
             /** GET FORM FIELDS DATA */
@@ -64,8 +85,9 @@ class DoctorPrescriptionFragment : Fragment() {
         binding.apply {
             patientsDiagnosis = patientDiagnosisEt.text.toString()
             patientsPrescription = fragmentPatientPrescriptionEditText.text.toString()
-            type = fragmentPatientTypeDropdown.text.toString()
+            type = fragmentPatientTypeDropdown.text.toString() == "True"
             doctorsNote = fragmentDoctorNoteTextInputEt.text.toString()
+            patientRegistrationNumber = "23657E5"
         }
     }
 
@@ -89,6 +111,18 @@ class DoctorPrescriptionFragment : Fragment() {
 
     private fun addDiagnosis() {
 
+        val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber )
+        viewModel.addMedicalRecord(recordRequest)
+        viewModel.medicalRecordResponse.observe(viewLifecycleOwner, {
+            when (it) {
+                is Resource.Success -> {
+                    Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
 }

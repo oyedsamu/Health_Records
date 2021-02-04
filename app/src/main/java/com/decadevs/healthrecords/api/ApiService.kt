@@ -2,6 +2,7 @@ package com.decadevs.healthrecords.api
 
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.MedicalRecordRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
@@ -35,6 +36,8 @@ interface ApiService {
     )
 
     @POST("MedicalRecord/CreateMedicalRecord")
-    suspend fun addMedicalRecord(): MedicalRecordResponse
+    suspend fun addMedicalRecord(
+        @Body medicalRecordRequest: MedicalRecordRequest
+    ): MedicalRecordResponse
 
 }
