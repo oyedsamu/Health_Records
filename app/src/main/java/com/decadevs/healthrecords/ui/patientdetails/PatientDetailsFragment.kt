@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.adapters.OnItemClick
@@ -21,12 +22,22 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     private var _binding: FragmentPatientDetailsBinding? = null
     private val binding get() = _binding!!
 
+    private val args by navArgs<PatientDetailsFragmentArgs>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPatientDetailsBinding.inflate(inflater, container, false)
+
+        val patientName = "${args.patientData.firstName} ${args.patientData.lastName}"
+        val patientAddress =
+            "${args.patientData.street}, ${args.patientData.city}, ${args.patientData.state}"
+
+        binding.patientName.text = patientName
+        binding.hospitalAddress.text = patientAddress
+        binding.patientHospitalNum.text = args.patientData.registrationNumber
         return binding.root
     }
 
@@ -61,16 +72,56 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     }
 
     private val patientsDetails = listOf<PatientDetails>(
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
-        PatientDetails("Dr Ben Ani", "24 FEB 2020", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
+        PatientDetails(
+            "Dr Ben Ani",
+            "24 FEB 2020",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        ),
     )
 
     override fun onDestroy() {
