@@ -1,6 +1,6 @@
 package com.decadevs.healthrecords.model.response
 
-data class PatientDataResponse (
+data class PatientDataResponse(
     val id: String,
     val firstName: String,
     val lastName: String,

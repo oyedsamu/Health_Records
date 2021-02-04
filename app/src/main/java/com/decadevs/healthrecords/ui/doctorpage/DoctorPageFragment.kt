@@ -77,15 +77,15 @@ class DoctorPageFragment : Fragment() {
 //            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
             val isSearchFieldValidated = validateSearchField()
 
-            if(isSearchFieldValidated) {
-                getAllPatientRecords(binding.search.text.toString())
+            if (isSearchFieldValidated) {
+                getPatientData(binding.search.text.toString())
             }
 
             viewModel.getPatientData.observe(viewLifecycleOwner, {
-                when(it) {
+                when (it) {
                     is Resource.Success -> {
-                        val successResponse = it.value
-                        Log.d("TAG", "sendNotificationSuccess: $successResponse")
+                        val successResponse = it.value.data
+                        Log.d("TAG", "Data success: $successResponse")
 
                         //findNavController().navigate(R.id.patientDetailsFragment)
                     }
@@ -113,12 +113,12 @@ class DoctorPageFragment : Fragment() {
         })
     }
 
-    private fun getAllPatientRecords(patientId: String){
-        viewModel.getPatientAllRecords(patientId)
+    private fun getPatientData(patientId: String) {
+        viewModel.getPatientData(patientId)
     }
 
     private fun validateSearchField(): Boolean {
-        return if(binding.search.text.isEmpty()) {
+        return if (binding.search.text.isEmpty()) {
             showToast("Please enter patient ID", requireActivity())
             false
         } else

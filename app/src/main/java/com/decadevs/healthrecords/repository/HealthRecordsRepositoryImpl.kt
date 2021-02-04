@@ -30,16 +30,18 @@ constructor(
 
     override suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): Resource<Any> =
         safeApiCall {
-        apiService.resetPassword(resetPasswordRequest)
-    }
+            apiService.resetPassword(resetPasswordRequest)
+        }
 
-    override suspend fun getPatientAllRecords(patientId: String): Resource<PatientAllRecordsResponse> = safeApiCall {
-        apiService.getAllHealthRecords(patientId)
-    }
+    override suspend fun getPatientAllRecords(patientId: String): Resource<PatientAllRecordsResponse> =
+        safeApiCall {
+            apiService.getAllHealthRecords(patientId)
+        }
 
-    override suspend fun getPatientData(patientId: String): Resource<PatientResponse> = safeApiCall {
-        apiService.getPatientData(patientId)
-    }
+    override suspend fun getPatientData(patientId: String): Resource<PatientResponse> =
+        safeApiCall {
+            apiService.getPatientData(patientId)
+        }
 
 
 }
