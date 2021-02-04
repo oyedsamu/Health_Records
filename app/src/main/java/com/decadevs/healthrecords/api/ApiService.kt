@@ -39,6 +39,6 @@ interface ApiService {
     @GET("Patient/{patientRegNum}")
     suspend fun getPatientData(
         @Path("patientRegNum") patientRegNum: String
-    ): PatientDataResponse
+    ): PatientResponse
 
 }

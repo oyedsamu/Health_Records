@@ -81,10 +81,10 @@ class DoctorPageFragment : Fragment() {
                 getAllPatientRecords(binding.search.text.toString())
             }
 
-            viewModel.getAllPatientMedicalRecord.observe(viewLifecycleOwner, {
+            viewModel.getPatientData.observe(viewLifecycleOwner, {
                 when(it) {
                     is Resource.Success -> {
-                        val successResponse = it.value.data
+                        val successResponse = it.value
                         Log.d("TAG", "sendNotificationSuccess: $successResponse")
 
                         //findNavController().navigate(R.id.patientDetailsFragment)

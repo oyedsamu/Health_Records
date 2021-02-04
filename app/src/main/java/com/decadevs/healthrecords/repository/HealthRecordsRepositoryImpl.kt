@@ -37,7 +37,7 @@ constructor(
         apiService.getAllHealthRecords(patientId)
     }
 
-    override suspend fun getPatientData(patientId: String): Resource<PatientDataResponse> = safeApiCall {
+    override suspend fun getPatientData(patientId: String): Resource<PatientResponse> = safeApiCall {
         apiService.getPatientData(patientId)
     }
 

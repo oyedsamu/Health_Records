@@ -31,8 +31,8 @@ class HealthRecordsViewModel(
     val getAllPatientMedicalRecord: LiveData<Resource<PatientAllRecordsResponse>>
         get() = _getAllPatientMedicalRecord
 
-    private val _getPatientData: MutableLiveData<Resource<PatientDataResponse>> = MutableLiveData()
-    val getPatientData: LiveData<Resource<PatientDataResponse>>
+    private val _getPatientData: MutableLiveData<Resource<PatientResponse>> = MutableLiveData()
+    val getPatientData: LiveData<Resource<PatientResponse>>
         get() = _getPatientData
 
     private val _getTokenResponse: MutableLiveData<Resource<TokenResponse>> =

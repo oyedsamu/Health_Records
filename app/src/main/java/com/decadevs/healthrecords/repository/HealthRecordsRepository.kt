@@ -17,5 +17,5 @@ interface HealthRecordsRepository {
 
     suspend fun getPatientAllRecords(patientId: String): Resource<PatientAllRecordsResponse>
 
-    suspend fun getPatientData(patientId: String): Resource<PatientDataResponse>
+    suspend fun getPatientData(patientId: String): Resource<PatientResponse>
 }
