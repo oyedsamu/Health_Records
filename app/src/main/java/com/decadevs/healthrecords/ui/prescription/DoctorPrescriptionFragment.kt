@@ -1,6 +1,7 @@
 package com.decadevs.healthrecords.ui.prescription
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,7 @@ class DoctorPrescriptionFragment : Fragment() {
     @Inject lateinit var apiService: ApiService
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var viewModelFactory: ViewModelFactory
-    private lateinit var repository: HealthRecordsRepository
+    private lateinit var repository: HealthRecordsRepositoryImpl
 
 
     override fun onCreateView(
@@ -59,10 +60,10 @@ class DoctorPrescriptionFragment : Fragment() {
 
         /** SET UP VIEW-MODEL */
         repository = HealthRecordsRepositoryImpl(apiService)
-        viewModelFactory = ViewModelFactory(repository as HealthRecordsRepositoryImpl)
+        viewModelFactory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory).get(HealthRecordsViewModel::class.java)
 
-
+        /** SUBMIT FORM */
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
             /** GET FORM FIELDS DATA */
             getFormData()
@@ -116,12 +117,18 @@ class DoctorPrescriptionFragment : Fragment() {
         val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
         viewModel.addMedicalRecord(recordRequest)
         viewModel.medicalRecordResponse.observe(viewLifecycleOwner, {
+
+//            Log.i("Record Response", "$it")
+
             when (it) {
                 is Resource.Success -> {
+                    Log.i("Record Response", it.value.success.toString())
+
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
+                    Log.i("Record Response", "${it.errorBody}")
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
                 }
