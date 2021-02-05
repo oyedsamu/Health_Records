@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/doctorPageActivity">
+    app:startDestination="@id/doctorPageFragment2">
 
     <fragment
         android:id="@+id/onBoardingScreenFragment"
@@ -85,4 +85,8 @@
             android:name="patientData"
             app:argType="com.decadevs.healthrecords.model.response.PatientDataResponse" />
     </fragment>
+    <fragment
+        android:id="@+id/patientMedicalDetailsFragment3"
+        android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
+        android:label="PatientMedicalDetailsFragment" />
 </navigation>

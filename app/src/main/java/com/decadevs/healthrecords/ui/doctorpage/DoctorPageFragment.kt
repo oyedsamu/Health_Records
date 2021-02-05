@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.ui.doctorpage
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,6 +30,8 @@ class DoctorPageFragment : Fragment() {
 
     @Inject
     lateinit var apiService: ApiService
+
+    private var mProgressDialog: ProgressDialog? = null
 
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
@@ -79,6 +82,15 @@ class DoctorPageFragment : Fragment() {
             val isSearchFieldValidated = validateSearchField()
 
             if (isSearchFieldValidated) {
+                mProgressDialog =
+                    ProgressDialog.show(
+                        requireActivity(),
+                        "Fetching patient data",
+                        "Please wait...",
+                        false,
+                        false
+                    )
+
                 getPatientData(binding.search.text.toString())
             }
 
@@ -87,7 +99,6 @@ class DoctorPageFragment : Fragment() {
                     is Resource.Success -> {
                         //response
                         val res = it.value.data
-
                         val patientObject = PatientDataResponse(
                             res.id,
                             res.firstName,
@@ -108,18 +119,21 @@ class DoctorPageFragment : Fragment() {
                             res.updatedAt
                         )
 
+                        mProgressDialog!!.dismiss()
+
                         val action =
                             DoctorPageFragmentDirections.actionDoctorPageFragment2ToPatientDetailsFragment2(
                                 patientObject
                             )
 
                         findNavController().navigate(action)
-
                         Log.d("TAG", "Data success: $res")
 
                     }
 
                     is Resource.Failure -> {
+                        mProgressDialog!!.dismiss()
+                        showToast("Something went wrong. Please try again", requireActivity())
                         Log.i("Records Failure", "${it.errorBody}, ${it.isNetworkError}")
 
                     }
