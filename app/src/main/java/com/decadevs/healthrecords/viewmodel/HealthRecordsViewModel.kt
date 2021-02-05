@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,11 +11,16 @@ import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.*
 import com.decadevs.healthrecords.repository.HealthRecordsRepository
+import com.decadevs.utils.SessionManager
+import com.decadevs.utils.TOKEN
 import kotlinx.coroutines.launch
 
 class HealthRecordsViewModel(
     private val repository: HealthRecordsRepository,
+    private val context : Context
 ) : ViewModel() {
+
+    val token = "Bearer ${SessionManager.load(context, TOKEN)}"
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> =
         MutableLiveData()
