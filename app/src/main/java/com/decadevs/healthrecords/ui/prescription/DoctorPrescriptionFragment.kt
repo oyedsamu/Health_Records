@@ -27,7 +27,7 @@ class DoctorPrescriptionFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_dropdown, items)
 
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
-            findNavController().navigate(R.id.patientMedicalDetailsFragment)
+            findNavController().navigate(R.id.nurseComments)
         }
 
         val dropDownTextFieldLayout = (binding.fragmentPatientTypeTextInputDropdownLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
