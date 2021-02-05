@@ -67,6 +67,8 @@ class DoctorPrescriptionFragment : Fragment() {
             /** GET FORM FIELDS DATA */
             getFormData()
             if(validateForm()) {
+                /** SHOW PROGRESS BAR */
+                binding.prescriptionProgressBarPb.visibility = View.VISIBLE
                 /** SEND POST REQUEST TO ADD DOCTOR'S DIAGNOSIS */
                 addDiagnosis()
                 /** NAVIGATE TO PATIENT MEDICAL DETAILS SCREEN IF SUCCESSFUL */
@@ -111,14 +113,16 @@ class DoctorPrescriptionFragment : Fragment() {
 
     private fun addDiagnosis() {
 
-        val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber )
+        val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
         viewModel.addMedicalRecord(recordRequest)
         viewModel.medicalRecordResponse.observe(viewLifecycleOwner, {
             when (it) {
                 is Resource.Success -> {
+                    binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
+                    binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
                 }
             }
