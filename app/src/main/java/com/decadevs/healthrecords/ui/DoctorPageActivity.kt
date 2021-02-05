@@ -91,8 +91,9 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finishAffinity()
+        //this.moveTaskToBack(true)
     }
 }

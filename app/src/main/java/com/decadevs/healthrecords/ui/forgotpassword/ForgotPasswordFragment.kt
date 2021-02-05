@@ -49,7 +49,7 @@ class ForgotPasswordFragment : Fragment() {
         uID = binding.fragmentForgotPasswordUniqueIdEt
 
         val repository = HealthRecordsRepositoryImpl(apiService)
-        val factory = ViewModelFactory(repository)
+        val factory = ViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
 
         binding.fragmentForgotPasswordSendBtn.setOnClickListener {

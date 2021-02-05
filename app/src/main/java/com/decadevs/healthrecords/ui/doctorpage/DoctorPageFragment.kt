@@ -44,7 +44,7 @@ class DoctorPageFragment : Fragment() {
         _binding = FragmentDoctorPageBinding.inflate(inflater, container, false)
 
         val repository = HealthRecordsRepositoryImpl(apiService)
-        val factory = ViewModelFactory(repository)
+        val factory = ViewModelFactory(repository, requireContext())
 
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())

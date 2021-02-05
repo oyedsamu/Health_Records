@@ -19,7 +19,7 @@ class ViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(HealthRecordsViewModel::class.java) ->
-                HealthRecordsViewModel(repository as HealthRecordsRepositoryImpl) as T
+                HealthRecordsViewModel(repository as HealthRecordsRepositoryImpl, context) as T
 
             else -> throw IllegalArgumentException("View Model Class Not found")
         }
