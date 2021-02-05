@@ -1,11 +1,11 @@
 package com.decadevs.healthrecords.ui.doctorpage
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -15,12 +15,13 @@ import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPageBinding
 import com.decadevs.healthrecords.datastore.UserManager
+import com.decadevs.healthrecords.model.response.PatientDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 @AndroidEntryPoint
 class DoctorPageFragment : Fragment() {
@@ -29,6 +30,8 @@ class DoctorPageFragment : Fragment() {
 
     @Inject
     lateinit var apiService: ApiService
+
+    private var mProgressDialog: ProgressDialog? = null
 
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
@@ -47,7 +50,6 @@ class DoctorPageFragment : Fragment() {
         userManager = UserManager(requireActivity())
 
         getStaffIdFromDataStoreAndImplementApiCall()
-
 
         viewModel.getStaffResponse.observe(viewLifecycleOwner, {
             when (it) {
@@ -69,16 +71,85 @@ class DoctorPageFragment : Fragment() {
 
         })
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         binding.searchBtn.setOnClickListener {
 //            Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.patientDetailsFragment)
+            val isSearchFieldValidated = validateSearchField()
+
+            if (isSearchFieldValidated) {
+                mProgressDialog =
+                    ProgressDialog.show(
+                        requireActivity(),
+                        "Fetching patient data",
+                        "Please wait...",
+                        false,
+                        false
+                    )
+
+                getPatientData(binding.search.text.trim().toString())
+
+
+                viewModel.getPatientData.observe(viewLifecycleOwner, {
+                    when (it) {
+                        is Resource.Success -> {
+                            //response
+                            val res = it.value.data
+                            val patientObject = PatientDataResponse(
+                                res.id,
+                                res.firstName,
+                                res.lastName,
+                                res.registrationNumber,
+                                res.weight,
+                                res.height,
+                                res.gender,
+                                res.doB,
+                                res.state,
+                                res.city,
+                                res.street,
+                                res.bloodGroup,
+                                res.genoType,
+                                res.allergies,
+                                res.disability,
+                                res.createdAt,
+                                res.updatedAt
+                            )
+
+                            mProgressDialog!!.dismiss()
+
+                            val action =
+                                DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(
+                                    patientObject
+                                )
+
+                            findNavController().navigate(action)
+                            Log.d("TAG", "Data success: $res")
+
+                            binding.search.text.clear()
+
+                        }
+
+                        is Resource.Failure -> {
+                            mProgressDialog!!.dismiss()
+                            showToast("Something went wrong. Please try again", requireActivity())
+                            Log.i("Records Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                        }
+                    }
+
+                })
+            }
+
+
         }
 
         binding.backArrow.setOnClickListener {
             findNavController().navigate(R.id.loginFragment)
         }
-
-        return binding.root
     }
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {
@@ -87,8 +158,18 @@ class DoctorPageFragment : Fragment() {
                 viewModel.getStaff(uid)
             }
         })
+    }
 
+    private fun getPatientData(patientId: String) {
+        viewModel.getPatientData(patientId)
+    }
 
+    private fun validateSearchField(): Boolean {
+        return if (binding.search.text.trim().isEmpty()) {
+            showToast("Please enter patient ID", requireActivity())
+            false
+        } else
+            true
     }
 
     override fun onDestroy() {

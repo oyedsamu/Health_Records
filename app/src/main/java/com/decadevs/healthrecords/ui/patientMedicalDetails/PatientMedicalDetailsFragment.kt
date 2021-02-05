@@ -37,7 +37,7 @@ class PatientMedicalDetailsFragment : Fragment() {
         binding.practitioner.text = practitioner
         binding.hospitalName.text = hospital
         binding.date.text = date
-      //  binding.diagnosisDetailsTv.text = details
+        binding.patientDiagnosisEt.setText(details)
 
         /** BACK BUTTON */
 //        binding.backArrow.setOnClickListener {
