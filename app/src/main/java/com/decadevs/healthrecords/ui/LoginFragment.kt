@@ -101,22 +101,22 @@ class LoginFragment : Fragment() {
         pwd: TextInputEditText
     ) {
         when {
-            uID.text?.isEmpty()!! -> {
+            uID.text?.trim()?.isEmpty()!! -> {
                 uID.error = "Please enter unique ID"
             }
-            pwd.text?.isEmpty()!! -> {
+            pwd.text?.trim()?.isEmpty()!! -> {
                 pwd.error = "Please enter your password"
             }
             else -> {
-                val loginRequest = LoginRequest(uID.text.toString(), pwd.text.toString())
+                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
                 viewModel.login(loginRequest)
 
                 if (rememberMe.isChecked) {
                     //Save user login data to DataStore
                     GlobalScope.launch {
                         userManager.createRememberMeSession(
-                            uID.text.toString(),
-                            pwd.text.toString()
+                            uID.text!!.trim()?.toString(),
+                            pwd.text!!.trim()?.toString()
                         )
                     }
                 }

@@ -91,55 +91,59 @@ class DoctorPageFragment : Fragment() {
                         false
                     )
 
-                getPatientData(binding.search.text.toString())
-            }
+                getPatientData(binding.search.text.trim().toString())
 
-            viewModel.getPatientData.observe(viewLifecycleOwner, {
-                when (it) {
-                    is Resource.Success -> {
-                        //response
-                        val res = it.value.data
-                        val patientObject = PatientDataResponse(
-                            res.id,
-                            res.firstName,
-                            res.lastName,
-                            res.registrationNumber,
-                            res.weight,
-                            res.height,
-                            res.gender,
-                            res.doB,
-                            res.state,
-                            res.city,
-                            res.street,
-                            res.bloodGroup,
-                            res.genoType,
-                            res.allergies,
-                            res.disability,
-                            res.createdAt,
-                            res.updatedAt
-                        )
 
-                        mProgressDialog!!.dismiss()
-
-                        val action =
-                            DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(
-                                patientObject
+                viewModel.getPatientData.observe(viewLifecycleOwner, {
+                    when (it) {
+                        is Resource.Success -> {
+                            //response
+                            val res = it.value.data
+                            val patientObject = PatientDataResponse(
+                                res.id,
+                                res.firstName,
+                                res.lastName,
+                                res.registrationNumber,
+                                res.weight,
+                                res.height,
+                                res.gender,
+                                res.doB,
+                                res.state,
+                                res.city,
+                                res.street,
+                                res.bloodGroup,
+                                res.genoType,
+                                res.allergies,
+                                res.disability,
+                                res.createdAt,
+                                res.updatedAt
                             )
 
-                        findNavController().navigate(action)
-                        Log.d("TAG", "Data success: $res")
+                            mProgressDialog!!.dismiss()
 
+                            val action =
+                                DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(
+                                    patientObject
+                                )
+
+                            findNavController().navigate(action)
+                            Log.d("TAG", "Data success: $res")
+
+                            binding.search.text.clear()
+
+                        }
+
+                        is Resource.Failure -> {
+                            mProgressDialog!!.dismiss()
+                            showToast("Something went wrong. Please try again", requireActivity())
+                            Log.i("Records Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                        }
                     }
 
-                    is Resource.Failure -> {
-                        mProgressDialog!!.dismiss()
-                        showToast("Something went wrong. Please try again", requireActivity())
-                        Log.i("Records Failure", "${it.errorBody}, ${it.isNetworkError}")
+                })
+            }
 
-                    }
-                }
-
-            })
 
         }
 
@@ -161,7 +165,7 @@ class DoctorPageFragment : Fragment() {
     }
 
     private fun validateSearchField(): Boolean {
-        return if (binding.search.text.isEmpty()) {
+        return if (binding.search.text.trim().isEmpty()) {
             showToast("Please enter patient ID", requireActivity())
             false
         } else
