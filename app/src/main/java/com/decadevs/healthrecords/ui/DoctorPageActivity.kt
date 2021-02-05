@@ -74,7 +74,7 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
                     SessionManager.save(this, TOKEN, "")
 
                     Intent(this, MainActivity::class.java).also {
-                        saveToSharedPreference(this, LOG_OUT, "true")
+                        SessionManager.save(this, LOG_OUT, "true")
 
                         startActivity(it)
                         finish()

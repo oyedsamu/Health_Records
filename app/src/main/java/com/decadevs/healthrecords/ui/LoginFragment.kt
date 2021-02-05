@@ -22,6 +22,8 @@ import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.SessionManager
+import com.decadevs.utils.TOKEN
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -81,6 +83,9 @@ class LoginFragment : Fragment() {
                         val successResponse = it.value.message
                         Log.i("Login Response", "$successResponse")
                         progressBar.visibility = View.GONE
+
+                        // on login, save token to sharedPref and go doctorPageActivity
+                        SessionManager.save(requireContext(), TOKEN, successResponse)
                         findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
                       //  findNavController().navigate(R.id.doctorPageFragment)
                     }
