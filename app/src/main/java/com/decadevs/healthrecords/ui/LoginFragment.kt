@@ -22,6 +22,8 @@ import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.SessionManager
+import com.decadevs.utils.TOKEN
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -56,7 +58,7 @@ class LoginFragment : Fragment() {
         progressBar = binding.progressBarLayout.fragmentMainProgressBar
 
         val repository = HealthRecordsRepositoryImpl(apiService)
-        val factory = ViewModelFactory(repository)
+        val factory = ViewModelFactory(repository, requireContext())
 
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
@@ -81,6 +83,9 @@ class LoginFragment : Fragment() {
                         val successResponse = it.value.message
                         Log.i("Login Response", "$successResponse")
                         progressBar.visibility = View.GONE
+
+                        // on login, save token to sharedPref and go doctorPageActivity
+                        SessionManager.save(requireContext(), TOKEN, successResponse)
                         findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
                       //  findNavController().navigate(R.id.doctorPageFragment)
                     }
@@ -101,22 +106,22 @@ class LoginFragment : Fragment() {
         pwd: TextInputEditText
     ) {
         when {
-            uID.text?.isEmpty()!! -> {
+            uID.text?.trim()?.isEmpty()!! -> {
                 uID.error = "Please enter unique ID"
             }
-            pwd.text?.isEmpty()!! -> {
+            pwd.text?.trim()?.isEmpty()!! -> {
                 pwd.error = "Please enter your password"
             }
             else -> {
-                val loginRequest = LoginRequest(uID.text.toString(), pwd.text.toString())
+                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
                 viewModel.login(loginRequest)
 
                 if (rememberMe.isChecked) {
                     //Save user login data to DataStore
                     GlobalScope.launch {
                         userManager.createRememberMeSession(
-                            uID.text.toString(),
-                            pwd.text.toString()
+                            uID.text!!.trim()?.toString(),
+                            pwd.text!!.trim()?.toString()
                         )
                     }
                 }

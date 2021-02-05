@@ -3,24 +3,25 @@ package com.decadevs.healthrecords.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.decadevs.healthrecords.data.PatientDetails
 import com.decadevs.healthrecords.databinding.PatientDetailsTemplateBinding
+import com.decadevs.healthrecords.model.response.PatientAllRecordsResponse
+import com.decadevs.healthrecords.model.response.PatientRecordDataResponse
 
-class PatientDetailsRVAdapter(private var patientDetails: List<PatientDetails>, var listener: OnItemClick) :
+class PatientDetailsRVAdapter(private var patientDetails: ArrayList<PatientRecordDataResponse>, var listener: OnItemClick) :
     RecyclerView.Adapter<PatientDetailsRVAdapter.PatientDetailsViewHolder>() {
 
     inner class PatientDetailsViewHolder(private val binding: PatientDetailsTemplateBinding):
         RecyclerView.ViewHolder(binding.root){
 
-        private lateinit var pDetails: PatientDetails
+        private lateinit var pDetails: PatientRecordDataResponse
 
-        fun bind(patientDetails: PatientDetails, action: OnItemClick) {
+        fun bind(patientDetails: PatientRecordDataResponse, action: OnItemClick) {
             this.pDetails = patientDetails
             binding.apply {
                 binding.apply {
-                    practitioner.text = patientDetails.practitioner
-                    date.text = patientDetails.date
-                    diagnosisDetailsTv.text = patientDetails.details
+                    practitioner.text = patientDetails.doctorOnCall
+                    date.text = patientDetails.createdAt
+                    diagnosisDetailsTv.text = patientDetails.doctorNotes
                 }
             }
 
@@ -46,5 +47,5 @@ class PatientDetailsRVAdapter(private var patientDetails: List<PatientDetails>, 
 }
 
 interface OnItemClick {
-    fun onItemClick(item: PatientDetails, position: Int)
+    fun onItemClick(item: PatientRecordDataResponse, position: Int)
 }

@@ -57,10 +57,13 @@ class DoctorPrescriptionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
+            findNavController().navigate(R.id.nurseComments)
+        }
 
         /** SET UP VIEW-MODEL */
         repository = HealthRecordsRepositoryImpl(apiService)
-        viewModelFactory = ViewModelFactory(repository)
+        viewModelFactory = ViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory).get(HealthRecordsViewModel::class.java)
 
         /** SUBMIT FORM */

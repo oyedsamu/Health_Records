@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,12 +14,18 @@ import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
+import com.decadevs.healthrecords.model.response.*
 import com.decadevs.healthrecords.repository.HealthRecordsRepository
+import com.decadevs.utils.SessionManager
+import com.decadevs.utils.TOKEN
 import kotlinx.coroutines.launch
 
 class HealthRecordsViewModel(
     private val repository: HealthRecordsRepository,
+    private val context : Context
 ) : ViewModel() {
+
+    val token = "Bearer ${SessionManager.load(context, TOKEN)}"
 
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> =
         MutableLiveData()
@@ -29,6 +36,15 @@ class HealthRecordsViewModel(
         MutableLiveData()
     val getStaffResponse: LiveData<Resource<StaffResponse>>
         get() = _getStaffResponse
+
+    private val _getAllPatientMedicalRecord: MutableLiveData<Resource<PatientAllRecordsResponse>> =
+        MutableLiveData()
+    val getAllPatientMedicalRecord: LiveData<Resource<PatientAllRecordsResponse>>
+        get() = _getAllPatientMedicalRecord
+
+    private val _getPatientData: MutableLiveData<Resource<PatientResponse>> = MutableLiveData()
+    val getPatientData: LiveData<Resource<PatientResponse>>
+        get() = _getPatientData
 
     private val _getTokenResponse: MutableLiveData<Resource<TokenResponse>> =
         MutableLiveData()
@@ -65,6 +81,13 @@ class HealthRecordsViewModel(
 
     /** ADD MEDICAL RECORD IN VIEW-MODEL SCOPE OF COROUTINE */
     fun addMedicalRecord(medicalRecordRequest: MedicalRecordRequest) = viewModelScope.launch {
-        _medicalRecordResponse.value = repository.addMedicalRecord(medicalRecordRequest)
+        _medicalRecordResponse.value = repository.addMedicalRecord(token, medicalRecordRequest)
+    }
+    fun getPatientAllRecords(patientId: String) = viewModelScope.launch {
+        _getAllPatientMedicalRecord.value = repository.getPatientAllRecords(patientId)
+    }
+
+    fun getPatientData(patientId: String) = viewModelScope.launch {
+        _getPatientData.value = repository.getPatientData(patientId)
     }
 }

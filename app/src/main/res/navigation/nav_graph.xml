@@ -22,11 +22,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nurseComments"
-        android:name="com.decadevs.healthrecords.ui.NurseComments"
-        android:label="fragment_nurse_comments"
-        tools:layout="@layout/fragment_nurse_comments" />
-    <fragment
         android:id="@+id/nursePrescriptionFragment"
         android:name="com.decadevs.healthrecords.ui.prescription.NursePrescriptionFragment"
         android:label="fragment_nurse_prescription"

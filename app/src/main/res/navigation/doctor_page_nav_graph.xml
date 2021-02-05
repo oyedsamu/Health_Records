@@ -9,7 +9,11 @@
         android:id="@+id/doctorPageFragment"
         android:name="com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragment"
         android:label="fragment_doctor_page"
-        tools:layout="@layout/fragment_doctor_page" />
+        tools:layout="@layout/fragment_doctor_page" >
+        <action
+            android:id="@+id/action_doctorPageFragment_to_patientDetailsFragment"
+            app:destination="@id/patientDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/vitalInfoFragment"
         android:name="com.decadevs.healthrecords.ui.vitalinfo.VitalInfoFragment"
@@ -19,7 +23,11 @@
         android:id="@+id/patientDetailsFragment"
         android:name="com.decadevs.healthrecords.ui.patientdetails.PatientDetailsFragment"
         android:label="fragment_patient_details"
-        tools:layout="@layout/fragment_patient_details" />
+        tools:layout="@layout/fragment_patient_details" >
+        <argument
+            android:name="patientData"
+            app:argType="com.decadevs.healthrecords.model.response.PatientDataResponse" />
+    </fragment>
     <fragment
         android:id="@+id/patientMedicalDetailsFragment"
         android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
@@ -31,6 +39,11 @@
         android:label="DoctorPrescriptionFragment"
         tools:layout="@layout/fragment_doctor_prescription"
         />
+    <fragment
+        android:id="@+id/nurseComments"
+        android:name="com.decadevs.healthrecords.ui.NurseComments"
+        android:label="fragment_nurse_comments"
+        tools:layout="@layout/fragment_nurse_comments" />
 
 
 </navigation>

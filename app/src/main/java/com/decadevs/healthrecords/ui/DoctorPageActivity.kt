@@ -74,7 +74,7 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
                     SessionManager.save(this, TOKEN, "")
 
                     Intent(this, MainActivity::class.java).also {
-                        saveToSharedPreference(this, LOG_OUT, "true")
+                        SessionManager.save(this, LOG_OUT, "true")
 
                         startActivity(it)
                         finish()
@@ -91,8 +91,9 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.finishAffinity()
+        //this.moveTaskToBack(true)
     }
 }

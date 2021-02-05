@@ -9,6 +9,7 @@ import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
+import com.decadevs.healthrecords.model.response.*
 
 interface HealthRecordsRepository {
     suspend fun login(loginRequest: LoginRequest): Resource<LoginResponse>
@@ -19,5 +20,9 @@ interface HealthRecordsRepository {
 
     suspend fun resetPassword(resetPasswordRequest: ResetPasswordRequest): Resource<Any>
 
-    suspend fun addMedicalRecord(medicalRecordRequest: MedicalRecordRequest): Resource<MedicalRecordResponse>
+    suspend fun addMedicalRecord(token : String, medicalRecordRequest: MedicalRecordRequest): Resource<MedicalRecordResponse>
+
+    suspend fun getPatientAllRecords(patientId: String): Resource<PatientAllRecordsResponse>
+
+    suspend fun getPatientData(patientId: String): Resource<PatientResponse>
 }
