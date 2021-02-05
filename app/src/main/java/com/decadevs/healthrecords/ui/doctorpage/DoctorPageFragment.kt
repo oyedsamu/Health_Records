@@ -122,7 +122,7 @@ class DoctorPageFragment : Fragment() {
                         mProgressDialog!!.dismiss()
 
                         val action =
-                            DoctorPageFragmentDirections.actionDoctorPageFragment2ToPatientDetailsFragment2(
+                            DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(
                                 patientObject
                             )
 

@@ -110,7 +110,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                     patientsDetailsRV.adapter = adapter
                     patientsDetailsRV.layoutManager = LinearLayoutManager(this.context)
                     patientsDetailsRV.setHasFixedSize(true)
-
                 }
 
                 is Resource.Failure -> {
@@ -126,59 +125,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         })
     }
 
-    private val patientsDetails = listOf<PatientDetails>(
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-        PatientDetails(
-            "Dr Ben Ani",
-            "24 FEB 2020",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        ),
-    )
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -193,7 +139,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             "details" to item.doctorNotes
         )
 
-        findNavController().navigate(R.id.patientMedicalDetailsFragment3, bundle)
+        findNavController().navigate(R.id.patientMedicalDetailsFragment, bundle)
     }
 
     private fun getPatientAllRecords(patientId: String) {

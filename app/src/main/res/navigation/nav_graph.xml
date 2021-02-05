@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/doctorPageFragment2">
+    app:startDestination="@id/onBoardingScreenFragment">
 
     <fragment
         android:id="@+id/onBoardingScreenFragment"
@@ -67,26 +67,4 @@
         android:id="@+id/doctorPageActivity"
         android:name="com.decadevs.healthrecords.ui.DoctorPageActivity"
         android:label="DoctorPageActivity" />
-    <fragment
-        android:id="@+id/doctorPageFragment2"
-        android:name="com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragment"
-        android:label="fragment_doctor_page"
-        tools:layout="@layout/fragment_doctor_page" >
-        <action
-            android:id="@+id/action_doctorPageFragment2_to_patientDetailsFragment2"
-            app:destination="@id/patientDetailsFragment2" />
-    </fragment>
-    <fragment
-        android:id="@+id/patientDetailsFragment2"
-        android:name="com.decadevs.healthrecords.ui.patientdetails.PatientDetailsFragment"
-        android:label="fragment_patient_details"
-        tools:layout="@layout/fragment_patient_details" >
-        <argument
-            android:name="patientData"
-            app:argType="com.decadevs.healthrecords.model.response.PatientDataResponse" />
-    </fragment>
-    <fragment
-        android:id="@+id/patientMedicalDetailsFragment3"
-        android:name="com.decadevs.healthrecords.ui.patientMedicalDetails.PatientMedicalDetailsFragment"
-        android:label="PatientMedicalDetailsFragment" />
 </navigation>
