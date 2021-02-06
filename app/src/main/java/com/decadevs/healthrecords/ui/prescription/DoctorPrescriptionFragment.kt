@@ -125,13 +125,12 @@ class DoctorPrescriptionFragment : Fragment() {
 
             when (it) {
                 is Resource.Success -> {
-                    Log.i("Record Response", it.value.success.toString())
-
+                    Log.i("response", it.value.success.toString())
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Failure -> {
-                    Log.i("Record Response", "${it.errorBody}")
+                    Log.i("response", it.errorBody.toString())
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
                 }
