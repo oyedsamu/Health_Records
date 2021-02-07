@@ -75,6 +75,7 @@
     <string name="patient_history_str">Patient History</string>
     <string name="edit_patient_details_str">Edit Patient Details</string>
     <string name="edit_str">Edit</string>
+    <string name="patient_s_prescription">Patient\'s Prescription</string>
     <string name="forgot_your_password_str">Forgot your password?</string>
 
     <!-- PATIENT DETAILS- YEARS -->

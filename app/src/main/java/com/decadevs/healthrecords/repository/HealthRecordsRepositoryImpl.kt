@@ -4,7 +4,12 @@ import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.MedicalRecordRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.response.LoginResponse
+import com.decadevs.healthrecords.model.response.MedicalRecordResponse
+import com.decadevs.healthrecords.model.response.StaffResponse
+import com.decadevs.healthrecords.model.response.TokenResponse
 import com.decadevs.healthrecords.model.response.*
 import javax.inject.Inject
 
@@ -33,6 +38,13 @@ constructor(
             apiService.resetPassword(resetPasswordRequest)
         }
 
+    override suspend fun addMedicalRecord(
+        token: String,
+        medicalRecordRequest: MedicalRecordRequest
+    ): Resource<MedicalRecordResponse> =     safeApiCall {
+        apiService.addMedicalRecord(token, medicalRecordRequest)
+    }
+
     override suspend fun getPatientAllRecords(patientId: String): Resource<PatientAllRecordsResponse> =
         safeApiCall {
             apiService.getAllHealthRecords(patientId)
@@ -42,6 +54,4 @@ constructor(
         safeApiCall {
             apiService.getPatientData(patientId)
         }
-
-
 }
