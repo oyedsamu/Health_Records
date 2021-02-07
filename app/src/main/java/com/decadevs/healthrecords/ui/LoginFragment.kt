@@ -76,6 +76,19 @@ class LoginFragment : Fragment() {
         binding.signInButton.setOnClickListener {
             if(validateLoginInput(uID, pwd)) {
 
+                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
+                viewModel.login(loginRequest)
+
+                if (rememberMe.isChecked) {
+                    //Save user login data to DataStore
+                    GlobalScope.launch {
+                        userManager.createRememberMeSession(
+                            uID.text!!.trim()?.toString(),
+                            pwd.text!!.trim()?.toString()
+                        )
+                    }
+                }
+
                 progressBar.visibility = View.VISIBLE
 
                 viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
@@ -114,27 +127,17 @@ class LoginFragment : Fragment() {
         when {
             uID.text?.trim()?.isEmpty()!! -> {
                 uID.error = "Please enter unique ID"
+                return false
             }
             pwd.text?.trim()?.isEmpty()!! -> {
                 pwd.error = "Please enter your password"
-            }
-            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
-                progressBar.visibility = View.GONE
                 return false
             }
+//            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
+//                progressBar.visibility = View.GONE
+//                return false
+//            }
             else -> {
-                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
-                viewModel.login(loginRequest)
-
-                if (rememberMe.isChecked) {
-                    //Save user login data to DataStore
-                    GlobalScope.launch {
-                        userManager.createRememberMeSession(
-                            uID.text!!.trim()?.toString(),
-                            pwd.text!!.trim()?.toString()
-                        )
-                    }
-                }
                 return true
             }
         }
