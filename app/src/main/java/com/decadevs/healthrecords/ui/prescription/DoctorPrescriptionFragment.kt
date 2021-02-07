@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
@@ -117,12 +118,12 @@ class DoctorPrescriptionFragment : Fragment() {
 
     private fun addDiagnosis() {
 
-        val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
+//        val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
+        val recordRequest = MedicalRecordRequest("sfl", "asf", true, "sldfk", "23657E5", null, "slfk")
+        Toast.makeText(requireContext(), viewModel.token, Toast.LENGTH_SHORT).show()
         viewModel.addMedicalRecord(recordRequest)
-        viewModel.medicalRecordResponse.observe(viewLifecycleOwner, {
-
-//            Log.i("Record Response", "$it")
-
+        viewModel.medicalRecordResponse.observe(viewLifecycleOwner, Observer {
+            //            Log.i("Record Response", "$it")
             when (it) {
                 is Resource.Success -> {
                     Log.i("response", it.value.success.toString())

@@ -41,6 +41,7 @@ interface ApiService {
         @Header("Authorization") token : String,
         @Body medicalRecordRequest: MedicalRecordRequest
     ): MedicalRecordResponse
+
     @GET("MedicalRecord/GetAllMedicalRecords/{id}/1")
     suspend fun getAllHealthRecords(
         @Path("id") id: String
