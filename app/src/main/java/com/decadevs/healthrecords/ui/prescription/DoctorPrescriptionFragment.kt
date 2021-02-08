@@ -131,6 +131,7 @@ class DoctorPrescriptionFragment : Fragment() {
                     Log.i("response", it.value.success.toString())
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.patientDetailsFragment)
 
                 }
                 is Resource.Failure -> {

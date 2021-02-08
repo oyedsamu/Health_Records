@@ -160,7 +160,7 @@ class LoginFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-      viewModel.loginResponse.removeObservers(viewLifecycleOwner)
+     // viewModel.loginResponse.removeObservers(viewLifecycleOwner)
         _binding = null
     }
 
