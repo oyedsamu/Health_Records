@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
@@ -73,31 +74,34 @@ class LoginFragment : Fragment() {
         checkAndImplementRememberMe(pwd, uID)
 
         binding.signInButton.setOnClickListener {
-            progressBar.visibility = View.VISIBLE
-            validateLoginInput(uID, pwd)
+            if(validateLoginInput(uID, pwd)) {
 
-            viewModel.loginResponse.observe(viewLifecycleOwner, {
-                Log.i("Login Response ", "$it")
+                progressBar.visibility = View.VISIBLE
 
-                when (it) {
-                    is Resource.Success -> {
-                        val successResponse = it.value.message
-                        Log.i("Login Response", "$successResponse")
-                        progressBar.visibility = View.GONE
+                viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
+                    Log.i("Login Response ", "$it")
 
-                        // on login, save token to sharedPref and go doctorPageActivity
-                        SessionManager.save(requireContext(), TOKEN, successResponse)
-                        findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
-                      //  findNavController().navigate(R.id.doctorPageFragment)
+                    when (it) {
+                        is Resource.Success -> {
+                            val successResponse = it.value.message
+                            Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
+                            Log.i("Login Response", "$successResponse")
+                            progressBar.visibility = View.GONE
+
+                            // on login, save token to sharedPref and go doctorPageActivity
+                            SessionManager.save(requireContext(), TOKEN, it.value.data)
+                            findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
+                            //  findNavController().navigate(R.id.doctorPageFragment)
+                        }
+                        is Resource.Failure -> {
+                            Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+                            progressBar.visibility = View.GONE
+                        }
                     }
-                    is Resource.Failure -> {
-                        Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-                        progressBar.visibility = View.GONE
-                        Toast.makeText(requireContext(), "Invalid UniqueID or Password", Toast.LENGTH_LONG).show()
-                    }
-                }
 
-            })
+                })
+            }
+
         }
 
         return binding.root
@@ -106,13 +110,17 @@ class LoginFragment : Fragment() {
     private fun validateLoginInput(
         uID: TextInputEditText,
         pwd: TextInputEditText
-    ) {
+    ): Boolean {
         when {
             uID.text?.trim()?.isEmpty()!! -> {
                 uID.error = "Please enter unique ID"
             }
             pwd.text?.trim()?.isEmpty()!! -> {
                 pwd.error = "Please enter your password"
+            }
+            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
+                progressBar.visibility = View.GONE
+                return false
             }
             else -> {
                 val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
@@ -127,8 +135,10 @@ class LoginFragment : Fragment() {
                         )
                     }
                 }
+                return true
             }
         }
+        return true
     }
 
 
