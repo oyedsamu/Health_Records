@@ -17,7 +17,6 @@ import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPrescriptionBinding
 import com.decadevs.healthrecords.model.request.MedicalRecordRequest
-import com.decadevs.healthrecords.repository.HealthRecordsRepository
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
@@ -80,13 +79,16 @@ class DoctorPrescriptionFragment : Fragment() {
 //                findNavController().navigate(R.id.patientMedicalDetailsFragment)
             }
         }
-    }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+
+
+
+
+
     }
+
 
     private fun getFormData() {
         binding.apply {
@@ -118,10 +120,10 @@ class DoctorPrescriptionFragment : Fragment() {
 
     private fun addDiagnosis() {
 
-    //   val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
-        val recordRequest = MedicalRecordRequest("sfl", "asf", true, "sldfk", "23657E5", null, "slfk")
+     //  val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
+        //val recordRequest = MedicalRecordRequest("sfl", "asf", true, "sldfk", "23657E5", null, "slfk")
         //Toast.makeText(requireContext(), viewModel.token, Toast.LENGTH_SHORT).show()
-        viewModel.addMedicalRecord(recordRequest)
+        viewModel.addMedicalRecord(requireActivity(), patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, "", "" )
         viewModel.medicalRecordResponse.observe(viewLifecycleOwner, Observer {
             //            Log.i("Record Response", "$it")
             when (it) {
@@ -129,6 +131,7 @@ class DoctorPrescriptionFragment : Fragment() {
                     Log.i("response", it.value.success.toString())
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
+
                 }
                 is Resource.Failure -> {
                     Log.i("response", it.errorBody.toString())
@@ -139,5 +142,11 @@ class DoctorPrescriptionFragment : Fragment() {
             }
         })
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }

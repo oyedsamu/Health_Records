@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.viewmodel
 
+import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,10 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
-import com.decadevs.healthrecords.model.request.MedicalRecordRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
-import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
 import com.decadevs.healthrecords.model.response.*
@@ -80,8 +79,13 @@ class HealthRecordsViewModel(
     }
 
     /** ADD MEDICAL RECORD IN VIEW-MODEL SCOPE OF COROUTINE */
-    fun addMedicalRecord(medicalRecordRequest: MedicalRecordRequest) = viewModelScope.launch {
-        _medicalRecordResponse.value = repository.addMedicalRecord(medicalRecordRequest)
+    fun addMedicalRecord(
+        activity: Activity, diagnosis: String, prescription: String,
+        isSensitive: Boolean, doctorNotes: String,
+        patientRegistrationNumber: String, documentFormFiles: String,
+        documentDescription: String) = viewModelScope.launch {
+        _medicalRecordResponse.value = repository.addMedicalRecord(token, activity, diagnosis, prescription, isSensitive,
+                                                doctorNotes, patientRegistrationNumber, documentFormFiles, documentDescription)
     }
     fun getPatientAllRecords(patientId: String) = viewModelScope.launch {
         _getAllPatientMedicalRecord.value = repository.getPatientAllRecords(patientId)

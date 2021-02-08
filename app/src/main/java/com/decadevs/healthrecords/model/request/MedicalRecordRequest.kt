@@ -6,6 +6,6 @@ data class MedicalRecordRequest(
     val IsSensitive: Boolean?,
     val DoctorNotes: String,
     val PatientRegistrationNumber: String,
-    val DocumentFormFiles: List<String>?,
+    val DocumentFormFiles: ArrayList<String>?,
     val DocumentDescription: String?
 )
