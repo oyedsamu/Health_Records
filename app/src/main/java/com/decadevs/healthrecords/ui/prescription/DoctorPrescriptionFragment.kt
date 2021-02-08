@@ -80,6 +80,10 @@ class DoctorPrescriptionFragment : Fragment() {
 //                findNavController().navigate(R.id.patientMedicalDetailsFragment)
             }
         }
+
+        binding.backArrow.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
 

@@ -147,9 +147,10 @@ class DoctorPageFragment : Fragment() {
 
         }
 
-//        binding.backArrow.setOnClickListener {
-//            findNavController().navigate(R.id.loginFragment)
-//        }
+        /** GO BAK TO PREVIOUS SCREEN */
+        binding.backArrow.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {

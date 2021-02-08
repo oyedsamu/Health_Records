@@ -97,8 +97,9 @@ class LoginFragment : Fragment() {
                     when (it) {
                         is Resource.Success -> {
                             val successResponse = it.value.message
-                            Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
                             Log.i("Login Response", "$successResponse")
+
+                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show()
                             progressBar.visibility = View.GONE
 
                             // on login, save token to sharedPref and go doctorPageActivity
@@ -108,10 +109,11 @@ class LoginFragment : Fragment() {
                         }
                         is Resource.Failure -> {
                             Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                            Toast.makeText(requireContext(), "Login not successful, Please make sure you input your correct details", Toast.LENGTH_LONG).show()
                             progressBar.visibility = View.GONE
                         }
                     }
-
                 })
             }
 
