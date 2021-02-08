@@ -32,7 +32,7 @@ class ForgotPasswordFragment : Fragment() {
 
     @Inject
     lateinit var apiService: ApiService
-    @Inject private lateinit var validator: FormValidator
+    private var validator: FormValidator = FormValidator()
 
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var email: EditText
@@ -58,7 +58,7 @@ class ForgotPasswordFragment : Fragment() {
         binding.fragmentForgotPasswordSendBtn.setOnClickListener {
             if(validateInputField()) {
 
-                validateInputFieldmProgressDialog =
+//                validateInputFieldmProgressDialog =
                     ProgressDialog.show(
                         requireActivity(),
                         "Verifying data",
@@ -104,6 +104,8 @@ class ForgotPasswordFragment : Fragment() {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 uID.error = "Something went wrong, please recheck your unique id"
+                            } else {
+                                Toast.makeText(requireContext(), "Something went wrong, please recheck your unique id", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
@@ -112,12 +114,16 @@ class ForgotPasswordFragment : Fragment() {
             }
         }
 
+        binding.forgotPasswordBackIb.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         return binding.root
     }
 
     private fun validateInputField(): Boolean {
         return when {
-            validator.validateEmail(email.text.toString().trim()) -> {
+            !validator.validateEmail(email.text.toString().trim()) -> {
                 email.error = "Please enter your correct email"
                 false
             }
