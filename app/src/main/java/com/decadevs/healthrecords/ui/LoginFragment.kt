@@ -76,6 +76,19 @@ class LoginFragment : Fragment() {
         binding.signInButton.setOnClickListener {
             if(validateLoginInput(uID, pwd)) {
 
+                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
+                viewModel.login(loginRequest)
+
+                if (rememberMe.isChecked) {
+                    //Save user login data to DataStore
+                    GlobalScope.launch {
+                        userManager.createRememberMeSession(
+                            uID.text!!.trim()?.toString(),
+                            pwd.text!!.trim()?.toString()
+                        )
+                    }
+                }
+
                 progressBar.visibility = View.VISIBLE
 
                 viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
@@ -84,8 +97,9 @@ class LoginFragment : Fragment() {
                     when (it) {
                         is Resource.Success -> {
                             val successResponse = it.value.message
-                            Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
                             Log.i("Login Response", "$successResponse")
+
+                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show()
                             progressBar.visibility = View.GONE
 
                             // on login, save token to sharedPref and go doctorPageActivity
@@ -95,10 +109,11 @@ class LoginFragment : Fragment() {
                         }
                         is Resource.Failure -> {
                             Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+
+                            Toast.makeText(requireContext(), "Login not successful, Please make sure you input your correct details", Toast.LENGTH_LONG).show()
                             progressBar.visibility = View.GONE
                         }
                     }
-
                 })
             }
 
@@ -114,27 +129,17 @@ class LoginFragment : Fragment() {
         when {
             uID.text?.trim()?.isEmpty()!! -> {
                 uID.error = "Please enter unique ID"
+                return false
             }
             pwd.text?.trim()?.isEmpty()!! -> {
                 pwd.error = "Please enter your password"
-            }
-            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
-                progressBar.visibility = View.GONE
                 return false
             }
+//            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
+//                progressBar.visibility = View.GONE
+//                return false
+//            }
             else -> {
-                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
-                viewModel.login(loginRequest)
-
-                if (rememberMe.isChecked) {
-                    //Save user login data to DataStore
-                    GlobalScope.launch {
-                        userManager.createRememberMeSession(
-                            uID.text!!.trim()?.toString(),
-                            pwd.text!!.trim()?.toString()
-                        )
-                    }
-                }
                 return true
             }
         }
