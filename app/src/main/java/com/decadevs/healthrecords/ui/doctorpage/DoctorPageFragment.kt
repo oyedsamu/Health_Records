@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
@@ -35,6 +37,7 @@ class DoctorPageFragment : Fragment() {
 
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
+    var back = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +72,17 @@ class DoctorPageFragment : Fragment() {
                 }
             }
 
+        })
+
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if(back > 0) {
+                    Toast.makeText(requireContext(), "Press back again to close the app", Toast.LENGTH_SHORT).show()
+                    back--
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
         })
 
         return binding.root
@@ -145,11 +159,6 @@ class DoctorPageFragment : Fragment() {
             }
 
 
-        }
-
-        /** GO BAK TO PREVIOUS SCREEN */
-        binding.backArrow.setOnClickListener {
-            findNavController().popBackStack()
         }
     }
 
