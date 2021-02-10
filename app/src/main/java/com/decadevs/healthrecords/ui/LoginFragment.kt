@@ -44,6 +44,7 @@ class LoginFragment : Fragment() {
     lateinit var progressBar: ProgressBar
     lateinit var rememberMe: CheckBox
     lateinit var userManager: UserManager
+    private var savedToken: String? = null
 
 
     override fun onCreateView(
@@ -52,6 +53,11 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        /** SKIP LOGIN IF USER HAS LOGGED IN BEFORE */
+        savedToken = SessionManager.load(requireContext(), TOKEN).trim()
+        if(savedToken != "") findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
+
 
         val uID = binding.uniqueIdEditText
         val pwd = binding.passwordEditText
