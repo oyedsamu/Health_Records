@@ -29,7 +29,7 @@ class VitalInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /** BACK BUTTON */
-        binding.vitalInfoBackIb.setOnClickListener {
+        binding.backLl.setOnClickListener {
             findNavController().popBackStack()
         }
     }

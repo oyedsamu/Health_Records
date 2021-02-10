@@ -7,16 +7,21 @@
     android:background="@color/white"
     tools:context=".ui.vitalinfo.VitalInfoFragment">
 
-    <ImageButton
-        android:id="@+id/vitalInfo_back_ib"
+    <LinearLayout
+        android:id="@+id/back_ll"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:backgroundTint="@color/transparent"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/vitalInfo_back_ib"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_arrow_back" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/fragment_vital_info_title_tv"

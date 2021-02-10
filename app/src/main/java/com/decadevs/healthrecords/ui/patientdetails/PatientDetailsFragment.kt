@@ -72,11 +72,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
         observePatientAllRecordsData()
 
-        /** BACK BUTTON */
-//        binding.backArrow.setOnClickListener {
-//            findNavController().navigate(R.id.doctorPageFragment)
-//        }
-
         binding.addRecord.setOnClickListener {
             findNavController().navigate(R.id.doctorPrescriptionFragment)
         }

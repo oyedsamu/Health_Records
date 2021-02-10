@@ -40,7 +40,7 @@ class PatientMedicalDetailsFragment : Fragment() {
         binding.patientDiagnosisEt.setText(details)
 
         /** BACK BUTTON */
-        binding.medicalDetailsBackIb.setOnClickListener {
+        binding.backLl.setOnClickListener {
             findNavController().popBackStack()
         }
 //

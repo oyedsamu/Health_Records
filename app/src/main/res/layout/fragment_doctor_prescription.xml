@@ -35,18 +35,23 @@
             app:layout_constraintStart_toEndOf="@id/back_arrow"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/back_arrow"
+        <LinearLayout
+            android:id="@+id/back_ll"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:elevation="5dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:elevation="10dp"
-            android:backgroundTint="@color/transparent"
-            android:background="@color/transparent"
-            android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageButton
+                android:id="@+id/back_arrow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/transparent"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_arrow_back" />
+        </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_patient_diagnosis_input_layout"
