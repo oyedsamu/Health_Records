@@ -39,21 +39,6 @@ class DoctorPageFragment : Fragment() {
     private lateinit var userManager: UserManager
     var back = 1
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-////                if(back > 0) {
-//                Toast.makeText(requireContext(), "Press back again to close the app", Toast.LENGTH_SHORT).show()
-////                    back--
-////                } else {
-////                    findNavController().popBackStack()
-////                }
-//            }
-//        })
-//    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

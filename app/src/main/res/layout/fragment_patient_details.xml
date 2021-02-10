@@ -7,6 +7,17 @@
     android:background="@color/white"
     tools:context=".ui.patientdetails.PatientDetailsFragment">
 
+    <ImageButton
+        android:id="@+id/patientDetails_back_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/transparent"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/fragment_patient_details_title_tv"
         android:layout_width="wrap_content"

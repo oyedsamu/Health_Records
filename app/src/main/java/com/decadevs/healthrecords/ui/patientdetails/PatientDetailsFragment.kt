@@ -85,6 +85,11 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.yearsSpinner.adapter = adapter
         }
+
+        /** HANDLE BACK BUTTON */
+        binding.patientDetailsBackIb.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun updateFragmentUIWithPatientDataFromArgs() {
