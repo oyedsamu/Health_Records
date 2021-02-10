@@ -18,12 +18,13 @@ import com.decadevs.healthrecords.adapters.OnItemClick
 import com.decadevs.healthrecords.adapters.PatientDetailsRVAdapter
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
-import com.decadevs.healthrecords.data.PatientDetails
 import com.decadevs.healthrecords.databinding.FragmentPatientDetailsBinding
 import com.decadevs.healthrecords.model.response.PatientRecordDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.currentPatientId
+import com.decadevs.utils.patientIsInView
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -62,6 +63,10 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
+        patientIsInView = true
+        currentPatientId = binding.patientHospitalNum.text.toString()
 
         updateFragmentUIWithPatientDataFromArgs()
 

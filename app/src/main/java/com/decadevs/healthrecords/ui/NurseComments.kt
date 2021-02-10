@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.FragmentNurseCommentsBinding
 import com.decadevs.healthrecords.databinding.FragmentPatientDetailsBinding
@@ -15,7 +16,6 @@ class NurseComments : Fragment() {
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -33,7 +33,11 @@ class NurseComments : Fragment() {
             val nurseComment = binding.fragmentNurseCommentTextInputEt.text
             // Do something with this text.
 
+        }
 
+        /** BACK BUTTON */
+        binding.nurseCommentsBackIb.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
