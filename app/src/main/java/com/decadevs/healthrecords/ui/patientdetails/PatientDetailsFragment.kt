@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.adapters.OnItemClick
 import com.decadevs.healthrecords.adapters.PatientDetailsRVAdapter
 import com.decadevs.healthrecords.api.ApiService
@@ -28,6 +28,7 @@ import com.decadevs.utils.patientIsInView
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class PatientDetailsFragment : Fragment(), OnItemClick {
@@ -64,6 +65,22 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        val toolbar: Toolbar = binding.backToolbar
+//        setSupportActionBar(toolbar)
+//
+//        // add back arrow to toolbar
+//
+//        // add back arrow to toolbar
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true)
+//            getSupportActionBar().setDisplayShowHomeEnabled(true)
+//        }
+
+        binding.backToolbar.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+
         /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
         patientIsInView = true
         currentPatientId = binding.patientHospitalNum.text.toString()
@@ -87,9 +104,9 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         }
 
         /** HANDLE BACK BUTTON */
-        binding.patientDetailsBackIb.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.patientDetailsBackIb.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
     }
 
     private fun updateFragmentUIWithPatientDataFromArgs() {
