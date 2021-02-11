@@ -24,9 +24,9 @@ import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
-import com.decadevs.utils.SessionManager
-import com.decadevs.utils.TOKEN
+import com.decadevs.utils.*
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -36,14 +36,12 @@ import javax.inject.Inject
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
     @Inject
     lateinit var apiService: ApiService
-
     private lateinit var viewModel: HealthRecordsViewModel
-    lateinit var progressBar: ProgressBar
     lateinit var rememberMe: CheckBox
     lateinit var userManager: UserManager
+
 
 
     override fun onCreateView(
@@ -53,15 +51,19 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        val uID = binding.uniqueIdEditText
-        val pwd = binding.passwordEditText
+
+        val uniqueID = binding.fragmentLoginUniqueIdEt
+        val doctorPassword = binding.fragmentLoginPasswordEt
+        val progressBar = binding.progressBarLayout
+        val uniqueIdLayout = binding.fragmentLoginUniqueIdTl
+        val doctorPasswordLayout = binding.fragmentLoginPasswordTl
         rememberMe = binding.rememberMe
 
-        progressBar = binding.progressBarLayout.fragmentMainProgressBar
+
+
 
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
-
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
 
@@ -71,13 +73,11 @@ class LoginFragment : Fragment() {
         /**
          * Set uid and password into login edit fields if rememberMe already saved
          */
-        checkAndImplementRememberMe(pwd, uID)
+        checkAndImplementRememberMe(doctorPassword, uniqueID)
 
         binding.signInButton.setOnClickListener {
-            if(validateLoginInput(uID, pwd)) {
-
-                progressBar.visibility = View.VISIBLE
-
+            progressBar.visibility = View.VISIBLE
+            if(validateLoginInput(uniqueID, doctorPassword, uniqueIdLayout, doctorPasswordLayout)) {
                 viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
                     Log.i("Login Response ", "$it")
 
@@ -86,7 +86,7 @@ class LoginFragment : Fragment() {
                             val successResponse = it.value.message
                             Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
                             Log.i("Login Response", "$successResponse")
-                            progressBar.visibility = View.GONE
+                            progressBar.visibility = View.INVISIBLE
 
                             // on login, save token to sharedPref and go doctorPageActivity
                             SessionManager.save(requireContext(), TOKEN, it.value.data)
@@ -95,7 +95,8 @@ class LoginFragment : Fragment() {
                         }
                         is Resource.Failure -> {
                             Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-                            progressBar.visibility = View.GONE
+                            showToast("Invalid login details", requireActivity())
+                            progressBar.visibility = View.INVISIBLE
                         }
                     }
 
@@ -109,19 +110,24 @@ class LoginFragment : Fragment() {
 
     private fun validateLoginInput(
         uID: TextInputEditText,
-        pwd: TextInputEditText
+        pwd: TextInputEditText,
+        uniqueIDLayout : TextInputLayout,
+        doctorPassword : TextInputLayout
+
     ): Boolean {
+        val progressBar = binding.progressBarLayout
         when {
             uID.text?.trim()?.isEmpty()!! -> {
-                uID.error = "Please enter unique ID"
-            }
-            pwd.text?.trim()?.isEmpty()!! -> {
-                pwd.error = "Please enter your password"
-            }
-            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
-                progressBar.visibility = View.GONE
+                uniqueIDLayout.error = "Please enter unique ID"
+                progressBar.visibility = View.INVISIBLE
                 return false
             }
+            pwd.text?.trim()?.isEmpty()!! -> {
+                doctorPassword.error = "Please enter your password"
+                progressBar.visibility = View.INVISIBLE
+                return false
+            }
+
             else -> {
                 val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
                 viewModel.login(loginRequest)
@@ -138,7 +144,6 @@ class LoginFragment : Fragment() {
                 return true
             }
         }
-        return true
     }
 
 
@@ -163,13 +168,5 @@ class LoginFragment : Fragment() {
      // viewModel.loginResponse.removeObservers(viewLifecycleOwner)
         _binding = null
     }
-
-
-//    override fun onDestroyView() {
-//        super.onDestroy()
-//        _binding = null
-//
-////        viewModel.loginResponse.removeObservers(viewLifecycleOwner)
-//    }
 
 }

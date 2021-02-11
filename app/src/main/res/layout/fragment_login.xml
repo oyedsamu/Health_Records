@@ -10,17 +10,19 @@
         android:id="@+id/loginPageBackGroundImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.2"
+        android:alpha="0.09"
         android:scaleType="centerCrop"
         android:src="@drawable/doctor_h"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-62dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/page_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="70dp"
         android:text="Login"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -34,43 +36,120 @@
         android:id="@+id/medical_logo_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/medical_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/page_title_tv" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/unique_id_editText"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/white"
-        android:hint="Unique-ID"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medical_logo_iv" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/password_editText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_login_unique_id_tl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/white"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Unique-ID"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeColor="@color/green_accent"
+        app:hintTextColor="@color/color_black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unique_id_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/medical_logo_iv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_login_unique_id_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="12sp"
+            tools:text="STA-RA10-P1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fragment_login_password_tl"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Password"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeColor="@color/green_accent"
+        app:hintTextColor="@color/color_black"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_unique_id_tl">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fragment_login_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:textSize="12sp"
+            tools:text="STA-RA10-P1" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signInButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:backgroundTint="@color/green"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="Sign In"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintTop_toBottomOf="@id/rememberMe"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_login_password_tl"
+        app:layout_constraintStart_toStartOf="@+id/fragment_login_password_tl"
+        />
+
+
+
+
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--        android:id="@+id/unique_id_editText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="100dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:hint="Unique-ID"-->
+<!--        android:padding="10dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/medical_logo_iv" />-->
+
+<!--    <com.google.android.material.textfield.TextInputEditText-->
+<!--        android:id="@+id/password_editText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:hint="Password"-->
+<!--        android:inputType="textPassword"-->
+<!--        android:padding="10dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/unique_id_editText" />-->
+
 
     <CheckBox
         android:id="@+id/rememberMe"
@@ -78,41 +157,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:buttonTint="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/password_editText"
-        android:layout_marginStart="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
         android:text="Remember Me"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/fragment_login_password_tl"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_login_password_tl" />
 
-
-    <include
+    <ProgressBar
         android:id="@+id/progress_bar_layout"
         layout="@layout/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
-        app:layout_constraintEnd_toEndOf="@+id/signInButton"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/signInButton"
-        app:layout_constraintTop_toBottomOf="@+id/password_editText" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signInButton"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/green"
-        android:text="Sign In"
-        android:textAllCaps="false"
-        android:textSize="20sp"
-        app:cornerRadius="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rememberMe" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <Button
         android:id="@+id/forgetPwdButton"
