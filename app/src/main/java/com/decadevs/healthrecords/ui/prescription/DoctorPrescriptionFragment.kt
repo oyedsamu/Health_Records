@@ -80,7 +80,7 @@ class DoctorPrescriptionFragment : Fragment() {
             }
         }
 
-        binding.backArrow.setOnClickListener {
+        binding.doctorPrescriptionBackIb.setOnClickListener {
             findNavController().popBackStack()
         }
     }

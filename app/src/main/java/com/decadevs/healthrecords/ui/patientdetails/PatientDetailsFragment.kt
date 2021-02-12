@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.adapters.OnItemClick
 import com.decadevs.healthrecords.adapters.PatientDetailsRVAdapter
 import com.decadevs.healthrecords.api.ApiService
@@ -65,21 +67,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val toolbar: Toolbar = binding.backToolbar
-//        setSupportActionBar(toolbar)
-//
-//        // add back arrow to toolbar
-//
-//        // add back arrow to toolbar
-//        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true)
-//            getSupportActionBar().setDisplayShowHomeEnabled(true)
-//        }
-
-        binding.backToolbar.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
 
         /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
         patientIsInView = true
@@ -104,9 +91,12 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         }
 
         /** HANDLE BACK BUTTON */
-//        binding.patientDetailsBackIb.setOnClickListener {
-//            findNavController().popBackStack()
-//        }
+        binding.patientDetailsBackIb.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.profileImage.setOnClickListener {
+            Toast.makeText(requireContext(), "alkf", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun updateFragmentUIWithPatientDataFromArgs() {
