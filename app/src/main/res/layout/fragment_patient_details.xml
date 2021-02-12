@@ -7,16 +7,26 @@
     android:background="@color/white"
     tools:context=".ui.patientdetails.PatientDetailsFragment">
 
+    <ImageButton
+        android:id="@+id/patientDetails_back_ib"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/white"
+        android:paddingBottom="30dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/fragment_patient_details_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/patient_history_str"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16sp"
+        android:text="@string/patient_history_str"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -87,9 +97,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:elevation="5dp"
-        app:backgroundTint="@color/white"
         android:popupBackground="@drawable/spinner_bg"
         android:theme="@style/spinner"
+        app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,23 +119,22 @@
         tools:listitem="@layout/patient_details_template" />
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_record"
+        style="@style/Widget.App.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        style="@style/Widget.App.FloatingActionButton"
-        app:tint="@color/white"
-        app:backgroundTint="@color/white"
         android:background="@color/green"
         android:backgroundTint="@color/green_accent"
         android:contentDescription="@string/add_comments"
         android:src="@drawable/ic_add"
+        app:backgroundTint="@color/white"
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/green_background" />
+        app:layout_constraintEnd_toEndOf="@+id/green_background"
+        app:tint="@color/white" />
 
     <View
         android:id="@+id/green_background"

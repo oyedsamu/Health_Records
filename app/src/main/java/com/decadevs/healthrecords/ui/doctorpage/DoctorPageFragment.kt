@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
-import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPageBinding
@@ -19,6 +18,7 @@ import com.decadevs.healthrecords.model.response.PatientDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.patientIsInView
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -35,6 +35,7 @@ class DoctorPageFragment : Fragment() {
 
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
+    var back = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +43,9 @@ class DoctorPageFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentDoctorPageBinding.inflate(inflater, container, false)
+
+        /** SET PARAMETER TO HIDE PATIENT DETAILS FROM SIDE NAV BAR */
+        patientIsInView = false
 
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
@@ -146,12 +150,9 @@ class DoctorPageFragment : Fragment() {
 
 
         }
-
-        /** GO BAK TO PREVIOUS SCREEN */
-        binding.backArrow.setOnClickListener {
-            findNavController().popBackStack()
-        }
     }
+
+
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {
         userManager.rmUserIdFlow.asLiveData().observe(requireActivity(), { uid ->

@@ -43,7 +43,6 @@ class DoctorPrescriptionFragment : Fragment() {
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var repository: HealthRecordsRepositoryImpl
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -81,7 +80,7 @@ class DoctorPrescriptionFragment : Fragment() {
             }
         }
 
-        binding.backArrow.setOnClickListener {
+        binding.doctorPrescriptionBackIb.setOnClickListener {
             findNavController().popBackStack()
         }
     }

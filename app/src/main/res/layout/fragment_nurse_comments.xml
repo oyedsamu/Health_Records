@@ -7,6 +7,20 @@
     android:background="@color/white"
     tools:context=".ui.NurseComments">
 
+    <ImageButton
+        android:id="@+id/nurseComments_back_ib"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/transparent"
+        android:background="@color/transparent"
+        android:paddingBottom="30dp"
+        android:elevation="5dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
     <include
         android:id="@+id/fragment_nurse_comment_toolbar"
         layout="@layout/nurse_comment_toolbar"

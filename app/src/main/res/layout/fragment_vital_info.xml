@@ -7,12 +7,22 @@
     android:background="@color/white"
     tools:context=".ui.vitalinfo.VitalInfoFragment">
 
+    <ImageButton
+        android:id="@+id/vitalInfo_back_ib"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:backgroundTint="@color/transparent"
+        android:background="@color/transparent"
+        android:paddingBottom="30dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/fragment_vital_info_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/vital_information_str"
         android:textColor="@color/black"
         android:textSize="24sp"

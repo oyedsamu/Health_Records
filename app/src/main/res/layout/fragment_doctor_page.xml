@@ -7,17 +7,6 @@
     android:background="@color/white"
     tools:context=".ui.doctorpage.DoctorPageFragment">
 
-    <ImageButton
-        android:id="@+id/back_arrow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="0dp"
-        android:backgroundTint="@color/transparent"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"

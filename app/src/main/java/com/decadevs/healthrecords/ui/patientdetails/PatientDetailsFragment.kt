@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -18,15 +20,17 @@ import com.decadevs.healthrecords.adapters.OnItemClick
 import com.decadevs.healthrecords.adapters.PatientDetailsRVAdapter
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
-import com.decadevs.healthrecords.data.PatientDetails
 import com.decadevs.healthrecords.databinding.FragmentPatientDetailsBinding
 import com.decadevs.healthrecords.model.response.PatientRecordDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.currentPatientId
+import com.decadevs.utils.patientIsInView
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class PatientDetailsFragment : Fragment(), OnItemClick {
@@ -63,14 +67,14 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
+        patientIsInView = true
+        currentPatientId = binding.patientHospitalNum.text.toString()
+
         updateFragmentUIWithPatientDataFromArgs()
 
         observePatientAllRecordsData()
-
-        /** BACK BUTTON */
-//        binding.backArrow.setOnClickListener {
-//            findNavController().navigate(R.id.doctorPageFragment)
-//        }
 
         binding.addRecord.setOnClickListener {
             findNavController().navigate(R.id.doctorPrescriptionFragment)
@@ -84,6 +88,14 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.yearsSpinner.adapter = adapter
+        }
+
+        /** HANDLE BACK BUTTON */
+        binding.patientDetailsBackIb.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.profileImage.setOnClickListener {
+            Toast.makeText(requireContext(), "alkf", Toast.LENGTH_SHORT).show()
         }
     }
 
