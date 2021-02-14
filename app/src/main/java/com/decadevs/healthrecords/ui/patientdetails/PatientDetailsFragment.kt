@@ -67,8 +67,17 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.vitalInfoBtn.setOnClickListener {
+        val action =
+            PatientDetailsFragmentDirections.actionPatientDetailsFragmentToVitalInfoFragment(
+                args.patientData.bloodGroup,
+                args.patientData.genoType,
+                args.patientData.allergies,
+                args.patientData.disability,
+                args.patientData.registrationNumber
+            )
 
+        binding.vitalInfoBtn.setOnClickListener {
+            findNavController().navigate(action)
         }
 
 

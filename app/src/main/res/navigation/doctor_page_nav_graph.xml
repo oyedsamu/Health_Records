@@ -18,7 +18,27 @@
         android:id="@+id/vitalInfoFragment"
         android:name="com.decadevs.healthrecords.ui.vitalinfo.VitalInfoFragment"
         android:label="fragment_vital_info"
-        tools:layout="@layout/fragment_vital_info" />
+        tools:layout="@layout/fragment_vital_info" >
+        <argument
+            android:name="bloodGroup"
+            app:argType="string"
+            android:defaultValue="Not Available" />
+        <argument
+            android:name="genotype"
+            app:argType="string"
+            android:defaultValue="Not Available" />
+        <argument
+            android:name="allergies"
+            app:argType="string"
+            android:defaultValue="Not Available" />
+        <argument
+            android:name="disabilities"
+            app:argType="string"
+            android:defaultValue="Not Available" />
+        <argument
+            android:name="patientId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/patientDetailsFragment"
         android:name="com.decadevs.healthrecords.ui.patientdetails.PatientDetailsFragment"
@@ -27,6 +47,9 @@
         <argument
             android:name="patientData"
             app:argType="com.decadevs.healthrecords.model.response.PatientDataResponse" />
+        <action
+            android:id="@+id/action_patientDetailsFragment_to_vitalInfoFragment"
+            app:destination="@id/vitalInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/patientMedicalDetailsFragment"
