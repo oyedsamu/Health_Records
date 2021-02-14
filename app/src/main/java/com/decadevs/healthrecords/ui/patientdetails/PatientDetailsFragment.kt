@@ -67,6 +67,10 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.vitalInfoBtn.setOnClickListener {
+
+        }
+
 
         /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
         patientIsInView = true
