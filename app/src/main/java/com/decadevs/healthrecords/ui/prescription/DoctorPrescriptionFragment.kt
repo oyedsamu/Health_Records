@@ -2,13 +2,13 @@ package com.decadevs.healthrecords.ui.prescription
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,7 +16,7 @@ import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPrescriptionBinding
-import com.decadevs.healthrecords.model.request.MedicalRecordRequest
+import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
@@ -27,7 +27,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DoctorPrescriptionFragment : Fragment() {
 
-    private var _binding : FragmentDoctorPrescriptionBinding? = null
+    private var _binding: FragmentDoctorPrescriptionBinding? = null
     private val binding get() = _binding!!
 
     private var validator = FormValidator()
@@ -37,7 +37,8 @@ class DoctorPrescriptionFragment : Fragment() {
     private lateinit var doctorsNote: String
     private lateinit var patientRegistrationNumber: String
 
-    @Inject lateinit var apiService: ApiService
+    @Inject
+    lateinit var apiService: ApiService
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var repository: HealthRecordsRepositoryImpl
@@ -51,7 +52,10 @@ class DoctorPrescriptionFragment : Fragment() {
 
         val items = listOf<String>("True", "False")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_dropdown, items)
-        val dropDownTextFieldLayout = (binding.fragmentPatientTypeTextInputDropdownLayout.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        val dropDownTextFieldLayout =
+            (binding.fragmentPatientTypeTextInputDropdownLayout.editText as? AutoCompleteTextView)?.setAdapter(
+                adapter
+            )
         return binding.root
     }
 
@@ -66,25 +70,32 @@ class DoctorPrescriptionFragment : Fragment() {
         viewModelFactory = ViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory).get(HealthRecordsViewModel::class.java)
 
+        addDiagnosis()
+
         /** SUBMIT FORM */
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
             /** GET FORM FIELDS DATA */
             getFormData()
-            if(validateForm()) {
+            if (validateForm()) {
                 /** SHOW PROGRESS BAR */
                 binding.prescriptionProgressBarPb.visibility = View.VISIBLE
                 /** SEND POST REQUEST TO ADD DOCTOR'S DIAGNOSIS */
-                addDiagnosis()
+
+                viewModel.addMedicalRecord(
+                    requireActivity(),
+                    binding.patientDiagnosisEt.text.toString(),
+                    binding.fragmentPatientPrescriptionEditText.text.toString(),
+                    true,
+                    binding.fragmentDoctorNoteTextInputEt.text.toString(),
+                    "23657E5",
+                    "",
+                    ""
+                )
                 /** NAVIGATE TO PATIENT MEDICAL DETAILS SCREEN IF SUCCESSFUL */
 //                findNavController().navigate(R.id.patientMedicalDetailsFragment)
             }
+
         }
-
-
-
-
-
-
 
 
     }
@@ -103,11 +114,16 @@ class DoctorPrescriptionFragment : Fragment() {
     private fun validateForm(): Boolean {
         when {
             validator.checkIfEmpty(patientsDiagnosis) -> {
-                Toast.makeText(context, "Patient's diagnosis cannot be blank", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Patient's diagnosis cannot be blank", Toast.LENGTH_SHORT)
+                    .show()
                 return false
             }
             validator.checkIfEmpty(patientsPrescription) -> {
-                Toast.makeText(context, "Patient's prescription cannot be blank", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "Patient's prescription cannot be blank",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return false
             }
             validator.checkIfEmpty(doctorsNote) -> {
@@ -120,10 +136,6 @@ class DoctorPrescriptionFragment : Fragment() {
 
     private fun addDiagnosis() {
 
-     //  val recordRequest = MedicalRecordRequest(patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, null, null )
-        //val recordRequest = MedicalRecordRequest("sfl", "asf", true, "sldfk", "23657E5", null, "slfk")
-        //Toast.makeText(requireContext(), viewModel.token, Toast.LENGTH_SHORT).show()
-        viewModel.addMedicalRecord(requireActivity(), patientsDiagnosis, patientsPrescription, type, doctorsNote, patientRegistrationNumber, "", "" )
         viewModel.medicalRecordResponse.observe(viewLifecycleOwner, Observer {
             //            Log.i("Record Response", "$it")
             when (it) {
@@ -131,14 +143,30 @@ class DoctorPrescriptionFragment : Fragment() {
                     Log.i("response", it.value.success.toString())
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.patientDetailsFragment)
+
+                    val result = it.value.data
+                    val doctorPrescription = MedicalRecordResponse(
+                        result.diagnosis,
+                        result.isSensitive,
+                        result.doctorNotes,
+                        result.documentDescription,
+                        result.documentFormFiles,
+                        result.prescription,
+                        result.patientRegistrationNumber
+
+                    )
+
+                    val action = DoctorPrescriptionFragmentDirections.actionDoctorPrescriptionFragmentToPatientDetailsFragment(doctorPrescription)
+
+                    findNavController().navigate(action)
+
+                   // findNavController().navigate(R.id.patientDetailsFragment)
 
                 }
                 is Resource.Failure -> {
                     Log.i("response", it.errorBody.toString())
                     binding.prescriptionProgressBarPb.visibility = View.GONE
-                    Toast.makeText(this.context, it.errorBody?.errorBody()?.string(), Toast.LENGTH_LONG ).show()
-                   // Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
                 }
             }
         })

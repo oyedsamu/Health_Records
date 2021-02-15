@@ -29,6 +29,11 @@
             app:argType="com.decadevs.healthrecords.model.response.PatientDataResponse"
             app:nullable="true"
             android:defaultValue="@null" />
+        <argument
+            android:name="doctorPrescription"
+            app:argType="com.decadevs.healthrecords.model.response.FormData"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/patientMedicalDetailsFragment"

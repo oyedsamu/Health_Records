@@ -65,7 +65,6 @@ class DoctorPageFragment : Fragment() {
                 }
                 is Resource.Failure -> {
                     Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-
                 }
             }
 

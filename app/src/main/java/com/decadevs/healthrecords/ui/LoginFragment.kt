@@ -79,12 +79,12 @@ class LoginFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
             if(validateLoginInput(uniqueID, doctorPassword, uniqueIdLayout, doctorPasswordLayout)) {
                 viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
-                    Log.i("Login Response ", "$it")
+                   // Log.i("Login Response ", "$it")
 
                     when (it) {
                         is Resource.Success -> {
                             val successResponse = it.value.message
-                            Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
+                           // Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
                             Log.i("Login Response", "$successResponse")
                             progressBar.visibility = View.INVISIBLE
 

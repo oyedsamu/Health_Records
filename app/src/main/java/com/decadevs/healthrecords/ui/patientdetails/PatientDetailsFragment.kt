@@ -123,6 +123,10 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             }
 
         })
+
+        val doctorPrescription = args.patientData
+
+
     }
 
     override fun onDestroy() {

@@ -37,7 +37,7 @@ interface ApiService {
         @Body resetPwdRequest: ResetPasswordRequest
     )
 
-    @POST("MedicalRecord/CreateMedicalRecord")
+    @POST("MedicalRecord/Create")
     suspend fun addMedicalRecord(
         @Header("Authorization") token : String,
         @Body medicalRecordRequest: RequestBody
