@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +25,7 @@ import com.decadevs.healthrecords.model.response.PatientRecordDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.SessionManager
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -57,6 +59,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         /** Retrieve patient's all records from api */
         args.patientData?.registrationNumber?.let { getPatientAllRecords(it) }
 
+
+
         return binding.root
     }
 
@@ -86,6 +90,21 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             binding.yearsSpinner.adapter = adapter
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        val registrationNumber = SessionManager.load(requireContext(), "REGISTRATION-NUMBER")
+        val patientName = SessionManager.load(requireContext(), "PATIENT-NAME")
+        val hospitalAddress = SessionManager.load(requireContext(), "LOCATION")
+       getPatientAllRecords(registrationNumber)
+
+        binding.patientName.text = patientName
+        binding.hospitalAddress.text = hospitalAddress
+        binding.patientHospitalNum.text = registrationNumber
+        Toast.makeText(requireContext(), "called", Toast.LENGTH_LONG).show()
+    }
+
+
 
     private fun updateFragmentUIWithPatientDataFromArgs() {
         val patientName = "${args.patientData?.firstName} ${args.patientData?.lastName}"
@@ -123,10 +142,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             }
 
         })
-
-        val doctorPrescription = args.patientData
-
-
     }
 
     override fun onDestroy() {

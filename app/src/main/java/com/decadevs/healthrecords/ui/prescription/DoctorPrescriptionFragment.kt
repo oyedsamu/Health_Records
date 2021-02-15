@@ -16,7 +16,9 @@ import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPrescriptionBinding
+import com.decadevs.healthrecords.model.response.FormData
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
+import com.decadevs.healthrecords.model.response.PatientDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
@@ -87,7 +89,7 @@ class DoctorPrescriptionFragment : Fragment() {
                     binding.fragmentPatientPrescriptionEditText.text.toString(),
                     true,
                     binding.fragmentDoctorNoteTextInputEt.text.toString(),
-                    "23657E5",
+                    binding.fragmentPatientRegNumberEditText.text.toString(),
                     "",
                     ""
                 )
@@ -144,24 +146,7 @@ class DoctorPrescriptionFragment : Fragment() {
                     binding.prescriptionProgressBarPb.visibility = View.GONE
                     Toast.makeText(this.context, "Record Successful", Toast.LENGTH_SHORT).show()
 
-                    val result = it.value.data
-                    val doctorPrescription = MedicalRecordResponse(
-                        result.diagnosis,
-                        result.isSensitive,
-                        result.doctorNotes,
-                        result.documentDescription,
-                        result.documentFormFiles,
-                        result.prescription,
-                        result.patientRegistrationNumber
-
-                    )
-
-                    val action = DoctorPrescriptionFragmentDirections.actionDoctorPrescriptionFragmentToPatientDetailsFragment(doctorPrescription)
-
-                    findNavController().navigate(action)
-
-                   // findNavController().navigate(R.id.patientDetailsFragment)
-
+                    findNavController().navigate(R.id.patientDetailsFragment)
                 }
                 is Resource.Failure -> {
                     Log.i("response", it.errorBody.toString())
