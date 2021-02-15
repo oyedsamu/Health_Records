@@ -19,6 +19,7 @@ import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,6 +35,9 @@ class ForgotPasswordFragment : Fragment() {
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var email: EditText
     private lateinit var uID: EditText
+    private lateinit var emailTextLayout : TextInputLayout
+    private lateinit var uniqueIdTextLayout : TextInputLayout
+
 
     private var mProgressDialog: ProgressDialog? = null
 
@@ -46,7 +50,11 @@ class ForgotPasswordFragment : Fragment() {
         _binding = FragmentForgotPasswordBinding.inflate(layoutInflater, container, false)
 
         email = binding.fragmentForgotPasswordEmailEt
-        uID = binding.fragmentForgotPasswordUniqueIdEt
+       uID = binding.fragmentForgotPasswordUniqueIdEt
+
+        emailTextLayout = binding.fragmentForgotPasswordEmailTl
+        uniqueIdTextLayout = binding.fragmentForgotPasswordUniqueIdTl
+
 
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
@@ -96,10 +104,13 @@ class ForgotPasswordFragment : Fragment() {
     private fun validateInputField() {
         when {
             email.text.isEmpty() -> {
-                email.error = "Please enter your correct email"
+                //email.error = "Please enter your correct email"
+                emailTextLayout.error = "Please enter your correct email"
+
             }
             uID.text.isEmpty() -> {
-                uID.error = "Please enter your correct unique ID"
+                //uID.error = "Please enter your correct unique ID"
+                uniqueIdTextLayout.error = "Please enter your correct unique ID"
             }
             else -> {
 
