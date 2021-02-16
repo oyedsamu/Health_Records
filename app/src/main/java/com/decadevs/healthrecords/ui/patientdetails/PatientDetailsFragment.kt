@@ -155,7 +155,10 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             "hospital" to binding.hospitalAddress.text.toString(),
             "practitioner" to item.doctorOnCall,
             "date" to item.createdAt,
-            "details" to item.doctorNotes
+            "doctorNote" to item.doctorNotes,
+            "diagnosis" to item.diagnosis,
+            "isSensitive" to item.isSensitive,
+            "prescription" to item.prescription
         )
 
         findNavController().navigate(R.id.patientMedicalDetailsFragment, bundle)
