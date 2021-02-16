@@ -72,11 +72,11 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
         val action =
             PatientDetailsFragmentDirections.actionPatientDetailsFragmentToVitalInfoFragment(
-                args.patientData.bloodGroup,
-                args.patientData.genoType,
-                args.patientData.allergies,
-                args.patientData.disability,
-                args.patientData.registrationNumber
+                args.patientData!!.bloodGroup,
+                args.patientData!!.genoType,
+                args.patientData!!.allergies,
+                args.patientData!!.disability,
+                args.patientData!!.registrationNumber
             )
 
         binding.vitalInfoBtn.setOnClickListener {
