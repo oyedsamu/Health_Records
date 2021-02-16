@@ -1,11 +1,11 @@
 package com.decadevs.healthrecords.model.request
 
 data class MedicalRecordRequest(
-    val diagnosis: String,
-    val prescription: String,
-    val isSensitive: Boolean?,
-    val doctorNotes: String,
-    val patientRegistrationNumber: String,
-    val documentFormFiles: List<String>?,
-    val documentDescription: String?
+    val Diagnosis: String,
+    val Prescription: String,
+    val IsSensitive: Boolean?,
+    val DoctorNotes: String,
+    val PatientRegistrationNumber: String,
+    val DocumentFormFiles: ArrayList<String>?,
+    val DocumentDescription: String?
 )

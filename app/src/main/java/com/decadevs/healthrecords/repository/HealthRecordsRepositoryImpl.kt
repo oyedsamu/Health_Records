@@ -1,5 +1,6 @@
 package com.decadevs.healthrecords.repository
 
+import android.app.Activity
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
@@ -11,6 +12,7 @@ import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
 import com.decadevs.healthrecords.model.response.*
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class HealthRecordsRepositoryImpl
@@ -40,10 +42,30 @@ constructor(
 
     override suspend fun addMedicalRecord(
         token: String,
-        medicalRecordRequest: MedicalRecordRequest
-    ): Resource<MedicalRecordResponse> =     safeApiCall {
-        apiService.addMedicalRecord(token, medicalRecordRequest)
+        activity: Activity,
+        diagnosis : String,
+        prescription : String,
+        isSensitive : Boolean,
+        doctorNotes : String,
+        patientRegistrationNumber : String,
+        documentFormFiles : String,
+        documentDescription : String
+    ): Resource<GenericResponseClass<FormData>> = safeApiCall {
+
+        val reqBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("Diagnosis", diagnosis)
+            .addFormDataPart("Prescription", prescription)
+            .addFormDataPart("IsSensitive", isSensitive.toString())
+            .addFormDataPart("DoctorNotes", doctorNotes)
+            .addFormDataPart ("PatientRegistrationNumber", patientRegistrationNumber)
+            .addFormDataPart ("DocumentFormFiles", documentFormFiles)
+            .addFormDataPart ("DocumentDescription", documentDescription)
+            .build()
+
+        apiService.addMedicalRecord(token, reqBody)
     }
+
 
     override suspend fun getPatientAllRecords(patientId: String): Resource<PatientAllRecordsResponse> =
         safeApiCall {

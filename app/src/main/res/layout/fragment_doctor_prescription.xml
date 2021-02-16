@@ -96,12 +96,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_patient_diagnosis_input_layout">
 
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fragment_patient_prescription_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|top"
                 android:hint="@string/patient_s_prescription"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/fragment_patient_reg_number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:hint="Patient reg number"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/green"
+            app:counterTextAppearance="@color/green"
+            app:hintTextColor="@color/green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_patient_prescription_layout">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fragment_patient_reg_number_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="start|top"
+                android:hint="patient reg number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -121,7 +151,7 @@
             app:hintTextColor="@color/green"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_patient_prescription_layout">
+            app:layout_constraintTop_toBottomOf="@+id/fragment_patient_reg_number">
 
             <AutoCompleteTextView
                 android:id="@+id/fragment_patient_type_dropdown"
