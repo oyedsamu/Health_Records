@@ -35,7 +35,7 @@
         android:id="@+id/profile_image"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:scaleType="centerCrop"
         android:src="@drawable/patient_pic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +47,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
@@ -89,6 +89,18 @@
             android:layout_weight="1"
             android:text="@string/adamsken_gmail_com"
             android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/vitalInfo_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="View Patient's Vital Data"
+            android:textColor="@color/dark_green"
+            android:textSize="12sp"
+            android:textStyle="bold"
+           />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSpinner

@@ -70,6 +70,19 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val action =
+            PatientDetailsFragmentDirections.actionPatientDetailsFragmentToVitalInfoFragment(
+                args.patientData!!.bloodGroup,
+                args.patientData!!.genoType,
+                args.patientData!!.allergies,
+                args.patientData!!.disability,
+                args.patientData!!.registrationNumber
+            )
+
+        binding.vitalInfoBtn.setOnClickListener {
+            findNavController().navigate(action)
+        }
+
 
         /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
         patientIsInView = true
