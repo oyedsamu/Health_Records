@@ -93,7 +93,7 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
 
     override fun onBackPressed() {
         super.onBackPressed()
-        this.finishAffinity()
+        //this.finishAffinity()
         //this.moveTaskToBack(true)
     }
 }

@@ -9,6 +9,7 @@ import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
 import com.decadevs.healthrecords.model.response.TokenResponse
 import com.decadevs.healthrecords.model.response.*
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface ApiService {
@@ -36,12 +37,13 @@ interface ApiService {
         @Body resetPwdRequest: ResetPasswordRequest
     )
 
-    @POST("MedicalRecord/CreateMedicalRecord")
+    @POST("MedicalRecord/Create")
     suspend fun addMedicalRecord(
         @Header("Authorization") token : String,
-        @Body medicalRecordRequest: MedicalRecordRequest
-    ): MedicalRecordResponse
+        @Body medicalRecordRequest: RequestBody
+    ): GenericResponseClass<FormData>
 
+    //MedicalRecordResponse
     @GET("MedicalRecord/GetAllMedicalRecords/{id}/1")
     suspend fun getAllHealthRecords(
         @Path("id") id: String

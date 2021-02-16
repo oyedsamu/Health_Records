@@ -20,6 +20,7 @@ import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -51,6 +52,8 @@ class ResetPasswordFragment : Fragment() {
         password = binding.fragmentResetPasswordEt
         confirmPwd = binding.fragmentResetConfirmPasswordEt
 
+        val progressBar = binding.progressBarLayout
+
         val token = args.token
         val email = args.email
         val uid = args.uid
@@ -59,18 +62,26 @@ class ResetPasswordFragment : Fragment() {
         val factory = ViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
 
+        val passwordLayout = binding.fragmentResetPasswordTl
+        val confirmPasswordLayout = binding.fragmentResetConfirmPasswordTl
+
 
         binding.fragmentResetPasswordSendBtn.setOnClickListener {
-            validateResetInput(token, email, uid)
+            validateResetInput(token, email, uid, passwordLayout, confirmPasswordLayout )
 
             viewModel.getResetPwdResponse.observe(viewLifecycleOwner, {
                 mProgressDialog!!.dismiss()
+
                 when (it) {
                     is Resource.Success -> {
                         findNavController().navigate(R.id.loginFragment)
+
+                        Toast.makeText(requireContext(), "Password reset", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     is Resource.Failure -> {
                         Log.i("Reset failed", "${it.errorCode}, $it")
+                        Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
@@ -79,14 +90,14 @@ class ResetPasswordFragment : Fragment() {
         return binding.root
     }
 
-    private fun validateResetInput(token: String, email: String, uid: String) {
+    private fun validateResetInput(token: String, email: String, uid: String, passwordLayout : TextInputLayout, confirmPasswordLayout : TextInputLayout) {
         when {
             password.text.isEmpty() -> {
-                password.error = "Please enter your new password"
+                passwordLayout.error = "Please enter your new password"
             }
 
             confirmPwd.text.isEmpty() -> {
-                confirmPwd.error = "Please confirm password"
+                confirmPasswordLayout.error = "Please confirm password"
             }
 
             confirmPwd.text.toString() != password.text.toString() -> {

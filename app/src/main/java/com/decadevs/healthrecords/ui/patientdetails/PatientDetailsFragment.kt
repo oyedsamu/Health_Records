@@ -25,6 +25,7 @@ import com.decadevs.healthrecords.model.response.PatientRecordDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.SessionManager
 import com.decadevs.utils.currentPatientId
 import com.decadevs.utils.patientIsInView
 import com.decadevs.utils.showToast
@@ -59,7 +60,9 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
 
         /** Retrieve patient's all records from api */
-        getPatientAllRecords(args.patientData.registrationNumber)
+        args.patientData?.registrationNumber?.let { getPatientAllRecords(it) }
+
+
 
         return binding.root
     }
@@ -99,14 +102,29 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val registrationNumber = SessionManager.load(requireContext(), "REGISTRATION-NUMBER")
+        val patientName = SessionManager.load(requireContext(), "PATIENT-NAME")
+        val hospitalAddress = SessionManager.load(requireContext(), "LOCATION")
+       getPatientAllRecords(registrationNumber)
+
+        binding.patientName.text = patientName
+        binding.hospitalAddress.text = hospitalAddress
+        binding.patientHospitalNum.text = registrationNumber
+        Toast.makeText(requireContext(), "called", Toast.LENGTH_LONG).show()
+    }
+
+
+
     private fun updateFragmentUIWithPatientDataFromArgs() {
-        val patientName = "${args.patientData.firstName} ${args.patientData.lastName}"
+        val patientName = "${args.patientData?.firstName} ${args.patientData?.lastName}"
         val patientAddress =
-            "${args.patientData.street}, ${args.patientData.city}, ${args.patientData.state}"
+            "${args.patientData?.street}, ${args.patientData?.city}, ${args.patientData?.state}"
 
         binding.patientName.text = patientName
         binding.hospitalAddress.text = patientAddress
-        binding.patientHospitalNum.text = args.patientData.registrationNumber
+        binding.patientHospitalNum.text = args.patientData?.registrationNumber
     }
 
     private fun observePatientAllRecordsData() {
@@ -148,7 +166,10 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             "hospital" to binding.hospitalAddress.text.toString(),
             "practitioner" to item.doctorOnCall,
             "date" to item.createdAt,
-            "details" to item.doctorNotes
+            "doctorNote" to item.doctorNotes,
+            "diagnosis" to item.diagnosis,
+            "isSensitive" to item.isSensitive,
+            "prescription" to item.prescription
         )
 
         findNavController().navigate(R.id.patientMedicalDetailsFragment, bundle)

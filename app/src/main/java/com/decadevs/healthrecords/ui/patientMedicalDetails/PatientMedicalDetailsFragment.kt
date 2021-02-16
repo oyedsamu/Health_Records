@@ -26,18 +26,34 @@ class PatientMedicalDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewUpdate()
+    }
+
+
+    private fun viewUpdate () {
+
         /** FILL VIEWS WITH PATIENT DETAILS */
         val patientName = arguments?.getString("patientName")
         val practitioner = arguments?.getString("practitioner")
         val date = arguments?.getString("date")
-        val details = arguments?.getString("details")
         val hospital = arguments?.getString("hospital")
+        val patientDiagnosis = arguments?.getString("diagnosis")
+        val doctorNote = arguments?.getString("doctorNote")
+        val isSensitive = arguments?.getString("isSensitive")
+        val prescription = arguments?.getString("prescription")
 
+        // setting it to text
         binding.patientName.text = patientName
         binding.practitioner.text = practitioner
         binding.hospitalName.text = hospital
         binding.date.text = date
-        binding.patientDiagnosisEt.setText(details)
+        binding.patientDiagnosisEt.setText(patientDiagnosis)
+        binding.fragmentDoctorNoteTextInputEt.setText(doctorNote)
+        binding.fragmentPatientPrescriptionEditText.setText(prescription)
+        binding.fragmentPatientTypeDropdown.setText(isSensitive)
+
+
+
 
         /** BACK BUTTON */
         binding.medicalDetailsBackIb.setOnClickListener {
@@ -47,7 +63,9 @@ class PatientMedicalDetailsFragment : Fragment() {
 //        binding.editDetailsBtn.setOnClickListener {
 //            findNavController().navigate(R.id.doctorPrescriptionFragment)
 //        }
+
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

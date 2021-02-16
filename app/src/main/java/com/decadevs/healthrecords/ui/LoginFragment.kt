@@ -24,9 +24,9 @@ import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
-import com.decadevs.utils.SessionManager
-import com.decadevs.utils.TOKEN
+import com.decadevs.utils.*
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -36,15 +36,13 @@ import javax.inject.Inject
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
     @Inject
     lateinit var apiService: ApiService
-
     private lateinit var viewModel: HealthRecordsViewModel
-    lateinit var progressBar: ProgressBar
     lateinit var rememberMe: CheckBox
     lateinit var userManager: UserManager
     private var savedToken: String? = null
+
 
 
     override fun onCreateView(
@@ -54,20 +52,28 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
+
+
+        val uniqueID = binding.fragmentLoginUniqueIdEt
+        val doctorPassword = binding.fragmentLoginPasswordEt
+        val progressBar = binding.progressBarLayout
+        val uniqueIdLayout = binding.fragmentLoginUniqueIdTl
+        val doctorPasswordLayout = binding.fragmentLoginPasswordTl
+
         /** SKIP LOGIN IF USER HAS LOGGED IN BEFORE */
         savedToken = SessionManager.load(requireContext(), TOKEN).trim()
         if(savedToken != "") findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
 
+        val uID = binding.fragmentLoginUniqueIdEt
+        val pwd = binding.fragmentLoginPasswordEt
 
-        val uID = binding.uniqueIdEditText
-        val pwd = binding.passwordEditText
         rememberMe = binding.rememberMe
 
-        progressBar = binding.progressBarLayout.fragmentMainProgressBar
+
+
 
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
-
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
 
@@ -77,10 +83,12 @@ class LoginFragment : Fragment() {
         /**
          * Set uid and password into login edit fields if rememberMe already saved
          */
-        checkAndImplementRememberMe(pwd, uID)
+        checkAndImplementRememberMe(doctorPassword, uniqueID)
 
         binding.signInButton.setOnClickListener {
-            if(validateLoginInput(uID, pwd)) {
+
+            progressBar.visibility = View.VISIBLE
+            if(validateLoginInput(uniqueID, doctorPassword, uniqueIdLayout, doctorPasswordLayout)) {
 
                 val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
                 viewModel.login(loginRequest)
@@ -98,15 +106,21 @@ class LoginFragment : Fragment() {
                 progressBar.visibility = View.VISIBLE
 
                 viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
-                    Log.i("Login Response ", "$it")
+                   // Log.i("Login Response ", "$it")
 
                     when (it) {
                         is Resource.Success -> {
                             val successResponse = it.value.message
+
+                           // Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
+                            Log.i("Login Response", "$successResponse")
+                            progressBar.visibility = View.INVISIBLE
+
                             Log.i("Login Response", "$successResponse")
 
                             Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show()
                             progressBar.visibility = View.GONE
+
 
                             // on login, save token to sharedPref and go doctorPageActivity
                             SessionManager.save(requireContext(), TOKEN, it.value.data)
@@ -116,8 +130,13 @@ class LoginFragment : Fragment() {
                         is Resource.Failure -> {
                             Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
 
+                            showToast("Invalid login details", requireActivity())
+                            progressBar.visibility = View.INVISIBLE
+
+
                             Toast.makeText(requireContext(), "Login not successful, Please make sure you input your correct details", Toast.LENGTH_LONG).show()
                             progressBar.visibility = View.GONE
+
                         }
                     }
                 })
@@ -130,26 +149,29 @@ class LoginFragment : Fragment() {
 
     private fun validateLoginInput(
         uID: TextInputEditText,
-        pwd: TextInputEditText
+        pwd: TextInputEditText,
+        uniqueIDLayout : TextInputLayout,
+        doctorPassword : TextInputLayout
+
     ): Boolean {
+        val progressBar = binding.progressBarLayout
         when {
             uID.text?.trim()?.isEmpty()!! -> {
-                uID.error = "Please enter unique ID"
+
+                uniqueIDLayout.error = "Please enter unique ID"
+                progressBar.visibility = View.INVISIBLE
                 return false
             }
             pwd.text?.trim()?.isEmpty()!! -> {
-                pwd.error = "Please enter your password"
+                doctorPassword.error = "Please enter your password"
+                progressBar.visibility = View.INVISIBLE
                 return false
             }
-//            pwd.text?.trim()?.isEmpty()!! || uID.text?.trim()?.isEmpty()!! -> {
-//                progressBar.visibility = View.GONE
-//                return false
-//            }
+
             else -> {
                 return true
             }
         }
-        return true
     }
 
 
@@ -169,11 +191,10 @@ class LoginFragment : Fragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
+     // viewModel.loginResponse.removeObservers(viewLifecycleOwner)
         _binding = null
-
-        viewModel.loginResponse.removeObservers(viewLifecycleOwner)
     }
 
 }

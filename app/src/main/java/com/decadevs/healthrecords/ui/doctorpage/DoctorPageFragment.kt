@@ -18,7 +18,10 @@ import com.decadevs.healthrecords.model.response.PatientDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.SessionManager
+
 import com.decadevs.utils.patientIsInView
+
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -69,7 +72,6 @@ class DoctorPageFragment : Fragment() {
                 }
                 is Resource.Failure -> {
                     Log.i("Staff Response Failure", "${it.errorBody}, ${it.isNetworkError}")
-
                 }
             }
 
@@ -129,6 +131,11 @@ class DoctorPageFragment : Fragment() {
                                 DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(
                                     patientObject
                                 )
+
+                            // saving in share pref
+                            SessionManager.save(requireContext(), "REGISTRATION-NUMBER", patientObject.registrationNumber)
+                            SessionManager.save(requireContext(), "PATIENT-NAME", "${patientObject.firstName}, ${patientObject.lastName}")
+                            SessionManager.save(requireContext(), "LOCATION", "${patientObject.street}, ${patientObject.city}.${patientObject.state}")
 
                             findNavController().navigate(action)
                             Log.d("TAG", "Data success: $res")
