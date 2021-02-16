@@ -45,7 +45,6 @@ class DoctorPrescriptionFragment : Fragment() {
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var repository: HealthRecordsRepositoryImpl
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,7 +76,7 @@ class DoctorPrescriptionFragment : Fragment() {
         /** SUBMIT FORM */
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
             /** GET FORM FIELDS DATA */
-            getFormData()
+           getFormData()
             if (validateForm()) {
                 /** SHOW PROGRESS BAR */
                 binding.prescriptionProgressBarPb.visibility = View.VISIBLE
@@ -99,8 +98,12 @@ class DoctorPrescriptionFragment : Fragment() {
 
         }
 
-
+//        binding.doctorPrescriptionBackIb.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
     }
+
+
 
 
     private fun getFormData() {
@@ -157,10 +160,11 @@ class DoctorPrescriptionFragment : Fragment() {
         })
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-
 }
+

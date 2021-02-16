@@ -33,7 +33,6 @@
     <string name="doctor_s_diagnosis_str">Doctor\'s Diagnosis</string>
     <string name="patient_s_diagnosis_string">Patient\'s Diagnosis</string>
     <string name="doctor_s_note_str">Doctor\'s Note</string>
-    <string name="submit_str">Submit</string>
     <string name="nurse_s_comment_str">Nurse\'s Comment</string>
     <string name="note">Note</string>
     <string name="patient_registration_form">Patient Registration Form</string>
@@ -77,6 +76,8 @@
     <string name="edit_str">Edit</string>
     <string name="patient_s_prescription">Patient\'s Prescription</string>
     <string name="forgot_your_password_str">Forgot your password?</string>
+    <string name="doctor_page">Doctor Page</string>
+    <string name="submit_str">Submit</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">

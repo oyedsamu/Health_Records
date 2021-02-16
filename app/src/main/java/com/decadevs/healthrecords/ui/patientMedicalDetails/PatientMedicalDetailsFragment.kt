@@ -52,6 +52,18 @@ class PatientMedicalDetailsFragment : Fragment() {
         binding.fragmentPatientPrescriptionEditText.setText(prescription)
         binding.fragmentPatientTypeDropdown.setText(isSensitive)
 
+
+
+
+        /** BACK BUTTON */
+        binding.medicalDetailsBackIb.setOnClickListener {
+            findNavController().popBackStack()
+        }
+//
+//        binding.editDetailsBtn.setOnClickListener {
+//            findNavController().navigate(R.id.doctorPrescriptionFragment)
+//        }
+
     }
 
 

@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_nurse_prescription" />
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.decadevs.healthrecords.ui.resetpassword.ForgotPasswordFragment"
+        android:name="com.decadevs.healthrecords.ui.forgotpassword.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" >
         <action

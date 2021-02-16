@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import com.decadevs.healthrecords.databinding.ActivityMainBinding
+import com.decadevs.utils.patientIsInView
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,14 +22,19 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
+        val sideNavMenu = R.menu.drawer_menu
 
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         setContentView(view)
 
-
+        /** SET VISIBILITY OF SIDE NAV ITEMS */
+        if(patientIsInView) {
+            //show patient details
+            sideNavMenu
+        } else {
+            //hide patient details
+        }
     }
-
-
 }

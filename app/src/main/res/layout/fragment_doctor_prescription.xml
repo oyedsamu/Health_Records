@@ -35,6 +35,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/doctor_prescription_back_ib"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:elevation="4dp"
+            android:background="@color/transparent"
+            android:backgroundTint="@color/transparent"
+            android:paddingBottom="30dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_patient_diagnosis_input_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

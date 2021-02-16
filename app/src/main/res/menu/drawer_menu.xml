@@ -6,33 +6,27 @@
             android:icon="@drawable/home_icon"
             android:title="@string/home_str" />
 
-
         <item
             android:id="@+id/vitalInfoFragment"
             android:icon="@drawable/stethoscope_icon"
             android:title="@string/vital_info_str"
-            android:visible="false"
-            />
+            android:visible="false" />
 
         <item
             android:id="@+id/historyFragment"
             android:icon="@drawable/contact_logo"
             android:title="@string/history_str"
-            android:visible="false"
-            />
-
+            android:visible="false" />
 
         <item
             android:id="@+id/addHistoryFragment"
             android:icon="@drawable/add_history"
             android:title="@string/add_history_str"
-            android:visible="false"
-            />
+            android:visible="false" />
 
         <item
             android:id="@+id/logout"
             android:icon="@drawable/signout"
             android:title="@string/log_out_str" />
     </group>
-
 </menu>

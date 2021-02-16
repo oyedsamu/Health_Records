@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: HealthRecordsViewModel
     lateinit var rememberMe: CheckBox
     lateinit var userManager: UserManager
+    private var savedToken: String? = null
 
 
 
@@ -52,11 +53,20 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
 
+
         val uniqueID = binding.fragmentLoginUniqueIdEt
         val doctorPassword = binding.fragmentLoginPasswordEt
         val progressBar = binding.progressBarLayout
         val uniqueIdLayout = binding.fragmentLoginUniqueIdTl
         val doctorPasswordLayout = binding.fragmentLoginPasswordTl
+
+        /** SKIP LOGIN IF USER HAS LOGGED IN BEFORE */
+        savedToken = SessionManager.load(requireContext(), TOKEN).trim()
+        if(savedToken != "") findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
+
+        val uID = binding.fragmentLoginUniqueIdEt
+        val pwd = binding.fragmentLoginPasswordEt
+
         rememberMe = binding.rememberMe
 
 
@@ -76,17 +86,41 @@ class LoginFragment : Fragment() {
         checkAndImplementRememberMe(doctorPassword, uniqueID)
 
         binding.signInButton.setOnClickListener {
+
             progressBar.visibility = View.VISIBLE
             if(validateLoginInput(uniqueID, doctorPassword, uniqueIdLayout, doctorPasswordLayout)) {
+
+                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
+                viewModel.login(loginRequest)
+
+                if (rememberMe.isChecked) {
+                    //Save user login data to DataStore
+                    GlobalScope.launch {
+                        userManager.createRememberMeSession(
+                            uID.text!!.trim()?.toString(),
+                            pwd.text!!.trim()?.toString()
+                        )
+                    }
+                }
+
+                progressBar.visibility = View.VISIBLE
+
                 viewModel.loginResponse.observe(viewLifecycleOwner, Observer{
                    // Log.i("Login Response ", "$it")
 
                     when (it) {
                         is Resource.Success -> {
                             val successResponse = it.value.message
+
                            // Toast.makeText(this.context, it.value.data, Toast.LENGTH_LONG).show()
                             Log.i("Login Response", "$successResponse")
                             progressBar.visibility = View.INVISIBLE
+
+                            Log.i("Login Response", "$successResponse")
+
+                            Toast.makeText(this.context, "Login Successful", Toast.LENGTH_LONG).show()
+                            progressBar.visibility = View.GONE
+
 
                             // on login, save token to sharedPref and go doctorPageActivity
                             SessionManager.save(requireContext(), TOKEN, it.value.data)
@@ -95,11 +129,16 @@ class LoginFragment : Fragment() {
                         }
                         is Resource.Failure -> {
                             Log.i("Login Response Failure", "${it.errorBody}, ${it.isNetworkError}")
+
                             showToast("Invalid login details", requireActivity())
                             progressBar.visibility = View.INVISIBLE
+
+
+                            Toast.makeText(requireContext(), "Login not successful, Please make sure you input your correct details", Toast.LENGTH_LONG).show()
+                            progressBar.visibility = View.GONE
+
                         }
                     }
-
                 })
             }
 
@@ -118,6 +157,7 @@ class LoginFragment : Fragment() {
         val progressBar = binding.progressBarLayout
         when {
             uID.text?.trim()?.isEmpty()!! -> {
+
                 uniqueIDLayout.error = "Please enter unique ID"
                 progressBar.visibility = View.INVISIBLE
                 return false
@@ -129,18 +169,6 @@ class LoginFragment : Fragment() {
             }
 
             else -> {
-                val loginRequest = LoginRequest(uID.text!!.trim().toString(), pwd.text!!.trim()?.toString())
-                viewModel.login(loginRequest)
-
-                if (rememberMe.isChecked) {
-                    //Save user login data to DataStore
-                    GlobalScope.launch {
-                        userManager.createRememberMeSession(
-                            uID.text!!.trim()?.toString(),
-                            pwd.text!!.trim()?.toString()
-                        )
-                    }
-                }
                 return true
             }
         }
