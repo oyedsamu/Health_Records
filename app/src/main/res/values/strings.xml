@@ -78,6 +78,8 @@
     <string name="forgot_your_password_str">Forgot your password?</string>
     <string name="doctor_page">Doctor Page</string>
     <string name="submit_str">Submit</string>
+    <string name="patient_registration_number_str">Patient registration number</string>
+    <string name="upload_str">Upload</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">
