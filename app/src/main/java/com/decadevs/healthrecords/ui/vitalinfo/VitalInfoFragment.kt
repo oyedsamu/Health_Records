@@ -31,6 +31,11 @@ class VitalInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.fragmentVitalInfoIdTv.text = args.patientId
+        binding.fragmentVitalInfoPositiveTv.text = args.bloodGroup
+        binding.fragmentVitalInfoAATv.text = args.genotype
+        binding.fragmentVitalInfoFoodTv.text = args.allergies
+        binding.fragmentVitalInfoDisabilitiesBloodTv.text = args.disabilities
 
         /** BACK BUTTON */
         binding.vitalInfoBackIb.setOnClickListener {
