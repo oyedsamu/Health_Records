@@ -3,10 +3,7 @@ package com.decadevs.healthrecords.repository
 import android.app.Activity
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
-import com.decadevs.healthrecords.model.request.ForgotPwdRequest
-import com.decadevs.healthrecords.model.request.LoginRequest
-import com.decadevs.healthrecords.model.request.MedicalRecordRequest
-import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.request.*
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
@@ -76,4 +73,11 @@ constructor(
         safeApiCall {
             apiService.getPatientData(patientId)
         }
+
+    override suspend fun addNurseComment(
+        token: String,
+        nurseCommentRequest: NurseCommentRequest
+    ): Resource<GenericResponseClass<NurseCommentRequest>> = safeApiCall {
+        apiService.addNurseNote(token, nurseCommentRequest)
+    }
 }

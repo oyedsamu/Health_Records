@@ -76,7 +76,7 @@ class DoctorPrescriptionFragment : Fragment() {
         /** SUBMIT FORM */
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
             /** GET FORM FIELDS DATA */
-           getFormData()
+            getFormData()
             if (validateForm()) {
                 /** SHOW PROGRESS BAR */
                 binding.prescriptionProgressBarPb.visibility = View.VISIBLE
