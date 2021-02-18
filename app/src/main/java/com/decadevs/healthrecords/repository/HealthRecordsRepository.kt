@@ -29,6 +29,8 @@ interface HealthRecordsRepository {
 
     suspend fun getPatientData(patientId: String): Resource<PatientResponse>
 
+    suspend fun addNurseComment(token: String, nurseCommentRequest: NurseCommentRequest): Resource<GenericResponseClass<NurseCommentRequest>>
+
     suspend fun updatePatientRecord(
         token: String,
         patientRegistrationNumber: String,

@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.NurseCommentRequest
 import com.decadevs.healthrecords.model.request.RecordUpdateRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
@@ -60,6 +61,9 @@ class HealthRecordsViewModel(
     private val _medicalRecordResponse: MutableLiveData<Resource<GenericResponseClass<FormData>>> = MutableLiveData()
     val medicalRecordResponse: LiveData<Resource<GenericResponseClass<FormData>>> get() = _medicalRecordResponse
 
+    private val _nurseCommentResponse: MutableLiveData<Resource<GenericResponseClass<NurseCommentRequest>>> = MutableLiveData()
+    val nurseCommentResponse: LiveData<Resource<GenericResponseClass<NurseCommentRequest>>> get() = _nurseCommentResponse
+
     private val _updateMedicalRecord: MutableLiveData<Resource<Any>> = MutableLiveData()
     val updateMedicalRecord: LiveData<Resource<Any>> get() = _updateMedicalRecord
 
@@ -99,9 +103,12 @@ class HealthRecordsViewModel(
         _getPatientData.value = repository.getPatientData(patientId)
     }
 
-    fun updateMedicalRecord(patientRegistrationNumber: String,
-                            medicalRecordUpdateRequest: RecordUpdateRequest) = viewModelScope.launch {
-        _updateMedicalRecord.value = repository.updatePatientRecord(token, patientRegistrationNumber, medicalRecordUpdateRequest)
+    /** ADD NURSE COMMENT IN  VIEW-MODEL SCOPE OF COROUTINE*/
+    fun addNurseComment(nurseCommentRequest: NurseCommentRequest) = viewModelScope.launch {
+        _nurseCommentResponse.value = repository.addNurseComment(token, nurseCommentRequest)
     }
 
+    fun updateMedicalRecord(patientRegistrationNumber: String, medicalRecordUpdateRequest: RecordUpdateRequest) = viewModelScope.launch {
+        _updateMedicalRecord.value = repository.updatePatientRecord(token, patientRegistrationNumber, medicalRecordUpdateRequest)
+    }
 }

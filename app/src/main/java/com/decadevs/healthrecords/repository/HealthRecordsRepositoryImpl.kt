@@ -74,6 +74,13 @@ constructor(
             apiService.getPatientData(patientId)
         }
 
+    override suspend fun addNurseComment(
+        token: String,
+        nurseCommentRequest: NurseCommentRequest
+    ): Resource<GenericResponseClass<NurseCommentRequest>> = safeApiCall {
+        apiService.addNurseNote(token, nurseCommentRequest)
+    }
+
     override suspend fun updatePatientRecord(
         token: String,
         patientRegistrationNumber: String,
