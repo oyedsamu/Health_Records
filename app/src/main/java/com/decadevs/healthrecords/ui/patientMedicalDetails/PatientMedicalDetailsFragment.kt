@@ -14,7 +14,9 @@ class PatientMedicalDetailsFragment : Fragment() {
     private var _binding: FragmentPatientMedicalDetailsBinding? = null
     private val binding get() = _binding!!
 
-
+    private lateinit var patientDiagnosisField:TextInputLayout
+    private lateinit var prescriptionField:TextInputLayout
+    private lateinit var doctorNoteField:TextInputLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +24,9 @@ class PatientMedicalDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPatientMedicalDetailsBinding.inflate(inflater, container, false)
-
+        patientDiagnosisField = binding.fragmentPatientDiagnosisInputLayout
+        prescriptionField = binding.fragmentPatientPrescriptionLayout
+        doctorNoteField = binding.fragmentDoctorNoteTextInputLayout
         return binding.root
     }
 
@@ -38,7 +42,20 @@ class PatientMedicalDetailsFragment : Fragment() {
 
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
 
+            when {
+                patientDiagnosisField.editText?.text?.trim().toString().isEmpty() -> {
+                    patientDiagnosisField.error = "Please enter a record for the patient"
+                }
+                prescriptionField.editText?.text?.trim().toString().isEmpty() -> {
+                    prescriptionField.error = "Please enter a record for the patient"
+                }
+                doctorNoteField.editText?.text?.trim().toString().isEmpty() -> {
+                    doctorNoteField.error = "Please enter a record for the patient"
+                }
+                else -> {
 
+                }
+            }
 
 
         }
