@@ -36,7 +36,7 @@ interface ApiService {
 
     @POST("MedicalRecord/Create")
     suspend fun addMedicalRecord(
-        @Header("Authorization") token : String,
+        @Header("Authorization") token: String,
         @Body medicalRecordRequest: RequestBody
     ): GenericResponseClass<FormData>
 
@@ -56,5 +56,12 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body nurseCommentRequest: NurseCommentRequest
     ): GenericResponseClass<NurseCommentRequest>
+
+    @PATCH("update/{patientRegNum}")
+    suspend fun updatePatientRecord(
+        @Header("Authorization") token: String,
+        @Path("patientRegNum") regNum: String,
+        @Body medicalRecordUpdateRequest: RecordUpdateRequest
+    )
 
 }

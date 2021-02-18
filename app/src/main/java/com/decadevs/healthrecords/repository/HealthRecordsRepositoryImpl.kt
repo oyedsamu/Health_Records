@@ -40,13 +40,13 @@ constructor(
     override suspend fun addMedicalRecord(
         token: String,
         activity: Activity,
-        diagnosis : String,
-        prescription : String,
-        isSensitive : Boolean,
-        doctorNotes : String,
-        patientRegistrationNumber : String,
-        documentFormFiles : String,
-        documentDescription : String
+        diagnosis: String,
+        prescription: String,
+        isSensitive: Boolean,
+        doctorNotes: String,
+        patientRegistrationNumber: String,
+        documentFormFiles: String,
+        documentDescription: String
     ): Resource<GenericResponseClass<FormData>> = safeApiCall {
 
         val reqBody = MultipartBody.Builder()
@@ -55,9 +55,9 @@ constructor(
             .addFormDataPart("Prescription", prescription)
             .addFormDataPart("IsSensitive", isSensitive.toString())
             .addFormDataPart("DoctorNotes", doctorNotes)
-            .addFormDataPart ("PatientRegistrationNumber", patientRegistrationNumber)
-            .addFormDataPart ("DocumentFormFiles", documentFormFiles)
-            .addFormDataPart ("DocumentDescription", documentDescription)
+            .addFormDataPart("PatientRegistrationNumber", patientRegistrationNumber)
+            .addFormDataPart("DocumentFormFiles", documentFormFiles)
+            .addFormDataPart("DocumentDescription", documentDescription)
             .build()
 
         apiService.addMedicalRecord(token, reqBody)
@@ -79,5 +79,13 @@ constructor(
         nurseCommentRequest: NurseCommentRequest
     ): Resource<GenericResponseClass<NurseCommentRequest>> = safeApiCall {
         apiService.addNurseNote(token, nurseCommentRequest)
+    }
+
+    override suspend fun updatePatientRecord(
+        token: String,
+        patientRegistrationNumber: String,
+        medicalRecordUpdateRequest: RecordUpdateRequest
+    ): Resource<Any> = safeApiCall {
+        apiService.updatePatientRecord(token, patientRegistrationNumber, medicalRecordUpdateRequest)
     }
 }

@@ -10,6 +10,7 @@ import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
 import com.decadevs.healthrecords.model.request.NurseCommentRequest
+import com.decadevs.healthrecords.model.request.RecordUpdateRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
@@ -63,6 +64,9 @@ class HealthRecordsViewModel(
     private val _nurseCommentResponse: MutableLiveData<Resource<GenericResponseClass<NurseCommentRequest>>> = MutableLiveData()
     val nurseCommentResponse: LiveData<Resource<GenericResponseClass<NurseCommentRequest>>> get() = _nurseCommentResponse
 
+    private val _updateMedicalRecord: MutableLiveData<Resource<Any>> = MutableLiveData()
+    val updateMedicalRecord: LiveData<Resource<Any>> get() = _updateMedicalRecord
+
     /** launch coroutine in viewModel scope for login */
     fun login(loginRequest: LoginRequest) = viewModelScope.launch {
         _loginResponse.value = repository.login(loginRequest)
@@ -102,5 +106,9 @@ class HealthRecordsViewModel(
     /** ADD NURSE COMMENT IN  VIEW-MODEL SCOPE OF COROUTINE*/
     fun addNurseComment(nurseCommentRequest: NurseCommentRequest) = viewModelScope.launch {
         _nurseCommentResponse.value = repository.addNurseComment(token, nurseCommentRequest)
+    }
+
+    fun updateMedicalRecord(patientRegistrationNumber: String, medicalRecordUpdateRequest: RecordUpdateRequest) = viewModelScope.launch {
+        _updateMedicalRecord.value = repository.updatePatientRecord(token, patientRegistrationNumber, medicalRecordUpdateRequest)
     }
 }
