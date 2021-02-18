@@ -3,10 +3,7 @@ package com.decadevs.healthrecords.repository
 import android.app.Activity
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
-import com.decadevs.healthrecords.model.request.ForgotPwdRequest
-import com.decadevs.healthrecords.model.request.LoginRequest
-import com.decadevs.healthrecords.model.request.MedicalRecordRequest
-import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.request.*
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
@@ -43,13 +40,13 @@ constructor(
     override suspend fun addMedicalRecord(
         token: String,
         activity: Activity,
-        diagnosis : String,
-        prescription : String,
-        isSensitive : Boolean,
-        doctorNotes : String,
-        patientRegistrationNumber : String,
-        documentFormFiles : String,
-        documentDescription : String
+        diagnosis: String,
+        prescription: String,
+        isSensitive: Boolean,
+        doctorNotes: String,
+        patientRegistrationNumber: String,
+        documentFormFiles: String,
+        documentDescription: String
     ): Resource<GenericResponseClass<FormData>> = safeApiCall {
 
         val reqBody = MultipartBody.Builder()
@@ -58,9 +55,9 @@ constructor(
             .addFormDataPart("Prescription", prescription)
             .addFormDataPart("IsSensitive", isSensitive.toString())
             .addFormDataPart("DoctorNotes", doctorNotes)
-            .addFormDataPart ("PatientRegistrationNumber", patientRegistrationNumber)
-            .addFormDataPart ("DocumentFormFiles", documentFormFiles)
-            .addFormDataPart ("DocumentDescription", documentDescription)
+            .addFormDataPart("PatientRegistrationNumber", patientRegistrationNumber)
+            .addFormDataPart("DocumentFormFiles", documentFormFiles)
+            .addFormDataPart("DocumentDescription", documentDescription)
             .build()
 
         apiService.addMedicalRecord(token, reqBody)
@@ -76,4 +73,12 @@ constructor(
         safeApiCall {
             apiService.getPatientData(patientId)
         }
+
+    override suspend fun updatePatientRecord(
+        token: String,
+        patientRegistrationNumber: String,
+        medicalRecordUpdateRequest: RecordUpdateRequest
+    ): Resource<Any> = safeApiCall {
+        apiService.updatePatientRecord(token, patientRegistrationNumber, medicalRecordUpdateRequest)
+    }
 }

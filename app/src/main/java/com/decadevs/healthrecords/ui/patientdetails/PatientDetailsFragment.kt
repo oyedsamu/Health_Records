@@ -182,7 +182,9 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             "doctorNote" to item.doctorNotes,
             "diagnosis" to item.diagnosis,
             "isSensitive" to item.isSensitive,
-            "prescription" to item.prescription
+            "prescription" to item.prescription,
+            "recordId" to item.id,
+            "patientRegNum" to args.patientData!!.registrationNumber
         )
 
         findNavController().navigate(R.id.patientMedicalDetailsFragment, bundle)

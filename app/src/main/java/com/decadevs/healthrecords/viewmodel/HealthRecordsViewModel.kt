@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.model.request.ForgotPwdRequest
 import com.decadevs.healthrecords.model.request.LoginRequest
+import com.decadevs.healthrecords.model.request.RecordUpdateRequest
 import com.decadevs.healthrecords.model.request.ResetPasswordRequest
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
@@ -59,6 +60,9 @@ class HealthRecordsViewModel(
     private val _medicalRecordResponse: MutableLiveData<Resource<GenericResponseClass<FormData>>> = MutableLiveData()
     val medicalRecordResponse: LiveData<Resource<GenericResponseClass<FormData>>> get() = _medicalRecordResponse
 
+    private val _updateMedicalRecord: MutableLiveData<Resource<Any>> = MutableLiveData()
+    val updateMedicalRecord: LiveData<Resource<Any>> get() = _updateMedicalRecord
+
     /** launch coroutine in viewModel scope for login */
     fun login(loginRequest: LoginRequest) = viewModelScope.launch {
         _loginResponse.value = repository.login(loginRequest)
@@ -94,4 +98,10 @@ class HealthRecordsViewModel(
     fun getPatientData(patientId: String) = viewModelScope.launch {
         _getPatientData.value = repository.getPatientData(patientId)
     }
+
+    fun updateMedicalRecord(patientRegistrationNumber: String,
+                            medicalRecordUpdateRequest: RecordUpdateRequest) = viewModelScope.launch {
+        _updateMedicalRecord.value = repository.updatePatientRecord(token, patientRegistrationNumber, medicalRecordUpdateRequest)
+    }
+
 }
