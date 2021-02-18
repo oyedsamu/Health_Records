@@ -36,6 +36,9 @@ class NurseComments : Fragment() {
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var repository: HealthRecordsRepositoryImpl
 
+//    private lateinit var nurseId: String
+//    private lateinit var patientId: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,8 +58,8 @@ class NurseComments : Fragment() {
         /** VALIDATE FORM AND MAKE NETWORK CALL ON BUTTON CLICK */
         binding.fragmentNurseCommentBtn.setOnClickListener{
             view.hideKeyboard()
-
             val nurseComment = binding.fragmentNurseCommentTextInputEt.text.toString()
+
             if(nurseComment.isNotEmpty()) {
                 binding.nurseCommentProgressBarPb.visibility = View.VISIBLE
                 addNurseComment(nurseComment)
@@ -72,7 +75,6 @@ class NurseComments : Fragment() {
     }
 
     private fun addNurseComment(comment: String) {
-        showToast(comment, requireContext())
 //        DYNAMICALLY PASS IN PATIENT AND NURSE ID FROM PREVIOUS SCREEN WHEN CODE IS READY
         val commentRequest = NurseCommentRequest("STA66121-R2", "23657E5", comment)
         viewModel.addNurseComment(commentRequest)
@@ -84,13 +86,14 @@ class NurseComments : Fragment() {
                 is Resource.Success -> {
                     Log.i("commentResponse", it.value.message.toString())
                     binding.nurseCommentProgressBarPb.visibility = View.GONE
-                    Toast.makeText(this.context, "Successful", Toast.LENGTH_SHORT).show()
+                    showToast("Comment Successfully Added.", requireContext())
+                    findNavController().popBackStack()
                 }
 
                 is Resource.Failure -> {
-                    Log.i("commentResponse", it.errorBody.toString())
+                    Log.i("commentResponse", it.errorCode.toString())
                     binding.nurseCommentProgressBarPb.visibility = View.GONE
-                    Toast.makeText(this.context, "Failed", Toast.LENGTH_SHORT).show()
+                    showToast("Failed, comment not dded. Make sure you have an internet connection.", requireContext())
                 }
             }
         })
