@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/doctor_page_nav_graph"
-    app:startDestination="@id/doctorPageFragment">
+    app:startDestination="@id/nurseComments">
 
     <fragment
         android:id="@+id/doctorPageFragment"
