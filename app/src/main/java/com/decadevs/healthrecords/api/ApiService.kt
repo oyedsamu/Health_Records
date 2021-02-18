@@ -1,9 +1,6 @@
 package com.decadevs.healthrecords.api
 
-import com.decadevs.healthrecords.model.request.ForgotPwdRequest
-import com.decadevs.healthrecords.model.request.LoginRequest
-import com.decadevs.healthrecords.model.request.MedicalRecordRequest
-import com.decadevs.healthrecords.model.request.ResetPasswordRequest
+import com.decadevs.healthrecords.model.request.*
 import com.decadevs.healthrecords.model.response.LoginResponse
 import com.decadevs.healthrecords.model.response.MedicalRecordResponse
 import com.decadevs.healthrecords.model.response.StaffResponse
@@ -53,5 +50,11 @@ interface ApiService {
     suspend fun getPatientData(
         @Path("patientRegNum") patientRegNum: String
     ): PatientResponse
+
+    @POST("NurseNote")
+    suspend fun addNurseNote(
+        @Header("Authorization") token: String,
+        @Body nurseCommentRequest: NurseCommentRequest
+    ): GenericResponseClass<NurseCommentRequest>
 
 }

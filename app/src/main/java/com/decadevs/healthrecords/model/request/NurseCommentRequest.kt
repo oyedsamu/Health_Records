@@ -1,6 +1,6 @@
 package com.decadevs.healthrecords.model.request
 
-data class NurseComment (
+data class NurseCommentRequest (
     val nurseId: String,
     val patientId: String,
     val note: String
