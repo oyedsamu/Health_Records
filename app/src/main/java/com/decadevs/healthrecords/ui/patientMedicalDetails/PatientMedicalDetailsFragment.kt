@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.FragmentPatientMedicalDetailsBinding
+import com.google.android.material.textfield.TextInputLayout
 
 class PatientMedicalDetailsFragment : Fragment() {
 
     private var _binding: FragmentPatientMedicalDetailsBinding? = null
     private val binding get() = _binding!!
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,17 +22,30 @@ class PatientMedicalDetailsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentPatientMedicalDetailsBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewUpdate()
+        updateInputsFieldsWithAvailableData()
+
+        /** BACK BUTTON */
+        binding.medicalDetailsBackIb.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
+
+
+
+
+        }
     }
 
 
-    private fun viewUpdate () {
+    private fun updateInputsFieldsWithAvailableData () {
 
         /** FILL VIEWS WITH PATIENT DETAILS */
         val patientName = arguments?.getString("patientName")
@@ -41,6 +56,7 @@ class PatientMedicalDetailsFragment : Fragment() {
         val doctorNote = arguments?.getString("doctorNote")
         val isSensitive = arguments?.getString("isSensitive")
         val prescription = arguments?.getString("prescription")
+        val recordId = arguments?.getString("recordId")
 
         // setting it to text
         binding.patientName.text = patientName
@@ -51,18 +67,6 @@ class PatientMedicalDetailsFragment : Fragment() {
         binding.fragmentDoctorNoteTextInputEt.setText(doctorNote)
         binding.fragmentPatientPrescriptionEditText.setText(prescription)
         binding.fragmentPatientTypeDropdown.setText(isSensitive)
-
-
-
-
-        /** BACK BUTTON */
-        binding.medicalDetailsBackIb.setOnClickListener {
-            findNavController().popBackStack()
-        }
-//
-//        binding.editDetailsBtn.setOnClickListener {
-//            findNavController().navigate(R.id.doctorPrescriptionFragment)
-//        }
 
     }
 

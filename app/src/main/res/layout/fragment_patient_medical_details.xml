@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
     android:background="@color/white"
-    >
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,25 +16,25 @@
             android:id="@+id/medicalDetails_back_ib"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:backgroundTint="@color/transparent"
             android:background="@color/transparent"
+            android:backgroundTint="@color/transparent"
             android:paddingBottom="30dp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-        android:id="@+id/patient_details_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Patient Medical Details"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/patient_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Patient Medical Details"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <TextView
@@ -72,8 +70,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/practitioner"
             android:textAllCaps="true"
             android:textColor="@color/black"
@@ -88,8 +86,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_marginStart="16dp"
-            android:text="@string/date"
             android:layout_marginTop="8dp"
+            android:text="@string/date"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="12sp"
@@ -99,32 +97,31 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_patient_diagnosis_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="15dp"
             android:hint=""
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/green"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="16dp"
             app:hintTextColor="@color/green"
-            android:layout_marginEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/date">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/patient_diagnosis_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|top"
+                android:hint="@string/patient_s_diagnosis_string"
                 android:inputType="textMultiLine"
                 android:scrollHorizontally="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                android:hint="@string/patient_s_diagnosis_string"
 
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -132,32 +129,30 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fragment_patient_prescription_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="15dp"
             android:hint=""
-            app:counterTextAppearance="@color/green"
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/green"
+            app:counterTextAppearance="@color/green"
             app:hintTextColor="@color/green"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_patient_diagnosis_input_layout"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/fragment_patient_diagnosis_input_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/fragment_patient_prescription_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start|top"
+                android:hint="Prescription"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                android:hint="Prescription"
-                />
+                app:layout_constraintStart_toStartOf="parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -165,13 +160,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint=""
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/green"
             app:hintTextColor="@color/green"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_patient_prescription_layout">
@@ -190,13 +185,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="120dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:hint=""
             app:boxBackgroundColor="@android:color/transparent"
             app:boxStrokeColor="@color/green"
             app:hintTextColor="@color/green"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -206,8 +201,8 @@
                 android:id="@+id/fragment_doctor_note_text_input_et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/doctor_s_note_str"
                 android:gravity="start"
+                android:hint="@string/doctor_s_note_str"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -220,16 +215,16 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="16dp"
-            app:cornerRadius="5dp"
             android:layout_marginBottom="25dp"
+            android:backgroundTint="@color/green"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:backgroundTint="@color/green"
             android:text="@string/edit_str"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            app:cornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -240,211 +235,211 @@
 </androidx.core.widget.NestedScrollView>
 
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    xmlns:tools="http://schemas.android.com/tools"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent"-->
-<!--    android:background="@color/white"-->
-<!--    tools:context=".ui.patientMedicalDetails.PatientMedicalDetailsFragment">-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent"-->
+    <!--    android:background="@color/white"-->
+    <!--    tools:context=".ui.patientMedicalDetails.PatientMedicalDetailsFragment">-->
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/back_arrow"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:backgroundTint="@color/transparent"-->
-<!--        android:src="@drawable/ic_arrow_back"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/back_arrow"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginStart="10dp"-->
+    <!--        android:backgroundTint="@color/transparent"-->
+    <!--        android:src="@drawable/ic_arrow_back"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/patient_name"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:text="@string/patient_name"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="18sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/patient_name"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="40dp"-->
+    <!--        android:text="@string/patient_name"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="18sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--    <View-->
-<!--        android:id="@+id/view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_marginHorizontal="20dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        android:background="@drawable/patient_details_bg"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/patient_name" />-->
+    <!--    <View-->
+    <!--        android:id="@+id/view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:layout_marginHorizontal="20dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        android:background="@drawable/patient_details_bg"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.5"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/patient_name" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/hospital_name"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="15dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:text="@string/hospital_name"-->
-<!--        android:textAllCaps="true"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="15sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/view"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/practitioner" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/hospital_name"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="15dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:text="@string/hospital_name"-->
+    <!--        android:textAllCaps="true"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="15sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/view"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/practitioner" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/practitioner"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="15dp"-->
-<!--        android:layout_marginTop="5dp"-->
-<!--        android:text="@string/practitioner"-->
-<!--        android:textAllCaps="true"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="15sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/view"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/date" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/practitioner"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="15dp"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:text="@string/practitioner"-->
+    <!--        android:textAllCaps="true"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="15sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/view"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/date" />-->
 
-<!--    <TextView-->
-<!--        android:id="@+id/date"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginHorizontal="15dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:text="@string/date"-->
-<!--        android:textAllCaps="true"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:textSize="12sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/view"-->
-<!--        app:layout_constraintTop_toTopOf="@id/view" />-->
+    <!--    <TextView-->
+    <!--        android:id="@+id/date"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginHorizontal="15dp"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:text="@string/date"-->
+    <!--        android:textAllCaps="true"-->
+    <!--        android:textColor="@color/black"-->
+    <!--        android:textSize="12sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/view"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/view" />-->
 
-<!--    <androidx.core.widget.NestedScrollView-->
-<!--        android:id="@+id/nestedScrollView"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:paddingHorizontal="15dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@id/edit_details_btn"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/view"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/view"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/hospital_name">-->
+    <!--    <androidx.core.widget.NestedScrollView-->
+    <!--        android:id="@+id/nestedScrollView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="0dp"-->
+    <!--        android:paddingHorizontal="15dp"-->
+    <!--        android:layout_marginBottom="10dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@id/edit_details_btn"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/view"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/view"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/hospital_name">-->
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:paddingVertical="10dp"-->
-<!--            android:orientation="vertical">-->
+    <!--        <LinearLayout-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:paddingVertical="10dp"-->
+    <!--            android:orientation="vertical">-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/diagnosis_tv"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:text="@string/diagnosis"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/diagnosis_tv"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:text="@string/diagnosis"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/diagnosis_details_tv"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:lineHeight="14dp"-->
-<!--                android:padding="5dp"-->
-<!--                android:text="@string/lorem_ipsum"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="12sp" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/diagnosis_details_tv"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:lineHeight="14dp"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:text="@string/lorem_ipsum"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textSize="12sp" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/prescription_tv"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:text="@string/prescription"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/prescription_tv"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="30dp"-->
+    <!--                android:text="@string/prescription"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/prescription_details_tv"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:lineHeight="14dp"-->
-<!--                android:padding="5dp"-->
-<!--                android:text="@string/lorem_ipsum"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="12sp" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/prescription_details_tv"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:lineHeight="14dp"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:text="@string/lorem_ipsum"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textSize="12sp" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/doctors_note_tv"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:text="@string/doctor_s_note"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/doctors_note_tv"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="30dp"-->
+    <!--                android:text="@string/doctor_s_note"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/doctors_note_details_tv"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:lineHeight="14dp"-->
-<!--                android:padding="5dp"-->
-<!--                android:text="@string/lorem_ipsum"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="12sp" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/doctors_note_details_tv"-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="10dp"-->
+    <!--                android:lineHeight="14dp"-->
+    <!--                android:padding="5dp"-->
+    <!--                android:text="@string/lorem_ipsum"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textSize="12sp" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/type_tv"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:text="@string/type"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textStyle="bold" />-->
+    <!--            <TextView-->
+    <!--                android:id="@+id/type_tv"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginTop="30dp"-->
+    <!--                android:text="@string/type"-->
+    <!--                android:textColor="@color/black"-->
+    <!--                android:textStyle="bold" />-->
 
-<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/type_details_tv"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_marginTop="10dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:lineHeight="14dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:padding="5dp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:text="@string/is_sensitive_or_not"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:textSize="12sp" />&ndash;&gt;-->
+    <!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:id="@+id/type_details_tv"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:layout_marginTop="10dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:lineHeight="14dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:padding="5dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:text="@string/is_sensitive_or_not"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+    <!--&lt;!&ndash;                android:textSize="12sp" />&ndash;&gt;-->
 
-<!--        </LinearLayout>-->
+    <!--        </LinearLayout>-->
 
-<!--    </androidx.core.widget.NestedScrollView>-->
+    <!--    </androidx.core.widget.NestedScrollView>-->
 
-<!--    <com.google.android.material.button.MaterialButton-->
-<!--        android:id="@+id/edit_details_btn"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="70dp"-->
-<!--        android:layout_marginBottom="15dp"-->
-<!--        android:layout_marginHorizontal="15dp"-->
-<!--        android:backgroundTint="@color/green"-->
-<!--        android:text="@string/edit_patient_details_str"-->
-<!--        android:textAllCaps="false"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="18sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/view"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/nestedScrollView" />-->
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--        android:id="@+id/edit_details_btn"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="70dp"-->
+    <!--        android:layout_marginBottom="15dp"-->
+    <!--        android:layout_marginHorizontal="15dp"-->
+    <!--        android:backgroundTint="@color/green"-->
+    <!--        android:text="@string/edit_patient_details_str"-->
+    <!--        android:textAllCaps="false"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="18sp"-->
+    <!--        android:textStyle="bold"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/view"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/nestedScrollView"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/nestedScrollView" />-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
