@@ -20,6 +20,7 @@ import com.decadevs.healthrecords.model.request.NurseCommentRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
+import com.decadevs.utils.hideKeyboard
 import com.decadevs.utils.showAlertDialog
 import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,9 +30,6 @@ import javax.inject.Inject
 class NurseComments : Fragment() {
     private var _binding: FragmentNurseCommentsBinding? = null
     private val binding get() = _binding!!
-
-//    private lateinit var nurseId: String
-//    private lateinit var patientId: String
 
     @Inject lateinit var apiService: ApiService
     private lateinit var viewModel: HealthRecordsViewModel
@@ -49,8 +47,6 @@ class NurseComments : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /** GET NURSE AND PATIENT ID FROM PREVIOUS SCREEN HERE */
-
         /** SET UP VIEW-MODEL */
         repository = HealthRecordsRepositoryImpl(apiService)
         viewModelFactory = ViewModelFactory(repository, requireContext())
@@ -58,6 +54,8 @@ class NurseComments : Fragment() {
 
         /** VALIDATE FORM AND MAKE NETWORK CALL ON BUTTON CLICK */
         binding.fragmentNurseCommentBtn.setOnClickListener{
+            view.hideKeyboard()
+
             val nurseComment = binding.fragmentNurseCommentTextInputEt.text.toString()
             if(nurseComment.isNotEmpty()) {
                 binding.nurseCommentProgressBarPb.visibility = View.VISIBLE
