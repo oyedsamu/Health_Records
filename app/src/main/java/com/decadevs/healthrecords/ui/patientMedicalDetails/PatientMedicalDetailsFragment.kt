@@ -56,7 +56,10 @@ class PatientMedicalDetailsFragment : Fragment() {
             mProgressDialog!!.dismiss()
             when (it) {
                 is Resource.Success -> {
-
+                    showToast(
+                        "Medical Record Updated successfully",
+                        requireActivity()
+                    )
                 }
 
                 is Resource.Failure -> {
