@@ -124,6 +124,7 @@ class LoginFragment : Fragment() {
 
                             // on login, save token to sharedPref and go doctorPageActivity
                             SessionManager.save(requireContext(), TOKEN, it.value.data)
+                            currentStaffId = uID.text!!.trim().toString()
                             findNavController().navigate(R.id.action_loginFragment_to_doctorPageActivity)
                             //  findNavController().navigate(R.id.doctorPageFragment)
                         }

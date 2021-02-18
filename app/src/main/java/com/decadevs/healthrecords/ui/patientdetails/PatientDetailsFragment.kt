@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,10 +26,7 @@ import com.decadevs.healthrecords.model.response.PatientRecordDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
-import com.decadevs.utils.SessionManager
-import com.decadevs.utils.currentPatientId
-import com.decadevs.utils.patientIsInView
-import com.decadevs.utils.showToast
+import com.decadevs.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -62,8 +60,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         /** Retrieve patient's all records from api */
         args.patientData?.registrationNumber?.let { getPatientAllRecords(it) }
 
-
-
         return binding.root
     }
 
@@ -86,14 +82,16 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
         /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
         patientIsInView = true
-        currentPatientId = binding.patientHospitalNum.text.toString()
 
         updateFragmentUIWithPatientDataFromArgs()
 
         observePatientAllRecordsData()
 
         binding.addRecord.setOnClickListener {
-            findNavController().navigate(R.id.doctorPrescriptionFragment)
+            when(roleName) {
+                "Doctor" -> findNavController().navigate(R.id.doctorPrescriptionFragment)
+                else -> findNavController().navigate(R.id.nurseComments)
+            }
         }
 
         /** SET UP SPINNER */
@@ -141,7 +139,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     }
 
     private fun observePatientAllRecordsData() {
-        viewModel.getAllPatientMedicalRecord.observe(viewLifecycleOwner, {
+        viewModel.getAllPatientMedicalRecord.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     patientRecordsResponseList = it.value.data
@@ -165,7 +163,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                 }
             }
 
-        })
+        }
     }
 
     override fun onDestroy() {

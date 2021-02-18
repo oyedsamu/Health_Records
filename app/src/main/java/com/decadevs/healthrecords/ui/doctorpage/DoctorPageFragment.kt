@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
@@ -18,11 +19,8 @@ import com.decadevs.healthrecords.model.response.PatientDataResponse
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
-import com.decadevs.utils.SessionManager
+import com.decadevs.utils.*
 
-import com.decadevs.utils.patientIsInView
-
-import com.decadevs.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,7 +36,6 @@ class DoctorPageFragment : Fragment() {
 
     private lateinit var viewModel: HealthRecordsViewModel
     private lateinit var userManager: UserManager
-    var back = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,14 +55,18 @@ class DoctorPageFragment : Fragment() {
 
         getStaffIdFromDataStoreAndImplementApiCall()
 
-        viewModel.getStaffResponse.observe(viewLifecycleOwner, {
+        viewModel.getStaffResponse.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Success -> {
                     val successResponse = it.value.data
-                    Log.i("Staff Response", successResponse.toString())
+                    Log.i("staffResponse", successResponse.toString())
+
+                    /** SAVE VITAL DETAILS */
+                    roleName = successResponse.roleName
+                    currentStaffId = successResponse.uniqueId
+
                     //Update UI
-                    binding.doctorName.text =
-                        successResponse.firstname + " " + successResponse.lastname
+                    binding.doctorName.text = successResponse.firstname + " " + successResponse.lastname
                     binding.doctorEmail.text = successResponse.email
                     binding.hospitalAddress.text = successResponse.healthcareProviderName
                     binding.doctorPhoneNumber.text = successResponse.phoneNumber
@@ -75,7 +76,7 @@ class DoctorPageFragment : Fragment() {
                 }
             }
 
-        })
+        }
 
         return binding.root
     }
@@ -100,7 +101,7 @@ class DoctorPageFragment : Fragment() {
                 getPatientData(binding.search.text.trim().toString())
 
 
-                viewModel.getPatientData.observe(viewLifecycleOwner, {
+                viewModel.getPatientData.observe(viewLifecycleOwner) {
                     when (it) {
                         is Resource.Success -> {
                             //response
@@ -127,6 +128,9 @@ class DoctorPageFragment : Fragment() {
 
                             mProgressDialog!!.dismiss()
 
+                            /** SAVE PATIENT ID */
+                            currentPatientId = res.registrationNumber
+
                             val action =
                                 DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(
                                     patientObject
@@ -152,7 +156,7 @@ class DoctorPageFragment : Fragment() {
                         }
                     }
 
-                })
+                }
             }
 
 
@@ -162,11 +166,11 @@ class DoctorPageFragment : Fragment() {
 
 
     private fun getStaffIdFromDataStoreAndImplementApiCall() {
-        userManager.rmUserIdFlow.asLiveData().observe(requireActivity(), { uid ->
+        userManager.rmUserIdFlow.asLiveData().observe(requireActivity()) { uid ->
             if (uid != "") {
                 viewModel.getStaff(uid)
             }
-        })
+        }
     }
 
     private fun getPatientData(patientId: String) {

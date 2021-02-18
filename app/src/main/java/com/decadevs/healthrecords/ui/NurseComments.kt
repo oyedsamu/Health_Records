@@ -20,9 +20,7 @@ import com.decadevs.healthrecords.model.request.NurseCommentRequest
 import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
-import com.decadevs.utils.hideKeyboard
-import com.decadevs.utils.showAlertDialog
-import com.decadevs.utils.showToast
+import com.decadevs.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -36,7 +34,7 @@ class NurseComments : Fragment() {
     private lateinit var viewModelFactory: ViewModelFactory
     private lateinit var repository: HealthRecordsRepositoryImpl
 
-//    private lateinit var nurseId: String
+    private lateinit var nurseId: String
 //    private lateinit var patientId: String
 
     override fun onCreateView(
@@ -75,8 +73,8 @@ class NurseComments : Fragment() {
     }
 
     private fun addNurseComment(comment: String) {
-//        DYNAMICALLY PASS IN PATIENT AND NURSE ID FROM PREVIOUS SCREEN WHEN CODE IS READY
-        val commentRequest = NurseCommentRequest("STA66121-R2", "23657E5", comment)
+
+        val commentRequest = NurseCommentRequest(currentStaffId, currentPatientId, comment)
         viewModel.addNurseComment(commentRequest)
 
         /** OBSERVE COMMENT RESPONSE */

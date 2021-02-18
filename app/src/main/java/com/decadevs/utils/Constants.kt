@@ -5,3 +5,5 @@ const val TOKEN : String = "token"
 const val LOG_OUT = "log_out"
 var patientIsInView = true
 var currentPatientId = ""
+var currentStaffId = ""
+var roleName = ""
