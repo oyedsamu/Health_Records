@@ -48,6 +48,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
     var patientRecordsResponseList = ArrayList<PatientRecordDataResponse>()
 
+    private lateinit var patientName: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +60,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
+
+        patientName = "${args.patientData?.firstName} ${args.patientData?.lastName}"
 
         /** Retrieve patient's all records from api */
         args.patientData?.registrationNumber?.let { getPatientAllRecords(it) }
@@ -76,7 +80,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                 args.patientData!!.genoType,
                 args.patientData!!.allergies,
                 args.patientData!!.disability,
-                args.patientData!!.registrationNumber
+                args.patientData!!.registrationNumber,
+                patientName
             )
 
         binding.vitalInfoBtn.setOnClickListener {
@@ -131,7 +136,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
 
     private fun updateFragmentUIWithPatientDataFromArgs() {
-        val patientName = "${args.patientData?.firstName} ${args.patientData?.lastName}"
         val patientAddress =
             "${args.patientData?.street}, ${args.patientData?.city}, ${args.patientData?.state}"
 
