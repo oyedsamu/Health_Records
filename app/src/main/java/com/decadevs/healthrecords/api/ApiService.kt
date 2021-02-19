@@ -51,7 +51,7 @@ interface ApiService {
         @Path("patientRegNum") patientRegNum: String
     ): PatientResponse
 
-    @PATCH("update/{patientRegNum}")
+    @PATCH("MedicalRecord/update/{patientRegNum}")
     suspend fun updatePatientRecord(
         @Header("Authorization") token: String,
         @Path("patientRegNum") regNum: String,
