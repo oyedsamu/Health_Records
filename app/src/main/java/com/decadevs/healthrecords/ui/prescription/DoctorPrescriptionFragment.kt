@@ -88,7 +88,7 @@ class DoctorPrescriptionFragment : Fragment() {
         /** SUBMIT FORM */
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
             /** GET FORM FIELDS DATA */
-           getFormData()
+            getFormData()
             if (validateForm()) {
                 /** SHOW PROGRESS BAR */
                 binding.prescriptionProgressBarPb.visibility = View.VISIBLE
@@ -160,7 +160,7 @@ class DoctorPrescriptionFragment : Fragment() {
     private fun addDiagnosis() {
 
         viewModel.medicalRecordResponse.observe(viewLifecycleOwner, Observer {
-            //            Log.i("Record Response", "$it")
+//                        Log.i("Record Response", "$it")
             when (it) {
                 is Resource.Success -> {
                     Log.i("response", it.value.success.toString())
