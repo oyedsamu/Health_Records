@@ -67,9 +67,9 @@ class NurseComments : Fragment() {
         }
 
         /** BACK BUTTON */
-        binding.nurseCommentsBackIb.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.nurseCommentsBackIb.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
     }
 
     private fun addNurseComment(comment: String) {

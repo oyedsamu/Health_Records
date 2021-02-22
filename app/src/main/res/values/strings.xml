@@ -78,7 +78,7 @@
     <string name="forgot_your_password_str">Forgot your password?</string>
     <string name="doctor_page">Doctor Page</string>
     <string name="submit_str">Submit</string>
-    <string name="patient_registration_number_str">Patient registration number</string>
+    <string name="patient_registration_number_str">Patient registration NO.</string>
     <string name="upload_str">Upload</string>
     <string name="no_data_found_for_this_category">No Data found for this category!</string>
 

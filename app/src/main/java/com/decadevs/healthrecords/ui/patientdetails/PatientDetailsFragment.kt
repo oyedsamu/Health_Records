@@ -49,6 +49,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
     var patientRecordsResponseList = ArrayList<PatientRecordDataResponse>()
 
+    private lateinit var patientName: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +61,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
+
+        patientName = "${args.patientData?.firstName} ${args.patientData?.lastName}"
 
         /** Retrieve patient's all records from api */
         args.patientData?.registrationNumber?.let { getPatientAllRecords(it) }
@@ -85,7 +89,8 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                 args.patientData!!.genoType,
                 args.patientData!!.allergies,
                 args.patientData!!.disability,
-                args.patientData!!.registrationNumber
+                args.patientData!!.registrationNumber,
+                patientName
             )
 
         binding.vitalInfoBtn.setOnClickListener {
@@ -96,11 +101,18 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
         observePatientAllRecordsData()
 
+        /** ADD PATIENT RECORD */
         binding.addRecord.setOnClickListener {
             when(roleName) {
                 "Doctor" -> findNavController().navigate(R.id.doctorPrescriptionFragment)
                 else -> findNavController().navigate(R.id.nurseComments)
             }
+        }
+
+        /** HIDE/SHOW VITAL INFO BUTTON */
+        when(roleName) {
+            "Doctor" -> binding.vitalInfoBtn.visibility = View.VISIBLE
+            else -> binding.vitalInfoBtn.visibility = View.GONE
         }
 
         /** SET UP SPINNER */
@@ -114,34 +126,12 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         }
 
         /** HANDLE SPINNER ITEM CHANGE */
-        binding.yearsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                /** FILTER LIST FOR SELECTED YEAR */
-                val selectedYear = years_spinner.selectedItem
-                Toast.makeText(requireContext(), "jhgfd", Toast.LENGTH_SHORT).show()
-                val list = filterPatientRecord(selectedYear.toString())
 
-                /** SHOW LIST OF FILTERED ITEMS */
-                if(list.isEmpty()) {
-                    binding.patientDetailsNoDataTv.visibility = View.VISIBLE
-                    binding.patientDetailsList.visibility = View.INVISIBLE
-                } else {
-                    binding.patientDetailsNoDataTv.visibility = View.INVISIBLE
-
-                    val adapter = PatientDetailsRVAdapter(list, this@PatientDetailsFragment)
-                    val patientsDetailsRV = binding.patientDetailsList
-                    patientsDetailsRV.adapter = adapter
-                    patientsDetailsRV.layoutManager = LinearLayoutManager(requireContext())
-                    patientsDetailsRV.setHasFixedSize(true)
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
 
         /** HANDLE BACK BUTTON */
-        binding.patientDetailsBackIb.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.patientDetailsBackIb.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
     }
 
     override fun onResume() {
@@ -160,7 +150,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
 
     private fun updateFragmentUIWithPatientDataFromArgs() {
-        val patientName = "${args.patientData?.firstName} ${args.patientData?.lastName}"
         val patientAddress =
             "${args.patientData?.street}, ${args.patientData?.city}, ${args.patientData?.state}"
 
@@ -177,14 +166,22 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                     Log.d("TAG", "Data success: $patientRecordsResponseList")
 
                     /** POPULATE PATIENT DETAILS RECYCLER VIEW WITH DUMMY DATA */
+
+                    binding.patientDetailsProgressBarPb.visibility = View.GONE
+                    binding.patientDetailsFetchingDataTv.visibility = View.GONE
+
                     val adapter = PatientDetailsRVAdapter(patientRecordsResponseList, this)
                     val patientsDetailsRV = binding.patientDetailsList
                     patientsDetailsRV.adapter = adapter
                     patientsDetailsRV.layoutManager = LinearLayoutManager(this.context)
                     patientsDetailsRV.setHasFixedSize(true)
+                    changeDisplayedData()
                 }
 
                 is Resource.Failure -> {
+                    binding.patientDetailsProgressBarPb.visibility = View.GONE
+                    binding.patientDetailsFetchingDataTv.visibility = View.GONE
+
                     showToast(
                         "Something went wrong retrieving patient's record.",
                         requireActivity()
@@ -226,10 +223,40 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     private fun filterPatientRecord(year: String): ArrayList<PatientRecordDataResponse> {
         val records: ArrayList<PatientRecordDataResponse> = arrayListOf()
         for(record in patientRecordsResponseList) {
-            if(record.createdAt.substring(0..4) == year) {
+//            Log.d("Pos", record.createdAt.substring(0..3))
+            if(record.createdAt.substring(0..3) == year) {
                 records.add(record)
             }
         }
         return records
+    }
+
+    private fun changeDisplayedData() {
+        binding.yearsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                /** FILTER LIST FOR SELECTED YEAR */
+                val selectedYear = years_spinner.selectedItem.toString()
+                val list = filterPatientRecord(selectedYear)
+//                Log.d("Pos", list.toString())
+
+                /** SHOW LIST OF FILTERED ITEMS */
+                if(list.isEmpty()) {
+                    binding.patientDetailsNoDataTv.visibility = View.VISIBLE
+                    binding.patientDetailsList.visibility = View.INVISIBLE
+                } else {
+                    binding.patientDetailsNoDataTv.visibility = View.INVISIBLE
+                    binding.patientDetailsList.visibility = View.VISIBLE
+
+                    val adapter = PatientDetailsRVAdapter(list, this@PatientDetailsFragment)
+                    val patientsDetailsRV = binding.patientDetailsList
+                    patientsDetailsRV.adapter = adapter
+                    patientsDetailsRV.layoutManager = LinearLayoutManager(requireContext())
+                    patientsDetailsRV.setHasFixedSize(true)
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
     }
 }
