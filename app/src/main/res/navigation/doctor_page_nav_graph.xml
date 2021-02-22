@@ -38,6 +38,10 @@
         <argument
             android:name="patientId"
             app:argType="string" />
+        <argument
+            android:name="patientName"
+            app:argType="string"
+            android:defaultValue="Mrs Adam Ken" />
     </fragment>
     <fragment
         android:id="@+id/patientDetailsFragment"

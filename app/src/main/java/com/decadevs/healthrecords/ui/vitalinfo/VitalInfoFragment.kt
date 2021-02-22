@@ -36,6 +36,7 @@ class VitalInfoFragment : Fragment() {
         binding.fragmentVitalInfoAATv.text = args.genotype
         binding.fragmentVitalInfoFoodTv.text = args.allergies
         binding.fragmentVitalInfoDisabilitiesBloodTv.text = args.disabilities
+        binding.fragmentVitalInfoNameTv.text = args.patientName
 
         /** BACK BUTTON */
         binding.vitalInfoBackIb.setOnClickListener {
