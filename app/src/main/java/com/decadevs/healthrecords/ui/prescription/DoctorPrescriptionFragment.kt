@@ -80,8 +80,8 @@ class DoctorPrescriptionFragment : Fragment() {
             if (validateForm()) {
                 /** SHOW PROGRESS BAR */
                 binding.prescriptionProgressBarPb.visibility = View.VISIBLE
-                /** SEND POST REQUEST TO ADD DOCTOR'S DIAGNOSIS */
 
+                /** SEND POST REQUEST TO ADD DOCTOR'S DIAGNOSIS */
                 viewModel.addMedicalRecord(
                     requireActivity(),
                     binding.patientDiagnosisEt.text.toString(),

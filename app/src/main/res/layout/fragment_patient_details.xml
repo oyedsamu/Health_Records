@@ -95,12 +95,11 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
             android:text="View Patient's Vital Data"
+            android:textAllCaps="false"
             android:textColor="@color/dark_green"
             android:textSize="12sp"
-            android:textStyle="bold"
-           />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSpinner
@@ -159,4 +158,19 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <TextView
+        android:id="@+id/patientDetails_noData_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_found_for_this_category"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/green_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/green_background" />
 </androidx.constraintlayout.widget.ConstraintLayout>

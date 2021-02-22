@@ -6,11 +6,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.api.ApiService
 import com.decadevs.healthrecords.api.Resource
 import com.decadevs.healthrecords.databinding.FragmentDoctorPageBinding
@@ -20,6 +22,7 @@ import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
 import com.decadevs.utils.*
+import com.google.android.material.navigation.NavigationView
 
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -44,12 +47,14 @@ class DoctorPageFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentDoctorPageBinding.inflate(inflater, container, false)
 
-        /** SET PARAMETER TO HIDE PATIENT DETAILS FROM SIDE NAV BAR */
-        patientIsInView = false
+        /** HIDE PATIENT ITEMS IN SIDE NAV */
+        val navigationView: NavigationView = requireActivity().findViewById(R.id.nav_drawer)
+        val menu = navigationView.menu
+        hidePatientMenuItems(menu)
 
+        /** SET UP VIEW-MODEL */
         val repository = HealthRecordsRepositoryImpl(apiService)
         val factory = ViewModelFactory(repository, requireContext())
-
         viewModel = ViewModelProvider(this, factory).get(HealthRecordsViewModel::class.java)
         userManager = UserManager(requireActivity())
 
@@ -126,9 +131,13 @@ class DoctorPageFragment : Fragment() {
                                 res.updatedAt
                             )
 
+
+                            Toast.makeText(requireContext(), res.firstName, Toast.LENGTH_SHORT).show()
+
                             mProgressDialog!!.dismiss()
 
-                            /** SAVE PATIENT ID */
+                            /** SAVE PATIENT DATA */
+                            patientData = patientObject
                             currentPatientId = res.registrationNumber
 
                             val action =

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -27,7 +28,9 @@ import com.decadevs.healthrecords.repository.HealthRecordsRepositoryImpl
 import com.decadevs.healthrecords.viewmodel.HealthRecordsViewModel
 import com.decadevs.healthrecords.viewmodel.ViewModelFactory
 import com.decadevs.utils.*
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_patient_details.*
 import javax.inject.Inject
 
 
@@ -66,8 +69,18 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val action =
-            PatientDetailsFragmentDirections.actionPatientDetailsFragmentToVitalInfoFragment(
+        /** SHOW PATIENT ITEMS IN SIDE NAV */
+        val navigationView: NavigationView = requireActivity().findViewById(R.id.nav_drawer)
+        val menu = navigationView.menu
+        showPatientMenuItems(menu)
+
+        /** SAVE CURRENT PATIENT PERSONAL DETAILS */
+        patientBloodGroup = args.patientData!!.bloodGroup
+        patientGenotype = args.patientData!!.genoType
+        patientAllergies = args.patientData!!.allergies
+        patientDisabilities = args.patientData!!.disability
+
+        val action = PatientDetailsFragmentDirections.actionPatientDetailsFragmentToVitalInfoFragment(
                 args.patientData!!.bloodGroup,
                 args.patientData!!.genoType,
                 args.patientData!!.allergies,
@@ -78,10 +91,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         binding.vitalInfoBtn.setOnClickListener {
             findNavController().navigate(action)
         }
-
-
-        /** SET CURRENT PATIENT DETAILS TO BE SHOWN ON SIDE NAV BAR */
-        patientIsInView = true
 
         updateFragmentUIWithPatientDataFromArgs()
 
@@ -104,12 +113,34 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             binding.yearsSpinner.adapter = adapter
         }
 
+        /** HANDLE SPINNER ITEM CHANGE */
+        binding.yearsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                /** FILTER LIST FOR SELECTED YEAR */
+                val selectedYear = years_spinner.selectedItem
+                Toast.makeText(requireContext(), "jhgfd", Toast.LENGTH_SHORT).show()
+                val list = filterPatientRecord(selectedYear.toString())
+
+                /** SHOW LIST OF FILTERED ITEMS */
+                if(list.isEmpty()) {
+                    binding.patientDetailsNoDataTv.visibility = View.VISIBLE
+                    binding.patientDetailsList.visibility = View.INVISIBLE
+                } else {
+                    binding.patientDetailsNoDataTv.visibility = View.INVISIBLE
+
+                    val adapter = PatientDetailsRVAdapter(list, this@PatientDetailsFragment)
+                    val patientsDetailsRV = binding.patientDetailsList
+                    patientsDetailsRV.adapter = adapter
+                    patientsDetailsRV.layoutManager = LinearLayoutManager(requireContext())
+                    patientsDetailsRV.setHasFixedSize(true)
+                }
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
         /** HANDLE BACK BUTTON */
         binding.patientDetailsBackIb.setOnClickListener {
             findNavController().popBackStack()
-        }
-        binding.profileImage.setOnClickListener {
-            Toast.makeText(requireContext(), "alkf", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -190,5 +221,15 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
     private fun getPatientAllRecords(patientId: String) {
         viewModel.getPatientAllRecords(patientId)
+    }
+
+    private fun filterPatientRecord(year: String): ArrayList<PatientRecordDataResponse> {
+        val records: ArrayList<PatientRecordDataResponse> = arrayListOf()
+        for(record in patientRecordsResponseList) {
+            if(record.createdAt.substring(0..4) == year) {
+                records.add(record)
+            }
+        }
+        return records
     }
 }

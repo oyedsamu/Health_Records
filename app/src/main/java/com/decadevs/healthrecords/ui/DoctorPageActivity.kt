@@ -3,8 +3,12 @@ package com.decadevs.healthrecords.ui
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -14,6 +18,8 @@ import androidx.navigation.ui.NavigationUI
 import com.decadevs.healthrecords.MainActivity
 import com.decadevs.healthrecords.R
 import com.decadevs.healthrecords.databinding.ActivityDoctorPageBinding
+import com.decadevs.healthrecords.ui.doctorpage.DoctorPageFragmentDirections
+import com.decadevs.healthrecords.ui.patientdetails.PatientDetailsFragmentDirections
 import com.decadevs.utils.*
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,8 +48,6 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
         binding.activityDoctorHambugerIv.setOnClickListener {
             binding.drawer.openDrawer(binding.navDrawer)
         }
-
-
     }
 
 
@@ -56,11 +60,25 @@ class DoctorPageActivity : AppCompatActivity (), NavigationView.OnNavigationItem
             }
 
             R.id.vitalInfoFragment -> {
-                findNavController(R.id.activity_doctor_nav_host).navigate(R.id.vitalInfoFragment)
+                val bundle = bundleOf(
+                    "patientId" to currentPatientId,
+                    "bloodGroup" to patientBloodGroup,
+                    "genotype" to patientGenotype,
+                    "allergies" to patientAllergies,
+                    "disabilities" to patientDisabilities
+                )
+                findNavController(R.id.activity_doctor_nav_host).navigate(R.id.vitalInfoFragment, bundle)
             }
 
             R.id.historyFragment -> {
-                findNavController(R.id.activity_doctor_nav_host).navigate(R.id.patientDetailsFragment)
+                Log.d("patientData", patientData.toString())
+                val action = DoctorPageFragmentDirections.actionDoctorPageFragmentToPatientDetailsFragment(patientData)
+                findNavController(R.id.activity_doctor_nav_host).navigate(action)
+
+//                val bundle = bundleOf(
+//
+//                )
+//                findNavController(R.id.activity_doctor_nav_host).navigate(R.id.patientDetailsFragment)
             }
 
             R.id.addHistoryFragment -> {
