@@ -39,9 +39,9 @@ class VitalInfoFragment : Fragment() {
         binding.fragmentVitalInfoNameTv.text = args.patientName
 
         /** BACK BUTTON */
-        binding.vitalInfoBackIb.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.vitalInfoBackIb.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
     }
 
 

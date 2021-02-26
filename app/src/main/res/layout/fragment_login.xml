@@ -93,7 +93,7 @@
             android:id="@+id/fragment_login_password_et"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textSize="12sp"
             tools:text="STA-RA10-P1" />
 
