@@ -81,6 +81,8 @@
     <string name="patient_registration_number_str">Patient registration NO.</string>
     <string name="upload_str">Upload</string>
     <string name="no_data_found_for_this_category">No Data found for this category!</string>
+    <string name="fetching_patient_medical_records">Fetching Patient medical records...</string>
+    <string name="view_patient_s_vital_data">View Patient\'s Vital Data</string>
 
     <!-- PATIENT DETAILS- YEARS -->
     <string-array name="years">

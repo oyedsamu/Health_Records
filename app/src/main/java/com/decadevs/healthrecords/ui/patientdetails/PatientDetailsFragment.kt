@@ -125,9 +125,6 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
             binding.yearsSpinner.adapter = adapter
         }
 
-        /** HANDLE SPINNER ITEM CHANGE */
-
-
         /** HANDLE BACK BUTTON */
 //        binding.patientDetailsBackIb.setOnClickListener {
 //            findNavController().popBackStack()
@@ -165,7 +162,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                     patientRecordsResponseList = it.value.data
                     Log.d("TAG", "Data success: $patientRecordsResponseList")
 
-                    /** POPULATE PATIENT DETAILS RECYCLER VIEW WITH DUMMY DATA */
+                    /** POPULATE PATIENT DETAILS RECYCLER VIEW WITH DATA */
 
                     binding.patientDetailsProgressBarPb.visibility = View.GONE
                     binding.patientDetailsFetchingDataTv.visibility = View.GONE
@@ -175,6 +172,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                     patientsDetailsRV.adapter = adapter
                     patientsDetailsRV.layoutManager = LinearLayoutManager(this.context)
                     patientsDetailsRV.setHasFixedSize(true)
+
                     changeDisplayedData()
                 }
 
@@ -233,7 +231,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
 
     private fun changeDisplayedData() {
         binding.yearsSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
+            /** HANDLE SPINNER ITEM CHANGE */
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
 
                 /** FILTER LIST FOR SELECTED YEAR */
