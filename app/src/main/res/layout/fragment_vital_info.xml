@@ -7,16 +7,16 @@
     android:background="@color/white"
     tools:context=".ui.vitalinfo.VitalInfoFragment">
 
-    <ImageButton
-        android:id="@+id/vitalInfo_back_ib"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:background="@color/transparent"
-        android:backgroundTint="@color/transparent"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_title_tv" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/vitalInfo_back_ib"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:background="@color/transparent"-->
+<!--        android:backgroundTint="@color/transparent"-->
+<!--        android:src="@drawable/ic_arrow_back"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/fragment_vital_info_title_tv" />-->
 
     <TextView
         android:id="@+id/fragment_vital_info_title_tv"

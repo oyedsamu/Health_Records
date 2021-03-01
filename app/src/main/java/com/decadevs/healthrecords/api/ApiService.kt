@@ -57,7 +57,7 @@ interface ApiService {
         @Body nurseCommentRequest: NurseCommentRequest
     ): GenericResponseClass<NurseCommentRequest>
 
-    @PATCH("update/{patientRegNum}")
+    @PATCH("MedicalRecord/update/{patientRegNum}")
     suspend fun updatePatientRecord(
         @Header("Authorization") token: String,
         @Path("patientRegNum") regNum: String,

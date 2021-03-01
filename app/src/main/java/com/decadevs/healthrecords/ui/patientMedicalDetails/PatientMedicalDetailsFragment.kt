@@ -84,9 +84,9 @@ class PatientMedicalDetailsFragment : Fragment() {
         val patientRegNum = arguments?.getString("patientRegNum")
 
         /** BACK BUTTON */
-        binding.medicalDetailsBackIb.setOnClickListener {
-            findNavController().popBackStack()
-        }
+//        binding.medicalDetailsBackIb.setOnClickListener {
+//            findNavController().popBackStack()
+//        }
 
         binding.fragmentDoctorPrescriptionBtn.setOnClickListener {
 

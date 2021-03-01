@@ -7,15 +7,15 @@
     android:background="@color/white"
     tools:context=".ui.patientdetails.PatientDetailsFragment">
 
-    <ImageButton
-        android:id="@+id/patientDetails_back_ib"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:backgroundTint="@color/white"
-        android:paddingBottom="30dp"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/patientDetails_back_ib"-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:backgroundTint="@color/white"-->
+    <!--        android:paddingBottom="30dp"-->
+    <!--        android:src="@drawable/ic_arrow_back"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/fragment_patient_details_title_tv"
@@ -94,12 +94,13 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableRight="@drawable/arrow_forward_24"
+            android:drawableTint="@color/dark_green"
+            android:text="@string/view_patient_s_vital_data"
             android:textAllCaps="false"
-            android:text="View Patient's Vital Data"
             android:textColor="@color/dark_green"
             android:textSize="12sp"
-            android:textStyle="bold"
-           />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatSpinner
@@ -155,4 +156,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <TextView
+        android:id="@+id/patientDetails_noData_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/no_data_found_for_this_category"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/green_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/green_background" />
+
+    <ProgressBar
+        android:id="@+id/patientDetails_progressBar_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_circle"
+        android:indeterminateTint="@color/dark_green"
+        app:layout_constraintBottom_toBottomOf="@+id/green_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/green_background" />
+
+    <TextView
+        android:id="@+id/patientDetails_fetchingData_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fetching_patient_medical_records"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patientDetails_progressBar_pb" />
 </androidx.constraintlayout.widget.ConstraintLayout>
