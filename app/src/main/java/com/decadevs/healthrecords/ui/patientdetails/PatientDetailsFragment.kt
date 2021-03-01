@@ -141,7 +141,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         binding.patientName.text = patientName
         binding.hospitalAddress.text = hospitalAddress
         binding.patientHospitalNum.text = registrationNumber
-        Toast.makeText(requireContext(), "called", Toast.LENGTH_LONG).show()
+//        Toast.makeText(requireContext(), "called", Toast.LENGTH_LONG).show()
     }
 
 
