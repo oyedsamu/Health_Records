@@ -141,7 +141,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
         binding.patientName.text = patientName
         binding.hospitalAddress.text = hospitalAddress
         binding.patientHospitalNum.text = registrationNumber
-        Toast.makeText(requireContext(), "called", Toast.LENGTH_LONG).show()
+//        Toast.makeText(requireContext(), "called", Toast.LENGTH_LONG).show()
     }
 
 
@@ -198,7 +198,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
     }
 
     override fun onItemClick(item: PatientRecordDataResponse, position: Int) {
-        var bundle = bundleOf(
+        val bundle = bundleOf(
             "patientName" to binding.patientName.text.toString(),
             "hospital" to binding.hospitalAddress.text.toString(),
             "practitioner" to item.doctorOnCall,

@@ -83,7 +83,7 @@ class ForgotPasswordFragment : Fragment() {
 
                 viewModel.getTokenResponse.observe(viewLifecycleOwner, Observer {
 //                    mProgressDialog!!.dismiss()
-                    Log.i("Token Response", "$it")
+//                    Log.i("Token Response", "$it")
                     when (it) {
                         is Resource.Success -> {
 //                            binding.forgotPasswordPrgressBarPb.visibility = View.GONE
@@ -96,27 +96,31 @@ class ForgotPasswordFragment : Fragment() {
                         }
                         is Resource.Failure -> {
 //                            binding.forgotPasswordPrgressBarPb.visibility = View.GONE
-                            if (it.errorCode == 404) {
-                                Toast.makeText(
-                                    requireActivity(),
-                                    "Email not found, please input correct email",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                email.error = "Email not found, please input correct email"
-                            } else if (it.errorCode == 500) {
-                                email.error = null
-                                Toast.makeText(
-                                    requireActivity(),
-                                    "Something went wrong, please recheck your unique id",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                uID.error = "Something went wrong, please recheck your unique id"
-                            } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Something went wrong, please recheck your unique id",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            when (it.errorCode) {
+                                404 -> {
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Email not found, please input correct email",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    email.error = "Email not found, please input correct email"
+                                }
+                                500 -> {
+                                    email.error = null
+                                    Toast.makeText(
+                                        requireActivity(),
+                                        "Something went wrong, please recheck your unique id",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    uID.error = "Something went wrong, please recheck your unique id"
+                                }
+                                else -> {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Something went wrong, please recheck your unique id",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
                     }

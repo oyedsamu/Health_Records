@@ -7,7 +7,7 @@
     <string name="timely_medical_intervention_str">Timely Medical Intervention</string>
     <string name="description_one_str">Information Availability\nensures faster and timely\nmedical interventions.</string>
     <string name="faster_laboratory_services_str">Faster Laboratory Services</string>
-    <string name="description_two_str">Vital information availabilty\nguarantees faster and\nfocused services delivry.</string>
+    <string name="description_two_str">Vital information availability\nguarantees faster and\nfocused services delivry.</string>
     <string name="better_personal_health_str">Better Personal Health</string>
 
 
@@ -80,6 +80,8 @@
     <string name="submit_str">Submit</string>
     <string name="patient_registration_number_str">Patient registration NO.</string>
     <string name="upload_str">Upload</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="no_data_found_for_this_category">No Data found for this category!</string>
     <string name="fetching_patient_medical_records">Fetching Patient medical records...</string>
     <string name="view_patient_s_vital_data">View Patient\'s Vital Data</string>
