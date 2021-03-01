@@ -89,7 +89,7 @@ class PatientDetailsFragment : Fragment(), OnItemClick {
                 args.patientData!!.genoType,
                 args.patientData!!.allergies,
                 args.patientData!!.disability,
-//                args.patientData!!.registrationNumber,
+                args.patientData!!.registrationNumber,
                 patientName
             )
 
